@@ -2,12 +2,14 @@ package com.escape.launch;
 
 import java.awt.EventQueue;
 
+import javax.swing.JFrame;
+
 import com.escape.component.Window;
 
 public class Main {
 	private static String[] arguments;
 	public static Escape escapeInstance;
-	public static Window windowInstance;
+	public static JFrame windowInstance;
 	
 	public static void main(String[] args) {
 		arguments = args;

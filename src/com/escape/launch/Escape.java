@@ -99,7 +99,6 @@ public final class Escape extends Canvas implements Runnable {
 		
 		g.dispose();
 		bs.show();
-		
 	}
 	
 	@Override
@@ -107,6 +106,4 @@ public final class Escape extends Canvas implements Runnable {
 		LoggingUtil.getLogger().log(Level.INFO, "Game loop is starting");
 		this.beginGameLoop();
 	}
-	
-	
 }
