@@ -10,6 +10,7 @@ import com.escape.util.LoggingUtil;
 public final class Escape extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = -5025704194120253102L;
+	private static final int BUFFERS = 2;
 	private String[] arguments;
 	
 	Escape(String[] args) {
@@ -91,7 +92,7 @@ public final class Escape extends Canvas implements Runnable {
 		BufferStrategy bs = this.getBufferStrategy();
 		
 		if (bs == null) {
-			this.createBufferStrategy(2);
+			this.createBufferStrategy(BUFFERS);
 			return;
 		}
 		
