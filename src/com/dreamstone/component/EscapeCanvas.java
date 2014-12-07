@@ -16,6 +16,7 @@ public final class EscapeCanvas extends Canvas implements Runnable {
 	private static GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 	private static final int DEFAULT_WIDTH = gd.getDisplayMode().getWidth() / 2;
 	private static final int DEFAULT_HEIGHT = gd.getDisplayMode().getHeight() / 2;
+	private static final int SCALE = 1;
 	
 	private Game game;
 	private boolean running;
@@ -23,7 +24,7 @@ public final class EscapeCanvas extends Canvas implements Runnable {
 	private static final int BUFFERS = 3;
 	
 	public EscapeCanvas() {
-		Dimension preferredSize = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		Dimension preferredSize = new Dimension(DEFAULT_WIDTH * SCALE, DEFAULT_HEIGHT * SCALE);
 		this.setPreferredSize(preferredSize);
 		
 		/* WE NEED TO LOOK INTO THIS. IT FIXES FLICKERING OF BACKGROUND WHEN RESIZED BUT IM NOT SURE IF
@@ -75,6 +76,7 @@ public final class EscapeCanvas extends Canvas implements Runnable {
 			//boolean ticked = false;
 			while (unproccessedSeconds > secondsPerTick) {
 				tick();
+				
 				unproccessedSeconds -= secondsPerTick;
 				//ticked = true;
 				
@@ -114,8 +116,9 @@ public final class EscapeCanvas extends Canvas implements Runnable {
 		}
 		
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.RED);
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
         g.dispose();
         bs.show();
 	}
