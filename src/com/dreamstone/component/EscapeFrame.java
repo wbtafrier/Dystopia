@@ -9,7 +9,6 @@ public final class EscapeFrame extends JFrame {
 	public EscapeFrame(EscapeCanvas escapeInstance) {
 		
 		this.setTitle("Escape");
-		this.setIgnoreRepaint(true);
 		this.add(escapeInstance);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

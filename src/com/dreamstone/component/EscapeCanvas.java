@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -33,7 +34,7 @@ public final class EscapeCanvas extends Canvas implements Runnable {
 		
 		/* WE NEED TO LOOK INTO THIS. IT FIXES FLICKERING OF BACKGROUND WHEN RESIZED BUT IM NOT SURE IF
 		* IT IS THE BEST SOLUTION. I THINK WE JUST DIDN'T IMPLEMENT DOUBLE BUFFERING CORRECTLY. */
-		System.setProperty("sun.awt.noerasebackground", "true");
+		Toolkit.getDefaultToolkit().setDynamicLayout(false);
 		game = new Game();
 	}
 	
