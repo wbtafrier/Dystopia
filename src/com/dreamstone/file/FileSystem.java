@@ -12,9 +12,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
+
+import com.dreamstone.util.EscapeLogger;
 
 public class FileSystem {
 
@@ -26,7 +32,29 @@ public class FileSystem {
 	private static GraphicsConfiguration gc = gd.getDefaultConfiguration();
 	
 	private static File gameFolder;
+	private static File resourcesFolder;
 	private static File savesFolder;
+	
+	public static File getGameFolder() {
+		return gameFolder;
+	}
+	
+	public static File getResourcesFolder() {
+		if (resourcesFolder == null) {
+			URL resources = FileSystem.class.getResource(".." + s + ".." + s +".." + s + "resources");
+			try {
+				return new File(new URI(resources.toString()));
+			} catch (URISyntaxException e) {
+				EscapeLogger.getLogger().log(Level.SEVERE, "INVALID FILE PATH");
+				e.printStackTrace();
+			}
+		}
+		return resourcesFolder;
+	}
+	
+	public static File getSavesFolder() {
+		return savesFolder;
+	}
 	
 	private static boolean createGameDirectories()
 	{
@@ -58,7 +86,7 @@ public class FileSystem {
 		File folder = new File(parent, folderName);
 		if (!folder.exists() && !folder.mkdirs()) {
 			boolean dirsMade = createGameDirectories();
-			if (!dirsMade) throw new RuntimeException("Game directories cannot be made: send this report to bugs@dreamstone.com");
+			if (!dirsMade) throw new RuntimeException("Game directories cannot be made: send this report to EscapeBugs@dreamstone.com");
 		}
 		return folder;
 	}
