@@ -6,7 +6,7 @@ public final class EscapeFrame extends JFrame {
 
 	private static final long serialVersionUID = 5615077115127764900L;
 	
-	public EscapeFrame(EscapeComponent escapeInstance) {
+	public EscapeFrame(EscapeCanvas escapeInstance) {
 		
 		this.setTitle("Escape");
 		this.setIgnoreRepaint(true);

@@ -1,6 +1,6 @@
 package com.dreamstone.util;
 
-public final class ArgumentsHandler {
+public final class LaunchHandler {
 	
 	public static void processArguments(String[] args) {
 		//TODO: Define arguments

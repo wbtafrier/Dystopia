@@ -6,12 +6,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
-import com.dreamstone.launch.Game;
+import com.dreamstone.core.Game;
 
-public final class EscapeComponent extends Canvas implements Runnable {
+public final class EscapeCanvas extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = -5025704194120253102L;
 	private static GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -23,7 +22,7 @@ public final class EscapeComponent extends Canvas implements Runnable {
 	private Thread gameThread;
 	private static final int BUFFERS = 3;
 	
-	public EscapeComponent() {
+	public EscapeCanvas() {
 		Dimension preferredSize = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		this.setPreferredSize(preferredSize);
 		

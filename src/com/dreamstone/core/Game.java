@@ -1,4 +1,4 @@
-package com.dreamstone.launch;
+package com.dreamstone.core;
 
 public class Game {
 	
