@@ -21,7 +21,7 @@ public final class EscapeComponent extends Canvas implements Runnable {
 	private Game game;
 	private boolean running;
 	private Thread gameThread;
-	private static final int BUFFERS = 2;
+	private static final int BUFFERS = 3;
 	
 	public EscapeComponent() {
 		Dimension preferredSize = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -30,7 +30,6 @@ public final class EscapeComponent extends Canvas implements Runnable {
 		/* WE NEED TO LOOK INTO THIS. IT FIXES FLICKERING OF BACKGROUND WHEN RESIZED BUT IM NOT SURE IF
 		* IT IS THE BEST SOLUTION. I THINK WE JUST DIDN'T IMPLEMENT DOUBLE BUFFERING CORRECTLY. */
 		System.setProperty("sun.awt.noerasebackground", "true");
-		
 		game = new Game();
 	}
 	
@@ -111,12 +110,14 @@ public final class EscapeComponent extends Canvas implements Runnable {
 		
 		if (bs == null) {
 			this.createBufferStrategy(BUFFERS);
+			this.requestFocus();
 			return;
 		}
 		
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.RED);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        g.dispose();
         bs.show();
 	}
 }
