@@ -13,7 +13,7 @@ public final class DystopiaFrame extends JFrame {
 		
 		this.setTitle("Dystopia");
 		this.add(DystopiaInstance);
-		this.setExtendedState(MAXIMIZED_BOTH);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH | this.getExtendedState());
 		this.setResizable(true);
 		this.setMinimumSize(minimumSize);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

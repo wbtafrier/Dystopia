@@ -9,8 +9,8 @@ public class DisplayManager {
 	private static GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 	private static final int BUFFERS = 3;
 	
-	private static int width = gd.getDisplayMode().getWidth();
-	private static int height = gd.getDisplayMode().getHeight();
+	private static int width = gd.getDisplayMode().getWidth() / 2;
+	private static int height = gd.getDisplayMode().getHeight() / 2;
 	private static int scale = 1;
 	private static Dimension resolution;
 	
