@@ -20,11 +20,11 @@ import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 
-import com.dreamstone.util.EscapeLogger;
+import com.dreamstone.util.DystopiaLogger;
 
 public class FileSystem {
 
-	private static final String ESCAPE = "Escape";
+	private static final String DYSTOPIA = "Dystopia";
 	private static final String OS = System.getProperty("os.name").toLowerCase();
 	private static final String s = System.getProperty("file.separator");
 	private static GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -45,7 +45,7 @@ public class FileSystem {
 			try {
 				return new File(new URI(resources.toString()));
 			} catch (URISyntaxException e) {
-				EscapeLogger.getLogger().log(Level.SEVERE, "INVALID FILE PATH");
+				DystopiaLogger.getLogger().log(Level.SEVERE, "INVALID FILE PATH");
 				e.printStackTrace();
 			}
 		}
@@ -61,22 +61,22 @@ public class FileSystem {
 		if (OS.contains("win"))
 		{
 			String env = System.getenv("APPDATA");
-			gameFolder = makeFolder(env, ESCAPE);
+			gameFolder = makeFolder(env, DYSTOPIA);
 		}
 		else if (OS.contains("mac"))
 		{
 			String support = System.getProperty("user.home") + s + "Library" + s + "Application Support";
-			gameFolder = makeFolder(support, ESCAPE);
+			gameFolder = makeFolder(support, DYSTOPIA);
 		}
 		else if (OS.contains("nux"))
 		{
 			String config = System.getProperty("user.home");
-			gameFolder = makeFolder(config, "." + ESCAPE);
+			gameFolder = makeFolder(config, "." + DYSTOPIA);
 		}
 		else
 		{
 			String dir = System.getProperty("user.dir");
-			gameFolder = makeFolder(dir, ESCAPE);
+			gameFolder = makeFolder(dir, DYSTOPIA);
 		}
 		savesFolder = makeFolder(gameFolder.getAbsolutePath(), "saves");
 		return gameFolder.exists();
@@ -86,7 +86,7 @@ public class FileSystem {
 		File folder = new File(parent, folderName);
 		if (!folder.exists() && !folder.mkdirs()) {
 			boolean dirsMade = createGameDirectories();
-			if (!dirsMade) throw new RuntimeException("Game directories cannot be made: send this report to EscapeBugs@dreamstone.com");
+			if (!dirsMade) throw new RuntimeException("Game directories cannot be made: send this report to DystopiaBugs@dreamstone.com");
 		}
 		return folder;
 	}
