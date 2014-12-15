@@ -12,15 +12,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
-
-import com.dreamstone.util.DystopiaLogger;
 
 public class FileSystem {
 
@@ -33,23 +29,9 @@ public class FileSystem {
 	private static ClassLoader classLoader = FileSystem.class.getClassLoader();
 	
 	private static File gameFolder;
-	private static File resourcesFolder;
 	
 	public static File getGameFolder() {
 		return gameFolder;
-	}
-	
-	public static File getResourcesFolder() {
-		if (resourcesFolder == null) {
-			URL resources = classLoader.getResource(s + "resources");
-			try {
-				return new File(new URI(resources.toString()));
-			} catch (URISyntaxException e) {
-				DystopiaLogger.getLogger().log(Level.SEVERE, "INVALID FILE PATH");
-				e.printStackTrace();
-			}
-		}
-		return resourcesFolder;
 	}
 	
 	public static boolean createGameDirectory()
