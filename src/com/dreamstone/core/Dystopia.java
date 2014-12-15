@@ -1,14 +1,9 @@
 package com.dreamstone.core;
 
-import javax.swing.JFrame;
-
-import com.dreamstone.graphics.DystopiaCanvas;
 
 public class Dystopia implements Runnable {
 	
 	static Dystopia gameInstance;
-	private static JFrame frameInstance;
-	private static DystopiaCanvas canvasInstance;
 	private static int time;
 	
 	private Thread gameThread;
@@ -75,7 +70,7 @@ public class Dystopia implements Runnable {
 			}
 			
 			//Updates frames independently from the game logic (ticks).
-			this.getCanvas().render();
+			DisplayCarrier.getCanvas().render();
 			frames++;
 			
 			//Controls the frames to update the same time as the game logic (ticks).
@@ -98,19 +93,8 @@ public class Dystopia implements Runnable {
 		return gameInstance;
 	}
 	
-	public void setFrame(JFrame frame) {
-		frameInstance = frame;
+	public boolean isRunning() {
+		return this.running;
 	}
 	
-	public JFrame getFrame() {
-		return frameInstance;
-	}
-	
-	public void setCanvas(DystopiaCanvas canvas) {
-		canvasInstance = canvas;
-	}
-	
-	public DystopiaCanvas getCanvas() {
-		return canvasInstance;
-	}
 }

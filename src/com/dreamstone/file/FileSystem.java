@@ -30,10 +30,10 @@ public class FileSystem {
 	private static GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	private static GraphicsDevice gd = ge.getDefaultScreenDevice();
 	private static GraphicsConfiguration gc = gd.getDefaultConfiguration();
+	private static ClassLoader classLoader = FileSystem.class.getClassLoader();
 	
 	private static File gameFolder;
 	private static File resourcesFolder;
-	private static File savesFolder;
 	
 	public static File getGameFolder() {
 		return gameFolder;
@@ -41,7 +41,7 @@ public class FileSystem {
 	
 	public static File getResourcesFolder() {
 		if (resourcesFolder == null) {
-			URL resources = FileSystem.class.getResource(".." + s + ".." + s +".." + s + "resources");
+			URL resources = classLoader.getResource(s + "resources");
 			try {
 				return new File(new URI(resources.toString()));
 			} catch (URISyntaxException e) {
@@ -52,11 +52,7 @@ public class FileSystem {
 		return resourcesFolder;
 	}
 	
-	public static File getSavesFolder() {
-		return savesFolder;
-	}
-	
-	private static boolean createGameDirectories()
+	public static boolean createGameDirectory()
 	{
 		if (OS.contains("win"))
 		{
@@ -78,17 +74,20 @@ public class FileSystem {
 			String dir = System.getProperty("user.dir");
 			gameFolder = makeFolder(dir, DYSTOPIA);
 		}
-		savesFolder = makeFolder(gameFolder.getAbsolutePath(), "saves");
 		return gameFolder.exists();
 	}
-
-	public static File makeFolder(String parent, String folderName) {
-		File folder = new File(parent, folderName);
+	
+	public static File makeFolder(File parent, String folderName) {
+		File folder = new File(parent.getAbsolutePath(), folderName);
 		if (!folder.exists() && !folder.mkdirs()) {
-			boolean dirsMade = createGameDirectories();
+			boolean dirsMade = createGameDirectory();
 			if (!dirsMade) throw new RuntimeException("Game directories cannot be made: send this report to DystopiaBugs@dreamstone.com");
 		}
 		return folder;
+	}
+
+	public static File makeFolder(String parent, String folderName) {
+		return makeFolder(new File(parent), folderName);
 	}
 	
 	public static File makeFile(File file) {
@@ -102,9 +101,34 @@ public class FileSystem {
 		return file;
 	}
 	
-	public static File makeFile(String folder, String fileName) {
-		File file = new File(folder + s + fileName);
+	public static File makeFile(File folder, String fileName) {
+		File file = new File(folder.getAbsolutePath() + s + fileName);
 		return makeFile(file);
+	}
+	
+	public static File makeFile(String folder, String fileName) {
+		return makeFile(new File(folder), fileName);
+	}
+	
+	public static String getClassLoaderResourceDirectory(String parent, String fileName) {
+		if (fileName != null && !fileName.isEmpty()) {
+			return parent + "/" + fileName;
+		}
+		else {
+			return parent;
+		}
+	}
+	
+	public static File getClassLoaderResourceFile(String directory, String fileName) {
+		URL url = null;
+		File f = null;
+		url = classLoader.getResource(directory + "/" + fileName);
+		try {
+			f = new File(url.toURI());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return f;
 	}
 	
 	public static void writeTextFile(File f, StringBuilder builder) throws IOException
@@ -141,17 +165,13 @@ public class FileSystem {
 		Image im = null;
 		BufferedImage bi = null;
 		
-		if (f != null && f.exists()) {
-//			URL fileUrl = f.toURI().toURL();
-//			File newFile = new File(fileURL);
-			try {
-				im = ImageIO.read(f);
-				bi = gc.createCompatibleImage(im.getWidth(null), im.getHeight(null), Transparency.TRANSLUCENT);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			im = ImageIO.read(f);
+			bi = gc.createCompatibleImage(im.getWidth(null), im.getHeight(null), Transparency.TRANSLUCENT);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		Graphics g = bi.getGraphics();
+		Graphics g = bi.createGraphics();
 		g.drawImage(im, 0, 0, im.getWidth(null), im.getHeight(null), null);
 		g.dispose();
 		return bi;
