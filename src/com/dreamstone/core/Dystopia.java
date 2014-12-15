@@ -9,13 +9,13 @@ public class Dystopia implements Runnable {
 	static Dystopia gameInstance;
 	private static JFrame frameInstance;
 	private static DystopiaCanvas canvasInstance;
-	private static int time;
+	private static int ticks;
 	
 	private Thread gameThread;
 	private boolean running;
 	
 	protected Dystopia() {
-		time = 0;
+		ticks = 0;
 	}
 	
 	public synchronized void start() {
@@ -87,11 +87,12 @@ public class Dystopia implements Runnable {
 	}
 	
 	public void tick() {
-		time++;
+		ticks++;
+		System.out.println(Dystopia.getGame().getTime());
 	}
 	
 	public int getTime() {
-		return time;
+		return ticks;
 	}
 	
 	public static Dystopia getGame() {
