@@ -59,17 +59,17 @@ public final class DystopiaCanvas extends Canvas {
 		BufferedImage rotateImage = TransformImage.scaleImage(grassOriginal, 20);
 		rotateImage = TransformImage.rotateImage(rotateImage, Dystopia.getGame().getTime());
 
-		g.drawImage(rotateImage, ((this.getWidth() - rotateImage.getWidth()) / 2), (this.getHeight() - rotateImage.getHeight()) / 2, null);
-		//g.setColor(Color.BLACK);
+//		g.drawImage(rotateImage, ((this.getWidth() - rotateImage.getWidth()) / 2), (this.getHeight() - rotateImage.getHeight()) / 2, null);
+//		g.setColor(Color.BLACK);
 		//g.drawRect((this.getWidth() - rotateImage.getWidth()) / 2, (this.getHeight() - rotateImage.getHeight()) / 2, rotateImage.getWidth(), rotateImage.getHeight());
 		
 		float width = (float)(grassOriginal.getWidth() * (5 * Math.sin(Dystopia.getGame().getTime() * 0.0115) + (grassOriginal.getWidth() - 4)));
 		float height = (float)(grassOriginal.getHeight() * (5 * Math.cos(Dystopia.getGame().getTime() * 0.0115) + (grassOriginal.getHeight() - 4)));
 		
-		//BufferedImage croppedImage = TransformImage.scaleImage(grassOriginal, 25);
-		//croppedImage = TransformImage.cropImage(croppedImage, 0, 0, width, height);
+		BufferedImage croppedImage = TransformImage.scaleImage(grassOriginal, 25);
+		croppedImage = TransformImage.cropImage(croppedImage, 0, 0, width, height);
 		//croppedImage = TransformImage.scaleImage(croppedImage, 20);
-		//g.drawImage(croppedImage, ((this.getWidth() - croppedImage.getWidth()) / 2), (this.getHeight() - croppedImage.getHeight()) / 2, null);
+		g.drawImage(croppedImage, ((this.getWidth() - croppedImage.getWidth()) / 2), (this.getHeight() - croppedImage.getHeight()) / 2, null);
 		
 		
 		

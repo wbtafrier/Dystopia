@@ -26,9 +26,7 @@ public class ResourceLoader {
 	}
 	
 	private static void loadTileImages() {
-		dirt1 = loadImageFromJar(
-				DirectoryMaster.dirtTilesFolder
-				, "dirt_1.png");
+		dirt1 = loadImageFromJar(DirectoryMaster.dirtTilesFolder, "dirt_1.png");
 		dirt2 = loadImageFromJar(DirectoryMaster.dirtTilesFolder, "dirt_2.png");
 		grass1 = loadImageFromJar(DirectoryMaster.grassTilesFolder, "grass_1.png");
 		grass2 = loadImageFromJar(DirectoryMaster.grassTilesFolder, "grass_2.png");

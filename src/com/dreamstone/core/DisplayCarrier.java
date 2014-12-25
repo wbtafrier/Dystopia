@@ -11,7 +11,6 @@ import com.dreamstone.graphics.DystopiaFrame;
 
 /**
  * Stores the main canvas and frame and provides accessors/mutators to modify selected aspects of them.
- *
  */
 public class DisplayCarrier {
 	private static DystopiaCanvas canvasInstance;
