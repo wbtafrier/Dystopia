@@ -38,7 +38,7 @@ public class ResourceLoader {
 		grassDirtWest2 = loadImageFromJar(DirectoryMaster.grassTilesFolder, "grass_to_dirt_west_2.png");
 	}
 	
-	private static BufferedImage loadImageFromJar(String directory, String imageNameDotExtension) {
+	public static BufferedImage loadImageFromJar(String directory, String imageNameDotExtension) {
 		BufferedImage bi = null;
 		
 		try {

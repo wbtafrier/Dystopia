@@ -111,8 +111,13 @@ public class TransformImage {
         return rotatedImage;
 	}
 	
-	//STILL WORKING ON THIS METHOD
-	@Deprecated
+	/**
+	 * splitImage takes in an image and splits it up into a bunch of tiles based on the width and height provided.
+	 * @param bi : The original BufferedImage to split.
+	 * @param width : The width of the new images.
+	 * @param height : The height of the new images.
+	 * @return : An ArrayList of new small images from the original BufferedImage.
+	 */
 	public static ArrayList<BufferedImage> splitImage(BufferedImage bi, int width, int height) {
 		
 		if (bi.getWidth() % width != 0 || bi.getHeight() % height != 0) {
@@ -126,12 +131,12 @@ public class TransformImage {
 		int xTiles = bi.getWidth() / width;
 		int yTiles = bi.getHeight() / height;
 		
-		for (int i = 0; i < xTiles; i++) {
-			BufferedImage tile = new BufferedImage(width, height, bi.getType());
-			
-			//IN THE MIDDLE OF THIS METHOD
-			//if ()
-			tile = bi.getSubimage(width * i, height, width, height);
+		for (int y = 0; y < yTiles; y++) {
+			for (int x = 0; x < xTiles; x++) {
+				BufferedImage tile = new BufferedImage(width, height, bi.getType());
+				tile = bi.getSubimage(width * x, height * y, width, height);
+				splitImages.add(tile);
+			}
 		}
 		
 		return splitImages;
