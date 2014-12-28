@@ -7,21 +7,16 @@ import com.dreamstone.tile.Tile;
 public class Grid {
 	
 	private ArrayList<Coordinate> map = null;
-	private int horizontalChunks;
-	private int verticalChunks;
 	
 	public Grid() {
 		map = new ArrayList<>();
 		this.initializeMap();
-		//growMap(new Chunk(10, 0));
-		growMap(new Chunk(8, 8));
-	}
-	
-	public ArrayList<Coordinate> getMap() {
-		return this.map;
+		growMap(new Chunk(1, 0));
 	}
 
 	private void initializeMap() {
+		
+		//Creates the first chunk
 		if (map.size() == 0) {
 			Chunk c = new Chunk(0, 0);
 			for (Coordinate coord : c.getCoords()) {
@@ -30,53 +25,72 @@ public class Grid {
 		}
 	}
 	
-	private boolean checkChunk(Chunk c) {
-		if (this.map.size() == 0) {
-			return true;
-		}
-		
-		for (Coordinate coord : c.getCoords()) {
-//			if (index < 0) {
-//				for (int i = 0; i > index; i--) {
-//					map.add(0, null);
-//				}
-//			}
-			boolean f = coord.equals(map.get(this.convertCoordToLinear(coord.xCoordinate, coord.yCoordinate)));
-//			System.out.println(f);
-			if (f) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
 	private void growMap(Chunk c) {
-		if (!this.checkChunk(c)) {
-			return;
-		}
 		
-		Coordinate firstCoord = map.get(0);
-		Coordinate lastCoord = map.get(map.size() - 1);
+		Coordinate lastCoord = c.getCoords()[Chunk.CHUNK_SIZE * Chunk.CHUNK_SIZE - 1];
 		
-		for (Coordinate coord : c.getCoords()) {
-			map.add(this.convertCoordToLinear(coord.xCoordinate, coord.yCoordinate), coord);
-		}
-		
-		for (int x = firstCoord.xCoordinate; x < lastCoord.xCoordinate; x++) {
-			for (int y = firstCoord.yCoordinate; y < lastCoord.yCoordinate; y++) {
-//				Coordinate current = new Coordinate(x, y);
-				if (map.get(this.convertCoordToLinear(x, y)) == null) {
-					Chunk chunk = new Chunk(x, y);
-					for (Coordinate coord : chunk.getCoords()) {
-						map.add(this.convertCoordToLinear(x, y), coord);
+		/*if (lastCoord.xCoordinate < 0 || lastCoord.yCoordinate < 0) {
+			Coordinate firstCoord = c.getCoords()[0];
+			
+			for (int x = firstCoord.xCoordinate; x <= 0; x++) {
+				for (int y = firstCoord.yCoordinate; y <= 0; y++) {
+					
+					map.add(0, new Coordinate(firstCoord.xCoordinate - (x + 1), firstCoord.yCoordinate - (y + 1)));
+					
+					//System.out.println("(" + x + ", " + y + ")");
+				}
+			}
+			
+			for (int x = map.get(0).xCoordinate; x < 0; x++) {
+				for (int y = map.get(0).yCoordinate; y < 0; y++) {
+					
+					Chunk genChunk = new Chunk(x, y);
+					if (this.isChunkCreated(genChunk)) {
+						continue;
 					}
-					x += Chunk.CHUNK_SIZE;
-					y += Chunk.CHUNK_SIZE;
+					else {
+						for (Coordinate coord : genChunk.getCoords()) {
+							System.out.println(map.get(this.convertCoordToLinear(x, y)));
+							map.set(this.convertCoordToLinear(x, y), coord);
+						}
+					}
 				}
 			}
 		}
-		
+		else {*/
+			for (int x = 0; x < lastCoord.xCoordinate; x++) {
+				for (int y = 0; y < lastCoord.yCoordinate; y++) {
+					
+					Chunk genChunk = new Chunk(x, y);
+					if (this.isChunkCreated(genChunk)) {
+						continue;
+					}
+					else {
+						for (Coordinate coord : genChunk.getCoords()) {
+							map.add(this.convertCoordToLinear(x, y), coord);
+						}
+					}
+				}
+			}
+		//}
 		System.out.println(map);
+	}
+	
+	private boolean isChunkCreated(Chunk c) {
+		if (this.map.size() == 0) {
+			return false;
+		}
+		
+		for (Coordinate coord : c.getCoords()) {
+			
+			System.out.println(this.convertCoordToLinear(coord.xCoordinate, coord.yCoordinate));
+			boolean f = coord.equals(map.get(this.convertCoordToLinear(coord.xCoordinate, coord.yCoordinate)));
+//			System.out.println(f);
+			if (f) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void setTile(int x, int y, Tile t) {
@@ -88,14 +102,31 @@ public class Grid {
 	}
 	
 	private int getWidth() {
-		return horizontalChunks * Chunk.CHUNK_SIZE;
+		return 0;
 	}
 	
-	private int getHeight() {
-		return verticalChunks * Chunk.CHUNK_SIZE;
+	public ArrayList<Coordinate> getMap() {
+		return this.map;
 	}
 	
 	private int convertCoordToLinear(int x, int y) {
+		
+		/*if (x < 0 || y < 0) {
+			if (map.get(0).equals(new Coordinate(x, y))) {
+				return 0;
+			}
+			else {
+				int index = 0;
+				for (Coordinate coord : map) {
+					if (coord.equals(new Coordinate(x, y))) {
+						return index;
+					}
+					else {
+						index++;
+					}
+				}
+			}
+		}*/
 		return x + (y * this.getWidth()); 
 	}
 }

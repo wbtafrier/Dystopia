@@ -8,6 +8,12 @@ public class Coordinate {
 	public final int yCoordinate;
 	private Tile tileType;
 	
+	protected Coordinate() {
+		xCoordinate = 0;
+		yCoordinate = 0;
+		tileType = null;
+	}
+	
 	protected Coordinate(int x, int y) {
 		xCoordinate = x;
 		yCoordinate = y;

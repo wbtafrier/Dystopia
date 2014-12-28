@@ -1,6 +1,7 @@
 package com.dreamstone.graphics;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -43,8 +44,8 @@ public final class DystopiaCanvas extends Canvas {
 //		int xOffset = ((this.getWidth() - grassTransformation.getWidth()) - this.getWidth() / 2) / 2;
 //		int yOffset = ((this.getHeight() - grassTransformation.getHeight())) / 2;
 //		
-//		g.setColor(new Color(0xEEEEEE));
-//		g.fillRect(0, 0, DisplayCarrier.getFrame().getWidth(), DisplayCarrier.getFrame().getHeight());
+		g.setColor(new Color(0xEEEEEE));
+		g.fillRect(0, 0, DisplayCarrier.getFrame().getWidth(), DisplayCarrier.getFrame().getHeight());
 //		g.drawImage(grassTransformation, xOffset, yOffset, grassTransformation.getWidth(), grassTransformation.getHeight(), null);
 //		
 //		grassTransformation= TransformImage.flipHorizontally(grassOriginal);
@@ -77,11 +78,12 @@ public final class DystopiaCanvas extends Canvas {
 		ArrayList<BufferedImage> rawr = new ArrayList<>();
 		rawr = TransformImage.splitImage(terrain, 16, 16);
 		
-		BufferedImage grass = TransformImage.scaleImage(rawr.get(18), 2.5F);
+		BufferedImage grass = TransformImage.scaleImage(rawr.get(17), 3.8F);
 		ArrayList<Coordinate> coords = Dystopia.grid.getMap();
 		
 		for (int i = 0; i < coords.size(); i++) {
-			g.drawImage(grass, 300 + coords.get(i).xCoordinate * grass.getWidth(), 50 + coords.get(i).yCoordinate * grass.getHeight(),
+			g.drawImage(grass, ((this.getWidth() - (grass.getWidth() * 16)) / 2) + coords.get(i).xCoordinate * grass.getWidth(), 
+					((this.getHeight() - (grass.getHeight() * 16)) + 400) + coords.get(i).yCoordinate * grass.getHeight(),
 					grass.getWidth(), grass.getHeight(), null);
 		}
 		
