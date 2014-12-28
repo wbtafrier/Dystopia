@@ -80,7 +80,7 @@ public final class DystopiaCanvas extends Canvas {
 		int xCoord = 0;
 		int yCoord = 0;
 		
-		for (int i = 0; i < rawr.size(); i++) {
+		/*for (int i = 0; i < rawr.size(); i++) {
 			rawr.set(i, TransformImage.scaleImage(rawr.get(i), 5));
 			
 			if (i % 16 == 0) {
@@ -89,7 +89,7 @@ public final class DystopiaCanvas extends Canvas {
 			}
 			g.drawImage(rawr.get(i), (xCoord * rawr.get(i).getWidth()), yCoord + (rawr.get(i).getHeight()), null);
 			xCoord++;
-		}
+		}*/
 		
 		
 		//BufferedImage[] lolAnimation = new BufferedImage[1];

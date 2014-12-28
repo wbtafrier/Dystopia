@@ -1,15 +1,18 @@
 package com.dreamstone.core;
 
+import com.dreamstone.world.Grid;
 
 public class Dystopia implements Runnable {
 	
 	static Dystopia gameInstance;
+	private Grid grid;
 	private static int ticks;
 	
 	private Thread gameThread;
 	private boolean running;
 	
 	protected Dystopia() {
+		grid = new Grid();
 		ticks = 0;
 	}
 	
@@ -83,7 +86,7 @@ public class Dystopia implements Runnable {
 	
 	public void tick() {
 		ticks++;
-		System.out.println(Dystopia.getGame().getTime());
+		//System.out.println(Dystopia.getGame().getTime());
 	}
 	
 	public int getTime() {
