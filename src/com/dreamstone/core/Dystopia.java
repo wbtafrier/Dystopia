@@ -5,7 +5,7 @@ import com.dreamstone.world.Grid;
 public class Dystopia implements Runnable {
 	
 	static Dystopia gameInstance;
-	private Grid grid;
+	public static Grid grid;
 	private static int ticks;
 	
 	private Thread gameThread;
