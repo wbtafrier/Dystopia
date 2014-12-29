@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import com.dreamstone.core.DisplayCarrier;
 
@@ -63,7 +62,7 @@ public class TransformImage {
 	public static BufferedImage scaleImage(BufferedImage bi, float percentage) {
 		
 		if (percentage <= 0) {
-			DystopiaLogger.getLogger().log(Level.WARNING, "THE PERCENTAGE: " + percentage + " CANNOT BE LESS THAN OR EQUAL TO ZERO. RETURNING IMAGE WITH DEFAULT SIZE.");
+			DystopiaLogger.logWarning("THE PERCENTAGE: " + percentage + " CANNOT BE LESS THAN OR EQUAL TO ZERO. RETURNING IMAGE WITH DEFAULT SIZE.");
 			return bi;
 		}
 		
@@ -121,7 +120,7 @@ public class TransformImage {
 	public static ArrayList<BufferedImage> splitImage(BufferedImage bi, int width, int height) {
 		
 		if (bi.getWidth() % width != 0 || bi.getHeight() % height != 0) {
-			DystopiaLogger.getLogger().log(Level.SEVERE, "It looks like there was a problem dividing up a tileset. :(");
+			DystopiaLogger.logSevere("It looks like there was a problem dividing up a tileset. :(");
 			DisplayCarrier.getFrame().dispose();
 			throw new IllegalArgumentException();
 		}
@@ -152,7 +151,7 @@ public class TransformImage {
 	public static BufferedImage[] splitAnimation(BufferedImage bi, int width) {
 		
 		if (bi.getWidth() % width != 0) {
-			DystopiaLogger.getLogger().log(Level.SEVERE, "It looks like there was a problem dividing up an animation strip. :(");
+			DystopiaLogger.logSevere("It looks like there was a problem dividing up an animation strip. :(");
 			DisplayCarrier.getFrame().dispose();
 			throw new IllegalArgumentException();
 		}

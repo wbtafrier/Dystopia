@@ -15,6 +15,7 @@ import com.dreamstone.file.DirectoryMaster;
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.util.TransformImage;
 import com.dreamstone.world.Coordinate;
+import com.dreamstone.world.Quadrant;
 
 public final class DystopiaCanvas extends Canvas {
 
@@ -78,13 +79,19 @@ public final class DystopiaCanvas extends Canvas {
 		ArrayList<BufferedImage> rawr = new ArrayList<>();
 		rawr = TransformImage.splitImage(terrain, 16, 16);
 		
-		BufferedImage grass = TransformImage.scaleImage(rawr.get(17), 3.8F);
-		ArrayList<Coordinate> coords = Dystopia.grid.getMap();
+		BufferedImage grass = TransformImage.scaleImage(rawr.get(17), 0.5F);
+		ArrayList<Quadrant> quads = Dystopia.grid.getGameMap();
 		
-		for (int i = 0; i < coords.size(); i++) {
-			g.drawImage(grass, ((this.getWidth() - (grass.getWidth() * 16)) / 2) + coords.get(i).xCoordinate * grass.getWidth(), 
-					((this.getHeight() - (grass.getHeight() * 16)) + 400) + coords.get(i).yCoordinate * grass.getHeight(),
-					grass.getWidth(), grass.getHeight(), null);
+		for (int i = 0; i < quads.size(); i++) {
+			ArrayList<ArrayList<Coordinate>> coords = quads.get(i).getMap();
+			for (int x = 0; x < coords.size(); x++) {
+				ArrayList<Coordinate> col = coords.get(x);
+				for (int y = 0; y < col.size(); y++) {
+					g.drawImage(grass, ((this.getWidth() - (grass.getWidth() * 32)) / 2) + col.get(y).xCoordinate * grass.getWidth(), 
+							((this.getHeight() - (grass.getHeight() * 32))) + col.get(y).yCoordinate * grass.getHeight(),
+							grass.getWidth(), grass.getHeight(), null);
+				}
+			}
 		}
 		
 		
