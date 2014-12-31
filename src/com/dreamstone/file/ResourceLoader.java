@@ -2,7 +2,6 @@ package com.dreamstone.file;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.logging.Level;
 
 import com.dreamstone.core.Dystopia;
 import com.dreamstone.util.DystopiaLogger;

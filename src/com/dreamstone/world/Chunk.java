@@ -1,7 +1,5 @@
 package com.dreamstone.world;
 
-import java.util.logging.Level;
-
 import com.dreamstone.util.DystopiaLogger;
 
 public class Chunk {
