@@ -1,38 +1,146 @@
 package com.dreamstone.world;
 
+import java.util.logging.Level;
+
+import com.dreamstone.util.DystopiaLogger;
+
 public class Chunk {
 
-	private Coordinate[] coords;
-	public static final int CHUNK_SIZE = 8;
+	private Coordinate[][] coordList;
+	public static final int CHUNK_SIZE = 4;
+	public final int X_VALUE;
+	public final int Y_VALUE;
+	
+	/* GUIDE TO ADDING CHUNKS */
+	//////////////////////////////////////////////
+	/*
+		Quadrant 1:
+			X Coordinates
+			- Always use inc8 for the x coordinate. This will give you the correct coordinate when multiplied.
+			- The values start at 0 and move their way UP.
+
+			Y Coordinates
+			- Always use inc8 for the y coordinate. This will give you the correct coordinate when multiplied.
+			- The values start at 0 and move their way UP.
+
+		Quadrant 2:
+			X Coordinates
+			- Always use inc8 for the x coordinate. This will give you the correct coordinate when multiplied.
+			- The values start at -1 and move their way DOWN.
+
+			Y Coordinates
+			- Always use inc7 for the y coordinate. This will give you the correct coordinate when multiplied.
+			- The values start at 0 and move their way UP.
+
+		Quadrant 3:
+			X Coordinates
+			- Always use inc8 for the x coordinate. This will give you the correct coordinate when multiplied.
+			- The values start at -1 and move their way DOWN.
+
+			Y Coordinates
+			- Always use inc8 for the y coordinate. This will give you the correct coordinate when multiplied.
+			- The values start at -1 and move their way DOWN.
+
+		Quadrant 4:
+			X Coordinates
+			- Always use inc7 for the x coordinate. This will give you the correct coordinate when multiplied.
+			- The values start at 1 and move their way UP.
+
+			Y Coordinates
+			- Always use inc8 for the y coordinate. This will give you the correct coordinate when multiplied.
+			- The values start at -1 and move their way DOWN.	
+	 */
 	
 	public Chunk(int startX, int startY) {
-		coords = new Coordinate[CHUNK_SIZE * CHUNK_SIZE];
+		X_VALUE = startX;
+		Y_VALUE = startY;
 		
-		for (int x = 0; x < CHUNK_SIZE; x++) {
-			for (int y = 0; y < CHUNK_SIZE; y++) {
-				coords[x + y * CHUNK_SIZE] = new Coordinate(startX + x, startY + y);
+		coordList = new Coordinate[CHUNK_SIZE][CHUNK_SIZE];
+		
+		if (startX >= 0 && startY >= 0) {
+			startX *= CHUNK_SIZE;
+			startY *= CHUNK_SIZE;
+		}
+		else if (startX < 0 && startY >= 0) {
+			startX *= CHUNK_SIZE;
+			startY *= CHUNK_SIZE;
+			startY--;
+		}
+		else if (startX < 0 && startY < 0) {
+			startX *= CHUNK_SIZE;
+			startY *= CHUNK_SIZE;
+		}
+		else if (startX >= 0 && startY < 0) {
+			startX *= CHUNK_SIZE;
+			startX--;
+			startY *= CHUNK_SIZE;
+		}
+		setChunkCoords(startX, startY);
+	}
+	
+	private void setChunkCoords(int startX, int startY) {
+		if (startX >= 0 && startY >= 0) {
+//			System.out.println("QUAD1");
+			for (int x = 0; x < CHUNK_SIZE; x++) {
+				for (int y = 0; y < CHUNK_SIZE; y++) {
+					coordList[x][y] = new Coordinate(startX + x, startY + y);
+				}
 			}
+		}
+		else if (startX < 0 && startY >= 0) {
+//			System.out.println("QUAD2");
+			for (int x = 0; x < CHUNK_SIZE; x++) {
+				for (int y = 0; y < CHUNK_SIZE; y++) {
+					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX + x, startY - y);
+				}
+			}
+		}
+		else if (startX < 0 && startY < 0) {
+//			System.out.println("QUAD3");
+			for (int x = 0; x < CHUNK_SIZE; x++) {
+				for (int y = 0; y < CHUNK_SIZE; y++) {
+					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX + x, startY + y);
+				}
+			}
+		}
+		else if (startX >= 0 && startY < 0) {
+//			System.out.println("QUAD4");
+			for (int x = 0; x < CHUNK_SIZE; x++) {
+				for (int y = 0; y < CHUNK_SIZE; y++) {
+					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX - x, startY + y);
+				}
+			}
+		}
+		else {
+			DystopiaLogger.logWarning("COORDINATE IS NOT VALID, NOT CREATING CHUNK.");
+			return;
 		}
 	}
 	
 	public Coordinate getStartingCoord() {
-		return this.getCoords()[0];
+		return this.getCoords()[0][0];
 	}
 	
+	/**
+	 * The getCoordinate method returns a Coordinate object at the index spots (x, y)
+	 * @param x : The x index spot of the chunk.
+	 * @param y : The y index spot of the chunk.
+	 * @return : A Coordinate object at the index spot of the chunk.
+	 */
 	public Coordinate getCoordinate(int x, int y) {
 		
 		for (int height = 0; height < CHUNK_SIZE; height++) {
 			for (int width = 0; width < CHUNK_SIZE; width++) {
 				if (width == x && height == y) {
-					return this.getCoords()[y + x * CHUNK_SIZE];
+					return this.getCoords()[x][y];
 				}
 			}
 		}
 		return null;
 	}
 	
-	public Coordinate[] getCoords() {
-		return coords;
+	public Coordinate[][] getCoords() {
+		return coordList;
 	}
 	
 	@Override
@@ -40,8 +148,12 @@ public class Chunk {
 		StringBuilder sb = new StringBuilder();
 		
 		for (int y = 0; y < CHUNK_SIZE; y++) {
+			if (y == 0) {
+				sb.append("\n");
+			}
+			
 			for (int x = 0; x < CHUNK_SIZE; x++) {
-				sb.append(coords[y + x * CHUNK_SIZE]);
+				sb.append(coordList[x][y]);
 			}
 			sb.append("\n");
 		}

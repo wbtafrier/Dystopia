@@ -45,8 +45,16 @@ public class Coordinate {
 		return (this.xCoordinate == c.xCoordinate) && (this.yCoordinate == c.yCoordinate);
 	}
 	
+//	public static int counter = 0;
 	@Override
 	public String toString() {
-		return "(" + xCoordinate + ", " + yCoordinate + ")\n";
+//		counter++;
+//		
+//		if (counter == 8) {
+//			counter = 0;
+//			return "(" + xCoordinate + ", " + yCoordinate + ")\n";
+//		}
+		return "(" + xCoordinate + ", " + yCoordinate + ")";
+		
 	}
 }

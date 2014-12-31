@@ -21,7 +21,7 @@ public class ResourceLoader {
 			loadTileImages();
 		}
 		else {
-			DystopiaLogger.getLogger().log(Level.WARNING, "Resources can only be loaded before the game starts.");
+			DystopiaLogger.logWarning("Resources can only be loaded before the game starts.");
 		}
 	}
 	

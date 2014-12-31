@@ -14,7 +14,9 @@ import com.dreamstone.core.Dystopia;
 import com.dreamstone.file.DirectoryMaster;
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.util.TransformImage;
+import com.dreamstone.world.Chunk;
 import com.dreamstone.world.Coordinate;
+import com.dreamstone.world.Quadrant;
 
 public final class DystopiaCanvas extends Canvas {
 
@@ -74,18 +76,12 @@ public final class DystopiaCanvas extends Canvas {
 		//croppedImage = TransformImage.scaleImage(croppedImage, 20);
 		//g.drawImage(croppedImage, ((this.getWidth() - croppedImage.getWidth()) / 2), (this.getHeight() - croppedImage.getHeight()) / 2, null);
 		
-		BufferedImage terrain = ResourceLoader.loadImageFromJar(DirectoryMaster.texturesFolder, "terrain.png");
-		ArrayList<BufferedImage> rawr = new ArrayList<>();
-		rawr = TransformImage.splitImage(terrain, 16, 16);
-		
-		BufferedImage grass = TransformImage.scaleImage(rawr.get(17), 3.8F);
-		ArrayList<Coordinate> coords = Dystopia.grid.getMap();
-		
-		for (int i = 0; i < coords.size(); i++) {
-			g.drawImage(grass, ((this.getWidth() - (grass.getWidth() * 16)) / 2) + coords.get(i).xCoordinate * grass.getWidth(), 
-					((this.getHeight() - (grass.getHeight() * 16)) + 400) + coords.get(i).yCoordinate * grass.getHeight(),
-					grass.getWidth(), grass.getHeight(), null);
-		}
+//		
+//		for (int i = 0; i < coords.size(); i++) {
+//			g.drawImage(grass, ((this.getWidth() - (grass.getWidth() * 16)) / 2) + coords.get(i).xCoordinate * grass.getWidth(), 
+//					((this.getHeight() - (grass.getHeight() * 16)) + 400) + coords.get(i).yCoordinate * grass.getHeight(),
+//					grass.getWidth(), grass.getHeight(), null);
+//		}
 		
 		
 		/*
@@ -100,6 +96,30 @@ public final class DystopiaCanvas extends Canvas {
 			g.drawImage(rawr.get(i), (xCoord * rawr.get(i).getWidth()), yCoord + (rawr.get(i).getHeight()), null);
 			xCoord++;
 		}*/
+		
+		BufferedImage terrain = ResourceLoader.loadImageFromJar(DirectoryMaster.texturesFolder, "terrain.png");
+		ArrayList<BufferedImage> rawr = new ArrayList<>();
+		rawr = TransformImage.splitImage(terrain, 16, 16);
+		
+		BufferedImage grass = TransformImage.scaleImage(rawr.get(17), 5);
+		
+		ArrayList<Quadrant> quads = Dystopia.grid.QUADRANTS;
+		
+		//1 for now I'm only looking at quad 1.
+		for (int i = 0; i < 1; i++) {
+			for (int y = 0; y < quads.get(i).getChunks().size(); y++) {
+				for (int x = 0; x < quads.get(i).getChunks().get(y).size(); x++) {
+					for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++) {
+						for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++) {
+							Coordinate c = quads.get(i).getChunks().get(y).get(x).getCoordinate(xx, yy);
+							
+							g.drawImage(grass, (c.xCoordinate * (grass.getWidth())), 
+								(c.yCoordinate * grass.getHeight()), null);
+						}
+					}
+				}
+			}
+		}
 		
 		
 		//BufferedImage[] lolAnimation = new BufferedImage[1];
