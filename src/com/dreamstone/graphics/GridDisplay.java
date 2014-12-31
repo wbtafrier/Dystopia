@@ -30,8 +30,8 @@ public class GridDisplay {
 		ArrayList<Quadrant> quads = grid.QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 
-		int screenWidth = DisplayCarrier.getDisplaySize().width;
-		int screenHeight = DisplayCarrier.getDisplaySize().height;
+		int screenWidth = DisplayCarrier.getCanvas().getWidth();
+		int screenHeight = DisplayCarrier.getCanvas().getHeight();
 		FontRenderContext context = display.getFontRenderContext();
 
 		Font f = new Font("Comic Sans MS", Font.PLAIN, 16);
