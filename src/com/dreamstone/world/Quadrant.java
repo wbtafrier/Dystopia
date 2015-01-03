@@ -96,14 +96,13 @@ public class Quadrant {
 						Chunk fillerChunk = new Chunk(x, y);
 						
 						//If the chunk is not created, add the new chunk.
-						if (!(isChunkCreated(fillerChunk))) {
-							if (tempY != y) {
+						if (tempY != y) {
+							tempY = y;
+							if (!(isChunkCreated(fillerChunk))) {
 								quadrant.add(new ArrayList<Chunk>());
-								tempY = y;
 							}
-							
-							quadrant.get(y).add(fillerChunk);
 						}
+						quadrant.get(y).add(fillerChunk);
 					}
 				}
 			}
@@ -115,14 +114,13 @@ public class Quadrant {
 						Chunk fillerChunk = new Chunk(x, y);
 						
 						//If the chunk is not created, add the new chunk.
-						if (!(isChunkCreated(fillerChunk))) {
-							if (tempY != y) {
+						if (tempY != y) {
+							tempY = y;
+							if (!(isChunkCreated(fillerChunk))) {
 								quadrant.add(new ArrayList<Chunk>());
-								tempY = y;
 							}
-							
-							quadrant.get(y - 1).add(fillerChunk);
 						}
+						quadrant.get(y).add(fillerChunk);
 					}
 				}
 			}
@@ -134,14 +132,13 @@ public class Quadrant {
 						Chunk fillerChunk = new Chunk(x, y);
 
 						//If the chunk is not created, add the new chunk.
-						if (!(isChunkCreated(fillerChunk))) {
-							if (tempY != y) {
+						if (tempY != y) {
+							tempY = y;
+							if (!(isChunkCreated(fillerChunk))) {
 								quadrant.add(new ArrayList<Chunk>());
-								tempY = y;
 							}
-
-							quadrant.get(Math.abs(y + 1)).add(fillerChunk);
 						}
+						quadrant.get(y).add(fillerChunk);
 					}
 				}
 			}
@@ -153,14 +150,13 @@ public class Quadrant {
 						Chunk fillerChunk = new Chunk(x, y);
 
 						//If the chunk is not created, add the new chunk.
-						if (!(isChunkCreated(fillerChunk))) {
-							if (tempY != y) {
+						if (tempY != y) {
+							tempY = y;
+							if (!(isChunkCreated(fillerChunk))) {
 								quadrant.add(new ArrayList<Chunk>());
-								tempY = y;
 							}
-
-							quadrant.get(Math.abs(y + 1)).add(fillerChunk);
 						}
+						quadrant.get(y).add(fillerChunk);
 					}
 				}
 			}

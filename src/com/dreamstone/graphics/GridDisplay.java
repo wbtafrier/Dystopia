@@ -62,7 +62,7 @@ public class GridDisplay {
 								baseY = strY + ascent;
 
 
-								display.drawString(coord, (int) strX, (int) baseY);
+//								display.drawString(coord, (int) strX, (int) baseY);
 							}
 							else if (i == 1) {
 								startX = screenWidth / 2 - Math.abs(c.xCoordinate) * grass.getWidth();
@@ -78,7 +78,7 @@ public class GridDisplay {
 								ascent = (float) -bounds.getY();
 								baseY = strY + ascent;
 
-								display.drawString(coord, (int) strX, (int) baseY);
+//								display.drawString(coord, (int) strX, (int) baseY);
 							}
 							else if (i == 2) {
 								startX = screenWidth / 2 - Math.abs(c.xCoordinate) * grass.getWidth();
@@ -94,7 +94,7 @@ public class GridDisplay {
 								ascent = (float) -bounds.getY();
 								baseY = strY + ascent;
 
-								display.drawString(coord, (int) strX, (int) baseY);
+//								display.drawString(coord, (int) strX, (int) baseY);
 							}
 							else if (i == 3) {
 								startX = screenWidth / 2 + c.xCoordinate * grass.getWidth();
@@ -110,7 +110,7 @@ public class GridDisplay {
 								ascent = (float) -bounds.getY();
 								baseY = strY + ascent;
 
-								display.drawString(coord, (int) strX, (int) baseY);
+//								display.drawString(coord, (int) strX, (int) baseY);
 							}
 						}
 					}
