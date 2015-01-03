@@ -92,35 +92,39 @@ public class Quadrant {
 				tempY = 0;
 				
 				for (int y = 0; y <= chunk.Y_VALUE; y++) {
+					if (quadrant.size() == y) {
+						if (tempY != y) {
+							tempY = y;
+							quadrant.add(new ArrayList<Chunk>());
+						}
+					}
 					for (int x = 0; x <= chunk.X_VALUE; x++) {
 						Chunk fillerChunk = new Chunk(x, y);
 						
 						//If the chunk is not created, add the new chunk.
-						if (tempY != y) {
-							tempY = y;
-							if (!(isChunkCreated(fillerChunk))) {
-								quadrant.add(new ArrayList<Chunk>());
-							}
+						if (!(isChunkCreated(fillerChunk))) {
+							quadrant.get(y).add(fillerChunk);
 						}
-						quadrant.get(y).add(fillerChunk);
 					}
 				}
 			}
 			else if (QUADRANT_NUMBER == 2) {
-				tempY = 1;
+				tempY = 0;
 				
-				for (int y = 1; y <= chunk.Y_VALUE; y++) {
-					for (int x = -1; x >= chunk.X_VALUE; x--) {
-						Chunk fillerChunk = new Chunk(x, y);
-						
-						//If the chunk is not created, add the new chunk.
+				for (int y = 0; y < chunk.Y_VALUE; y++) {
+					if (quadrant.size() == y) {
 						if (tempY != y) {
 							tempY = y;
-							if (!(isChunkCreated(fillerChunk))) {
-								quadrant.add(new ArrayList<Chunk>());
-							}
+							quadrant.add(new ArrayList<Chunk>());
 						}
-						quadrant.get(y).add(fillerChunk);
+					}
+					for (int x = -1; x >= chunk.X_VALUE; x--) {
+						Chunk fillerChunk = new Chunk(x, y + 1);
+						
+						//If the chunk is not created, add the new chunk.
+						if (!(isChunkCreated(fillerChunk))) {
+							quadrant.get(y).add(fillerChunk);
+						}
 					}
 				}
 			}
@@ -128,17 +132,19 @@ public class Quadrant {
 				tempY = -1;
 				
 				for (int y = -1; y >= chunk.Y_VALUE; y--) {
+					if (quadrant.size() == Math.abs(y + 1)) {
+						if (tempY != y) {
+							tempY = y;
+							quadrant.add(new ArrayList<Chunk>());
+						}
+					}
 					for (int x = -1; x >= chunk.X_VALUE; x--) {
 						Chunk fillerChunk = new Chunk(x, y);
 
 						//If the chunk is not created, add the new chunk.
-						if (tempY != y) {
-							tempY = y;
-							if (!(isChunkCreated(fillerChunk))) {
-								quadrant.add(new ArrayList<Chunk>());
-							}
+						if (!(isChunkCreated(fillerChunk))) {
+							quadrant.get(Math.abs(y + 1)).add(fillerChunk);
 						}
-						quadrant.get(y).add(fillerChunk);
 					}
 				}
 			}
@@ -146,19 +152,21 @@ public class Quadrant {
 				tempY = -1;
 				
 				for (int y = -1; y >= chunk.Y_VALUE; y--) {
-					for (int x = 1; x <= chunk.X_VALUE; x++) {
-						Chunk fillerChunk = new Chunk(x, y);
-
-						//If the chunk is not created, add the new chunk.
+					if (quadrant.size() == Math.abs(y + 1)) {
 						if (tempY != y) {
 							tempY = y;
+							quadrant.add(new ArrayList<Chunk>());
+						}
+					}
+					for (int x = 0; x <= chunk.X_VALUE; x++) {
+						Chunk fillerChunk = new Chunk(x + 1, y);
+
+						//If the chunk is not created, add the new chunk.
 							if (!(isChunkCreated(fillerChunk))) {
-								quadrant.add(new ArrayList<Chunk>());
+								quadrant.get(Math.abs(y + 1)).add(fillerChunk);
 							}
 						}
-						quadrant.get(y).add(fillerChunk);
 					}
-				}
 			}
 		}
 		else {

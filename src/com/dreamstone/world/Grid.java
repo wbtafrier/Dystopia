@@ -17,8 +17,11 @@ public class Grid {
 		QUADRANTS = new ArrayList<>();
 		initializeMap();
 		
-		for (int i = 0; i < 3; i++) {
-			quad1.growQuadrant(new Chunk((quad1.getChunks().size() + 1), (quad1.getChunks().size() + 1)));
+		for (int i = 0; i < 6; i++) {
+			quad1.growQuadrant(new Chunk(quad1.getChunks().size(), quad1.getChunks().size()));
+			quad2.growQuadrant(new Chunk(-(quad2.getChunks().size() + 1), quad2.getChunks().size() + 1));
+			quad3.growQuadrant(new Chunk(-(quad3.getChunks().size() + 1), -(quad3.getChunks().size() + 1)));
+			quad4.growQuadrant(new Chunk((quad4.getChunks().size() + 1), -(quad4.getChunks().size() + 1)));
 		}
 		
 		System.out.println(quad1);
