@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import com.dreamstone.core.DisplayCarrier;
-import com.dreamstone.file.DirectoryMaster;
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.tile.Tile;
 import com.dreamstone.util.DystopiaLogger;
@@ -32,7 +31,7 @@ public class GridDisplay {
 		else {
 			//TODO: return pink square as separate image
 			DystopiaLogger.logSevere("Failed to load tile " + t.getName() + " at index " + t.getIndex() + " from terrain.png");
-			return null;
+			return ResourceLoader.nullImage;
 		}
 	}
 	

@@ -10,17 +10,19 @@ public class ResourceLoader {
 
 	// IMAGE FILES
 	public static BufferedImage terrainSheet;
+	public static BufferedImage nullImage;
 	
 	public static void loadAllResources() {
 		if (Dystopia.getGame() == null || !Dystopia.getGame().isRunning()) {
-			loadTilesheets();
+			loadImages();
 		}
 		else {
 			DystopiaLogger.logWarning("Resources can only be loaded before the game starts.");
 		}
 	}
 	
-	private static void loadTilesheets() {
-		terrainSheet = FileSystem.loadImageFromJar(DirectoryMaster.texturesFolder, "terrain.png");
+	private static void loadImages() {
+		terrainSheet = FileSystem.loadImageFromJar(DirectoryMaster.tilesFolder, "terrain.png");
+		nullImage = FileSystem.loadImageFromJar(DirectoryMaster.tilesFolder, "null_image.png");
 	}
 }

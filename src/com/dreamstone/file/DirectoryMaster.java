@@ -20,4 +20,5 @@ public class DirectoryMaster {
 	
 	// textures/...
 	public static final String playersFolder = FileSystem.getClassLoaderResourceDirectory(texturesFolder, "players");
+	public static final String tilesFolder = FileSystem.getClassLoaderResourceDirectory(texturesFolder, "tiles");
 }
