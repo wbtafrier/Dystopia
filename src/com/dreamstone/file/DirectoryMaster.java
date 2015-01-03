@@ -19,9 +19,5 @@ public class DirectoryMaster {
 	public static final String texturesFolder = FileSystem.getClassLoaderResourceDirectory(resourcesFolder, "textures");
 	
 	// textures/...
-	public static final String individualTilesFolder = FileSystem.getClassLoaderResourceDirectory(texturesFolder, "individual_tiles");
-	
-	// individual_tiles/...
-	public static final String dirtTilesFolder = FileSystem.getClassLoaderResourceDirectory(individualTilesFolder, "dirt_tiles");
-	public static final String grassTilesFolder = FileSystem.getClassLoaderResourceDirectory(individualTilesFolder, "grass_tiles");
+	public static final String playersFolder = FileSystem.getClassLoaderResourceDirectory(texturesFolder, "players");
 }

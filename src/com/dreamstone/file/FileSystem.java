@@ -158,4 +158,16 @@ public class FileSystem {
 		g.dispose();
 		return bi;
 	}
+	
+	public static BufferedImage loadImageFromJar(String directory, String imageNameDotExtension) {
+		BufferedImage bi = null;
+		
+		try {
+			bi = FileSystem.readImageFile(FileSystem.getClassLoaderResourceFile(directory, imageNameDotExtension));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return bi;
+	}
 }
