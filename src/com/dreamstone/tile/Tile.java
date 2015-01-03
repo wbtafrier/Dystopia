@@ -1,5 +1,8 @@
 package com.dreamstone.tile;
 
+import com.dreamstone.file.ResourceLoader;
+import com.dreamstone.util.DystopiaLogger;
+
 public class Tile {
 	
 	private String tileName = "null";
@@ -8,6 +11,7 @@ public class Tile {
 	
 	/**
 	 * Instantiating this constructor will create a new Tile with a specific name and independent image file.
+	 * Sets the index to -1, representing no index.
 	 * @param name : The identity or ID of the Tile.
 	 * @param imgName : The independent file name of the image of this Tile (DO NOT include file extension).
 	 */
@@ -25,8 +29,16 @@ public class Tile {
 	 */
 	public Tile(String name, String tileSheetName, int index) {
 		this.setName(name);
-		this.setImageName(tileSheetName);
-		this.setIndex(index);
+		
+		if (isIndexLegal(index)) {
+			this.setImageName(tileSheetName);
+			this.setIndex(index);
+		}
+		else {
+			DystopiaLogger.logWarning("The index \"" + index + "\" is not a valid index number. Must be between 0 - 255.");
+			this.setImageName(ResourceLoader.nullImage.toString());
+			this.setIndex(-1);
+		}
 	}
 	
 	/**
@@ -70,8 +82,8 @@ public class Tile {
 	 * If this Tile is NOT in a tilesheet, index will automatically be set to -1.
 	 * @return A boolean condition reflecting whether or not this Tile's index is legal in a tilesheet.
 	 */
-	public boolean isIndexLegal() {
-		return index >= 0 && index < 256;
+	public boolean isIndexLegal(int i) {
+		return i >= 0 && i < 256;
 	}
 	
 	@Override

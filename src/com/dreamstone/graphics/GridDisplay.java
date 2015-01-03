@@ -136,6 +136,5 @@ public class GridDisplay {
 		display.setColor(Color.BLACK);
 		display.drawLine(0, screenHeight / 2, screenWidth, screenHeight / 2);
 		display.drawLine(screenWidth / 2, screenHeight, screenWidth / 2, 0);
-		display.setColor(Color.WHITE);
 	}
 }
