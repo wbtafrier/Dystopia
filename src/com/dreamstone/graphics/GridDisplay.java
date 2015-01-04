@@ -29,7 +29,6 @@ public class GridDisplay {
 			return tiles.get(t.getIndex());
 		}
 		else {
-			//TODO: return pink square as separate image
 			DystopiaLogger.logSevere("Failed to load tile " + t.getName() + " at index " + t.getIndex() + " from terrain.png");
 			return ResourceLoader.nullImage;
 		}
