@@ -118,7 +118,7 @@ public class TransformImage {
 	 * @return : An ArrayList of new small images from the original BufferedImage.
 	 */
 	public static ArrayList<BufferedImage> splitImage(BufferedImage bi, int width, int height) {
-		
+		//TODO: Write new method to get specific index
 		if (bi.getWidth() % width != 0 || bi.getHeight() % height != 0) {
 			DystopiaLogger.logSevere("It looks like there was a problem dividing up a tileset. :(");
 			DisplayCarrier.getFrame().dispose();

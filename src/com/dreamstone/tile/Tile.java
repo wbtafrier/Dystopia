@@ -1,11 +1,16 @@
 package com.dreamstone.tile;
 
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.util.DystopiaLogger;
+import com.dreamstone.util.TransformImage;
 
 public class Tile {
 	
 	private String tileName = "null";
+	private BufferedImage image;
 	private String imageName;
 	private int index = 0;
 	
@@ -17,7 +22,7 @@ public class Tile {
 	 */
 	public Tile(String name, String imgName) {
 		this.setName(name);
-		this.setImageName(imgName);
+		this.setImage(imgName);
 		this.setIndex(-1);
 	}
 	
@@ -31,12 +36,12 @@ public class Tile {
 		this.setName(name);
 		
 		if (isIndexLegal(index)) {
-			this.setImageName(tileSheetName);
+			this.setImage(tileSheetName);
 			this.setIndex(index);
 		}
 		else {
 			DystopiaLogger.logWarning("The index \"" + index + "\" is not a valid index number. Must be between 0 - 255.");
-			this.setImageName(ResourceLoader.nullImage.toString());
+			this.setImage(ResourceLoader.nullImage.toString());
 			this.setIndex(-1);
 		}
 	}
@@ -53,8 +58,17 @@ public class Tile {
 	 * Sets the image or tilesheet file name.
 	 * @param img : The image or tilesheet file name (NO extension).
 	 */
-	protected void setImageName(String img) {
-		this.imageName = img + ".png";
+	protected void setImage(String img) {
+		this.imageName = img;
+		if (isIndexLegal(this.getIndex()) && this.imageName.equals("terrain.png")) {
+			//TODO: Change method below to NEW getIndexFromImage method
+			ArrayList<BufferedImage> tiles = TransformImage.splitImage(ResourceLoader.terrainSheet, 16, 16);
+			this.image = tiles.get(this.getIndex());
+		}
+		else {
+			DystopiaLogger.logSevere("Failed to load tile " + this.getName() + " at index " + this.getIndex() + " from terrain.png");
+			this.image = ResourceLoader.nullImage;
+		}
 	}
 	
 	/**
@@ -63,14 +77,15 @@ public class Tile {
 	 */
 	public void setIndex(int i) {
 		this.index = i;
+		this.setImage(this.imageName);
 	}
 	
 	public String getName() {
 		return this.tileName;
 	}
 	
-	public String getImageName() {
-		return this.imageName;
+	public BufferedImage getImage() {
+		return this.image;
 	}
 	
 	public int getIndex() {
@@ -82,7 +97,7 @@ public class Tile {
 	 * If this Tile is NOT in a tilesheet, index will automatically be set to -1.
 	 * @return A boolean condition reflecting whether or not this Tile's index is legal in a tilesheet.
 	 */
-	public boolean isIndexLegal(int i) {
+	public static boolean isIndexLegal(int i) {
 		return i >= 0 && i < 256;
 	}
 	
