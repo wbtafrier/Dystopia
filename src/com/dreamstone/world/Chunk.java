@@ -4,7 +4,7 @@ import com.dreamstone.util.DystopiaLogger;
 
 public class Chunk {
 	private Coordinate[][] coordList;
-	public static final int CHUNK_SIZE = 4;
+	public static final int CHUNK_SIZE = 8;
 	public final int X_VALUE;
 	public final int Y_VALUE;
 	
@@ -138,10 +138,6 @@ public class Chunk {
 	public Coordinate getCoordinate(int x, int y) {
 		Coordinate startCoord = getCoordinateFromIndex(0, 0);
 		
-//		System.out.println(x + " " + y);
-//		System.out.println(startCoord.xCoordinate);
-//		System.out.println((Math.abs(startCoord.xCoordinate) + " <= " + Math.abs(x)));
-//		System.out.println(Math.abs(x) + " < " + (Math.abs(startCoord.xCoordinate) + (CHUNK_SIZE)));
 		if ((Math.abs(startCoord.xCoordinate) <= Math.abs(x)) && Math.abs(x) < (Math.abs(startCoord.xCoordinate) + (CHUNK_SIZE)) &&
 			(Math.abs(startCoord.yCoordinate) <= Math.abs(y)) && Math.abs(y) < (Math.abs(startCoord.yCoordinate) + (CHUNK_SIZE))) {
 			return getCoordinateFromIndex(Math.abs(x) - Math.abs(startCoord.xCoordinate), Math.abs(y) - Math.abs(startCoord.yCoordinate));

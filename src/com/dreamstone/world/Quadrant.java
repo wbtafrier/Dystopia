@@ -12,19 +12,15 @@ public class Quadrant {
 	public Quadrant(Chunk startChunk) {
 		quadrant = new ArrayList<>();
 		if (startChunk.getCoordinateFromIndex(0, 0).xCoordinate >= 0 && startChunk.getCoordinateFromIndex(0, 0).yCoordinate >= 0) {
-			System.out.println("Chunk should be added in Quadrant 1");
 			QUADRANT_NUMBER = 1;
 		}
 		else if (startChunk.getCoordinateFromIndex(0, 0).xCoordinate < 0 && startChunk.getCoordinateFromIndex(0, 0).yCoordinate >= 0) {
-			System.out.println("Chunk should be added in Quadrant 2");
 			QUADRANT_NUMBER = 2;
 		}
 		else if (startChunk.getCoordinateFromIndex(0, 0).xCoordinate < 0 && startChunk.getCoordinateFromIndex(0, 0).yCoordinate < 0) {
-			System.out.println("Chunk should be added in Quadrant 3");
 			QUADRANT_NUMBER = 3;
 		}
 		else if (startChunk.getCoordinateFromIndex(0, 0).xCoordinate >= 0 && startChunk.getCoordinateFromIndex(0, 0).yCoordinate < 0) {
-			System.out.println("Chunk should be added in Quadrant 4");
 			QUADRANT_NUMBER = 4;
 		}
 		else {

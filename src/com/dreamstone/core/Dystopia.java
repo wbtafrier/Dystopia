@@ -1,6 +1,7 @@
 package com.dreamstone.core;
 
 import com.dreamstone.world.Grid;
+import com.dreamstone.world.TestMap;
 
 public class Dystopia implements Runnable {
 	
@@ -13,6 +14,7 @@ public class Dystopia implements Runnable {
 	
 	protected Dystopia() {
 		grid = new Grid();
+		TestMap.testWorld();
 		ticks = 0;
 	}
 	

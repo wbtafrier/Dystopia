@@ -42,15 +42,8 @@ public class Coordinate {
 				&& (this.yCoordinate == c.yCoordinate);
 	}
 
-	// public static int counter = 0;
 	@Override
 	public String toString() {
-		// counter++;
-		//
-		// if (counter == 8) {
-		// counter = 0;
-		// return "(" + xCoordinate + ", " + yCoordinate + ")\n";
-		// }
 		return "(" + xCoordinate + ", " + yCoordinate + ")";
 
 	}

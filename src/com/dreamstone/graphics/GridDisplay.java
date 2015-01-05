@@ -15,11 +15,10 @@ import com.dreamstone.world.Chunk;
 import com.dreamstone.world.Coordinate;
 import com.dreamstone.world.Grid;
 import com.dreamstone.world.Quadrant;
-import com.dreamstone.world.TestMap;
 
 public class GridDisplay {
 
-	static void drawGrid(Graphics2D display, Grid grid) {
+	static void drawGrid(Graphics2D display, Grid grid, boolean showCoords) {
 		ArrayList<Quadrant> quads = grid.QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 
@@ -40,74 +39,40 @@ public class GridDisplay {
 							int startX = 0, startY = 0;
 							float strX, strY, ascent, baseY;
 							
-							TestMap.testWorld(c);
 							if (c.getTile() == null) {
-								break;
+								continue;
 							}
 							BufferedImage tileImg = TransformImage.scaleImage(c.getTile().getImage(), 5F);
 							
 							if (i == 0) {
 								startX = screenWidth / 2 + c.xCoordinate * tileImg.getWidth();
 								startY = screenHeight / 2 - (c.yCoordinate + 1) * tileImg.getHeight();
-								display.drawImage(tileImg, startX, startY, null);
-								
-								String coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
-								display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-								Rectangle2D bounds = f.getStringBounds(coord, context);
-
-								strX = (float) (startX + (tileImg.getWidth() / 2 - bounds.getWidth() / 2));
-								strY = (float) (startY + (tileImg.getHeight() / 2 - bounds.getHeight() / 2));
-								ascent = (float) -bounds.getY();
-								baseY = strY + ascent;
-
-								display.drawString(coord, (int) strX, (int) baseY);
 							}
 							else if (i == 1) {
 								startX = screenWidth / 2 - Math.abs(c.xCoordinate) * tileImg.getWidth();
 								startY = screenHeight / 2 - (c.yCoordinate + 1) * tileImg.getHeight();
-								display.drawImage(tileImg, startX, startY, null);
-								
-								String coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
-								display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-								Rectangle2D bounds = f.getStringBounds(coord, context);
-
-								strX = (float) (startX + (tileImg.getWidth() / 2 - bounds.getWidth() / 2));
-								strY = (float) (startY + (tileImg.getHeight() / 2 - bounds.getHeight() / 2));
-								ascent = (float) -bounds.getY();
-								baseY = strY + ascent;
-
-								display.drawString(coord, (int) strX, (int) baseY);
 							}
 							else if (i == 2) {
 								startX = screenWidth / 2 - Math.abs(c.xCoordinate) * tileImg.getWidth();
 								startY = screenHeight / 2 + Math.abs(c.yCoordinate + 1) * tileImg.getHeight();
-								display.drawImage(tileImg, startX, startY, null);
-								
-								String coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
-								display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-								Rectangle2D bounds = f.getStringBounds(coord, context);
-
-								strX = (float) (startX + (tileImg.getWidth() / 2 - bounds.getWidth() / 2));
-								strY = (float) (startY + (tileImg.getHeight() / 2 - bounds.getHeight() / 2));
-								ascent = (float) -bounds.getY();
-								baseY = strY + ascent;
-
-								display.drawString(coord, (int) strX, (int) baseY);
 							}
 							else if (i == 3) {
 								startX = screenWidth / 2 + c.xCoordinate * tileImg.getWidth();
 								startY = screenHeight / 2 + Math.abs(c.yCoordinate + 1) * tileImg.getHeight();
-								display.drawImage(tileImg, startX, startY, null);
-								
-								String coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
-								display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-								Rectangle2D bounds = f.getStringBounds(coord, context);
+							}
+							
+							display.drawImage(tileImg, startX, startY, null);
+							
+							String coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
+							display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+							Rectangle2D bounds = f.getStringBounds(coord, context);
 
-								strX = (float) (startX + (tileImg.getWidth() / 2 - bounds.getWidth() / 2));
-								strY = (float) (startY + (tileImg.getHeight() / 2 - bounds.getHeight() / 2));
-								ascent = (float) -bounds.getY();
-								baseY = strY + ascent;
-
+							strX = (float) (startX + (tileImg.getWidth() / 2 - bounds.getWidth() / 2));
+							strY = (float) (startY + (tileImg.getHeight() / 2 - bounds.getHeight() / 2));
+							ascent = (float) -bounds.getY();
+							baseY = strY + ascent;
+							
+							if (showCoords) {
 								display.drawString(coord, (int) strX, (int) baseY);
 							}
 						}
