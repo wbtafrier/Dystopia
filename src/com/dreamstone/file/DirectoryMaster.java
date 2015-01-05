@@ -11,7 +11,6 @@ public class DirectoryMaster {
 	public static final File savesFolder = FileSystem.makeFolder(gameFolder, "saves");
 	public static final File logsFolder = FileSystem.makeFolder(gameFolder, "logs");
 	
-	
 	//Master Directory (Resources)
 	public static final String resourcesFolder = FileSystem.getClassLoaderResourceDirectory("resources", "");
 	

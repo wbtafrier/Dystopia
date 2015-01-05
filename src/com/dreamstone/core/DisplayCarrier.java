@@ -8,7 +8,6 @@ import java.awt.Toolkit;
 import com.dreamstone.graphics.DystopiaCanvas;
 import com.dreamstone.graphics.DystopiaFrame;
 
-
 /**
  * Stores the main canvas and frame and provides accessors/mutators to modify selected aspects of them.
  */

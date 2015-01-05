@@ -5,10 +5,9 @@ import java.awt.image.BufferedImage;
 import com.dreamstone.core.Dystopia;
 import com.dreamstone.util.DystopiaLogger;
 
-
 public class ResourceLoader {
 
-	// IMAGE FILES
+	//Image Files
 	public static BufferedImage terrainSheet;
 	public static BufferedImage nullImage;
 	

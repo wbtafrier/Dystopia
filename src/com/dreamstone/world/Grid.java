@@ -38,6 +38,29 @@ public class Grid {
 	
 	public void setTile(int x, int y, Tile t) {
 		
+		int chunkX;
+		int chunkY;
+		
+		if (x >= 0 && y >= 0) {
+			chunkX = x / Chunk.CHUNK_SIZE;
+			chunkY = y / Chunk.CHUNK_SIZE;
+			quad1.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y).setTile(t);
+		}
+		else if (x < 0 && y >= 0) {
+			chunkX = (Math.abs(x) - 1) / Chunk.CHUNK_SIZE;
+			chunkY = y / Chunk.CHUNK_SIZE;
+			quad2.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y).setTile(t);
+		}
+		else if (x < 0 && y < 0) {
+			chunkX = (Math.abs(x) - 1) / Chunk.CHUNK_SIZE;
+			chunkY = (Math.abs(y) - 1) / Chunk.CHUNK_SIZE;
+			quad3.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y).setTile(t);
+		}
+		else if (x >= 0 && y < 0) {
+			chunkX = x / Chunk.CHUNK_SIZE;
+			chunkY = (Math.abs(y) - 1) / Chunk.CHUNK_SIZE;
+			quad4.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y).setTile(t);
+		}
 	}
 	
 //	public Tile getTile(int x, int y) {

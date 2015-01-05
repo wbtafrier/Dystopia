@@ -15,6 +15,7 @@ import com.dreamstone.world.Chunk;
 import com.dreamstone.world.Coordinate;
 import com.dreamstone.world.Grid;
 import com.dreamstone.world.Quadrant;
+import com.dreamstone.world.TestMap;
 
 public class GridDisplay {
 
@@ -35,10 +36,15 @@ public class GridDisplay {
 				for (int x = 0; x < chunks.get(y).size(); x++) {
 					for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++) {
 						for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++) {
-							Coordinate c = chunks.get(y).get(x).getCoordinate(xx, yy);
+							Coordinate c = chunks.get(y).get(x).getCoordinateFromIndex(xx, yy);
 							int startX = 0, startY = 0;
 							float strX, strY, ascent, baseY;
-							BufferedImage tileImg = TransformImage.scaleImage(c.getTile().getImage(), 4F);
+							
+							TestMap.testWorld(c);
+							if (c.getTile() == null) {
+								break;
+							}
+							BufferedImage tileImg = TransformImage.scaleImage(c.getTile().getImage(), 5F);
 							
 							if (i == 0) {
 								startX = screenWidth / 2 + c.xCoordinate * tileImg.getWidth();
@@ -53,7 +59,6 @@ public class GridDisplay {
 								strY = (float) (startY + (tileImg.getHeight() / 2 - bounds.getHeight() / 2));
 								ascent = (float) -bounds.getY();
 								baseY = strY + ascent;
-
 
 								display.drawString(coord, (int) strX, (int) baseY);
 							}

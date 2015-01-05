@@ -5,11 +5,12 @@ package com.dreamstone.entity;
  */
 public enum EnumNPCAge {
 	
-	//TODO: CHANGE ALL THE AGE VALUES.
-	CHILD(100), 
-	TEEN(100),
-	ADULT(100),
-	ELDER(100);
+	//An NPC's live span lives for a total of 5 real days (120 hours). <--- RANDOMIZE THIS SO EACH NPC LIVES FOR DIFFERENT LENGTHS
+	//IF A DAY LASTS 30 MINUTES LONG, AN NPC SPENDS...
+	CHILD(24), 							// 12 Hours as a child
+	TEEN(28),							// 14 Hours as a teen
+	ADULT(44),							// 22 Hours as an adult
+	ELDER(24);							// 12 Hours as an elder
 	
 	public final int DAYS_OLD;
 	

@@ -86,10 +86,10 @@ public class Dystopia implements Runnable {
 	
 	public void tick() {
 		ticks++;
-		//System.out.println(Dystopia.getGame().getTime());
+//		System.out.println(Dystopia.getGame().getTickCount());
 	}
 	
-	public int getTime() {
+	public int getTickCount() {
 		return ticks;
 	}
 	

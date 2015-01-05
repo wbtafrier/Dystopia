@@ -11,19 +11,19 @@ public class Quadrant {
 
 	public Quadrant(Chunk startChunk) {
 		quadrant = new ArrayList<>();
-		if (startChunk.getCoordinate(0, 0).xCoordinate >= 0 && startChunk.getCoordinate(0, 0).yCoordinate >= 0) {
+		if (startChunk.getCoordinateFromIndex(0, 0).xCoordinate >= 0 && startChunk.getCoordinateFromIndex(0, 0).yCoordinate >= 0) {
 			System.out.println("Chunk should be added in Quadrant 1");
 			QUADRANT_NUMBER = 1;
 		}
-		else if (startChunk.getCoordinate(0, 0).xCoordinate < 0 && startChunk.getCoordinate(0, 0).yCoordinate >= 0) {
+		else if (startChunk.getCoordinateFromIndex(0, 0).xCoordinate < 0 && startChunk.getCoordinateFromIndex(0, 0).yCoordinate >= 0) {
 			System.out.println("Chunk should be added in Quadrant 2");
 			QUADRANT_NUMBER = 2;
 		}
-		else if (startChunk.getCoordinate(0, 0).xCoordinate < 0 && startChunk.getCoordinate(0, 0).yCoordinate < 0) {
+		else if (startChunk.getCoordinateFromIndex(0, 0).xCoordinate < 0 && startChunk.getCoordinateFromIndex(0, 0).yCoordinate < 0) {
 			System.out.println("Chunk should be added in Quadrant 3");
 			QUADRANT_NUMBER = 3;
 		}
-		else if (startChunk.getCoordinate(0, 0).xCoordinate >= 0 && startChunk.getCoordinate(0, 0).yCoordinate < 0) {
+		else if (startChunk.getCoordinateFromIndex(0, 0).xCoordinate >= 0 && startChunk.getCoordinateFromIndex(0, 0).yCoordinate < 0) {
 			System.out.println("Chunk should be added in Quadrant 4");
 			QUADRANT_NUMBER = 4;
 		}
@@ -38,7 +38,7 @@ public class Quadrant {
 	public void growQuadrant(Chunk chunk) {
 		
 		if (!(isChunkLegal(chunk))) {
-			System.out.println("(" + chunk.getCoordinate(0, 0).xCoordinate + ", " + chunk.getCoordinate(0, 0).yCoordinate + ")");
+			System.out.println("(" + chunk.getCoordinateFromIndex(0, 0).xCoordinate + ", " + chunk.getCoordinateFromIndex(0, 0).yCoordinate + ")");
 			DystopiaLogger.logWarning("THIS CHUNK CANNOT BE ADDED TO QUADRANT " + getQuadrant() + ". RETURNING.");
 			return;
 		}
@@ -73,10 +73,10 @@ public class Quadrant {
 		
 		if (quadrant.size() > 0) {
 			
-			if (chunk.getCoordinate(0, 0).xCoordinate >= 0 && chunk.getCoordinate(0, 0).yCoordinate >= 0 && QUADRANT_NUMBER != 1 ||
-				chunk.getCoordinate(0, 0).xCoordinate < 0 && chunk.getCoordinate(0, 0).yCoordinate >= 0 && QUADRANT_NUMBER != 2 ||
-				chunk.getCoordinate(0, 0).xCoordinate < 0 && chunk.getCoordinate(0, 0).yCoordinate < 0 && QUADRANT_NUMBER != 3 ||
-				chunk.getCoordinate(0, 0).xCoordinate >= 0 && chunk.getCoordinate(0, 0).yCoordinate < 0 && QUADRANT_NUMBER != 4) {
+			if (chunk.getCoordinateFromIndex(0, 0).xCoordinate >= 0 && chunk.getCoordinateFromIndex(0, 0).yCoordinate >= 0 && QUADRANT_NUMBER != 1 ||
+				chunk.getCoordinateFromIndex(0, 0).xCoordinate < 0 && chunk.getCoordinateFromIndex(0, 0).yCoordinate >= 0 && QUADRANT_NUMBER != 2 ||
+				chunk.getCoordinateFromIndex(0, 0).xCoordinate < 0 && chunk.getCoordinateFromIndex(0, 0).yCoordinate < 0 && QUADRANT_NUMBER != 3 ||
+				chunk.getCoordinateFromIndex(0, 0).xCoordinate >= 0 && chunk.getCoordinateFromIndex(0, 0).yCoordinate < 0 && QUADRANT_NUMBER != 4) {
 				return false;
 			}
 		}

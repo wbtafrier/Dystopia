@@ -1,8 +1,6 @@
 package com.dreamstone.tile;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.util.DystopiaLogger;
 import com.dreamstone.util.TransformImage;
@@ -18,7 +16,7 @@ public class Tile {
 	 * Instantiating this constructor will create a new Tile with a specific name and independent image file.
 	 * Sets the index to -1, representing no index.
 	 * @param name : The identity or ID of the Tile.
-	 * @param imgName : The independent file name of the image of this Tile (DO NOT include file extension).
+	 * @param imgName : The independent file name of the image of this Tile (Include file extension).
 	 */
 	public Tile(String name, String imgName) {
 		this.setName(name);
@@ -29,7 +27,7 @@ public class Tile {
 	/**
 	 * Instantiating this constructor will create a new Tile with a specific name and index from a specific tilesheet.
 	 * @param name : The identity or ID of the Tile.
-	 * @param tileSheetName : The file name of the tilesheet sent in (DO NOT include file extension).
+	 * @param tileSheetName : The file name of the tilesheet sent in (Include file extension).
 	 * @param index : The index of this Tile's sprite from the specified tilesheet. 
 	 */
 	public Tile(String name, String tileSheetName, int index) {
@@ -56,14 +54,12 @@ public class Tile {
 	
 	/**
 	 * Sets the image or tilesheet file name.
-	 * @param img : The image or tilesheet file name (NO extension).
+	 * @param img : The image or tilesheet file name (Include extension).
 	 */
 	protected void setImage(String img) {
 		this.imageName = img;
 		if (isIndexLegal(this.getIndex()) && this.imageName.equals("terrain.png")) {
-			//TODO: Change method below to NEW getIndexFromImage method
-			ArrayList<BufferedImage> tiles = TransformImage.splitImage(ResourceLoader.terrainSheet, 16, 16);
-			this.image = tiles.get(this.getIndex());
+			this.image = TransformImage.getSubImageFromIndex(ResourceLoader.terrainSheet, 16, 16, this.getIndex());
 		}
 		else {
 			DystopiaLogger.logSevere("Failed to load tile " + this.getName() + " at index " + this.getIndex() + " from terrain.png");
@@ -93,9 +89,10 @@ public class Tile {
 	}
 	
 	/**
-	 * Checks if the index of this Tile is legal in a standard tilesheet. Must be between 0 and 255.
+	 * Checks if the index is legal in a standard tilesheet. Must be between 0 and 255.
 	 * If this Tile is NOT in a tilesheet, index will automatically be set to -1.
-	 * @return A boolean condition reflecting whether or not this Tile's index is legal in a tilesheet.
+	 * @param i : The index being checked.
+	 * @return A boolean condition reflecting whether or not the index is legal in a tilesheet.
 	 */
 	public static boolean isIndexLegal(int i) {
 		return i >= 0 && i < 256;

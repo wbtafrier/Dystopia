@@ -118,7 +118,6 @@ public class TransformImage {
 	 * @return : An ArrayList of new small images from the original BufferedImage.
 	 */
 	public static ArrayList<BufferedImage> splitImage(BufferedImage bi, int width, int height) {
-		//TODO: Write new method to get specific index
 		if (bi.getWidth() % width != 0 || bi.getHeight() % height != 0) {
 			DystopiaLogger.logSevere("It looks like there was a problem dividing up a tileset. :(");
 			DisplayCarrier.getFrame().dispose();
@@ -139,6 +138,35 @@ public class TransformImage {
 		}
 		
 		return splitImages;
+	}
+	
+	public static BufferedImage getSubImageFromIndex(BufferedImage bi, int width, int height, int index) {
+		if ((bi.getWidth() != 0 && bi.getHeight() != 0) && (bi.getWidth() % width != 0 || bi.getHeight() % height != 0)) {
+			DystopiaLogger.logSevere("It looks like there was a problem retrieving a subimage. :(");
+			DisplayCarrier.getFrame().dispose();
+			throw new IllegalArgumentException();
+		}
+		
+		ArrayList<BufferedImage> splitImages = new ArrayList<>();
+
+		int xTiles = bi.getWidth() / width;
+		int yTiles = bi.getHeight() / height;
+
+		for (int y = 0; y < yTiles; y++) {
+			for (int x = 0; x < xTiles; x++) {
+				BufferedImage tile = new BufferedImage(width, height, bi.getType());
+				tile = bi.getSubimage(width * x, height * y, width, height);
+				splitImages.add(tile);
+			}
+		}
+		try{
+			return splitImages.get(index);
+		}
+		catch(IndexOutOfBoundsException e) {
+			DystopiaLogger.logWarning("That index is not in the image provided. Returning image at index 0");
+			e.printStackTrace();
+		}
+		return splitImages.get(0);
 	}
 	
 	/**

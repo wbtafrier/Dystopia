@@ -3,9 +3,8 @@ package com.dreamstone.world;
 import com.dreamstone.util.DystopiaLogger;
 
 public class Chunk {
-
 	private Coordinate[][] coordList;
-	public static final int CHUNK_SIZE = 2;
+	public static final int CHUNK_SIZE = 4;
 	public final int X_VALUE;
 	public final int Y_VALUE;
 	
@@ -78,7 +77,7 @@ public class Chunk {
 	
 	private void setChunkCoords(int startX, int startY) {
 		if (startX >= 0 && startY >= 0) {
-//			System.out.println("QUAD1");
+			//QUADRANT 1
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
 					coordList[x][y] = new Coordinate(startX + x, startY + y);
@@ -86,7 +85,7 @@ public class Chunk {
 			}
 		}
 		else if (startX < 0 && startY >= 0) {
-//			System.out.println("QUAD2");
+			//QUADRANT 2
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
 					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX + x, startY - y);
@@ -94,7 +93,7 @@ public class Chunk {
 			}
 		}
 		else if (startX < 0 && startY < 0) {
-//			System.out.println("QUAD3");
+			//QUADRANT 3
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
 					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX + x, startY + y);
@@ -102,7 +101,7 @@ public class Chunk {
 			}
 		}
 		else if (startX >= 0 && startY < 0) {
-//			System.out.println("QUAD4");
+			//QUADRANT 4
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
 					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX - x, startY + y);
@@ -120,13 +119,12 @@ public class Chunk {
 	}
 	
 	/**
-	 * The getCoordinate method returns a Coordinate object at the index spots (x, y)
+	 * The getCoordinateFromIndex method returns a Coordinate object at the index spots (x, y)
 	 * @param x : The x index spot of the chunk.
 	 * @param y : The y index spot of the chunk.
 	 * @return : A Coordinate object at the index spot of the chunk.
 	 */
-	public Coordinate getCoordinate(int x, int y) {
-		
+	public Coordinate getCoordinateFromIndex(int x, int y) {
 		for (int height = 0; height < CHUNK_SIZE; height++) {
 			for (int width = 0; width < CHUNK_SIZE; width++) {
 				if (width == x && height == y) {
@@ -135,6 +133,24 @@ public class Chunk {
 			}
 		}
 		return null;
+	}
+	
+	public Coordinate getCoordinate(int x, int y) {
+		Coordinate startCoord = getCoordinateFromIndex(0, 0);
+		
+//		System.out.println(x + " " + y);
+//		System.out.println(startCoord.xCoordinate);
+//		System.out.println((Math.abs(startCoord.xCoordinate) + " <= " + Math.abs(x)));
+//		System.out.println(Math.abs(x) + " < " + (Math.abs(startCoord.xCoordinate) + (CHUNK_SIZE)));
+		if ((Math.abs(startCoord.xCoordinate) <= Math.abs(x)) && Math.abs(x) < (Math.abs(startCoord.xCoordinate) + (CHUNK_SIZE)) &&
+			(Math.abs(startCoord.yCoordinate) <= Math.abs(y)) && Math.abs(y) < (Math.abs(startCoord.yCoordinate) + (CHUNK_SIZE))) {
+			return getCoordinateFromIndex(Math.abs(x) - Math.abs(startCoord.xCoordinate), Math.abs(y) - Math.abs(startCoord.yCoordinate));
+		}
+		else {
+			DystopiaLogger.logSevere("Coordinate is not in the chunk!");
+			return null;
+		}
+		
 	}
 	
 	public Coordinate[][] getCoords() {

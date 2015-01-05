@@ -9,11 +9,11 @@ public class Coordinate {
 	private Tile tileType;
 
 	protected Coordinate() {
-		this(0, 0, WorldGeneration.setRandomTile());
+		this(0, 0, null);
 	}
 
 	protected Coordinate(int x, int y) {
-		this(x, y, WorldGeneration.setRandomTile());
+		this(x, y, null);
 	}
 
 	protected Coordinate(int x, int y, Tile t) {

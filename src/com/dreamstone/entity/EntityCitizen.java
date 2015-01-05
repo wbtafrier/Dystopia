@@ -21,5 +21,4 @@ public abstract class EntityCitizen extends EntityMovable {
 		//Randomly pick a hair color and type from the hair color generator
 		//Randomly pick a skin color from the skin color generator
 	}
-
 }
