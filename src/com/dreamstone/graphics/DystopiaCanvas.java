@@ -14,6 +14,7 @@ public final class DystopiaCanvas extends Canvas {
 
 	private static final long serialVersionUID = -5025704194120253102L;
 	private static final int BUFFERS = 3;
+	private static int lol = 0, lol2 = 0;
 	
 	public DystopiaCanvas() {
 		Dimension defaultSize = new Dimension((int)(DisplayCarrier.getDisplaySize().getWidth() / 2), (int)(DisplayCarrier.getDisplaySize().getHeight() / 2));
@@ -30,12 +31,18 @@ public final class DystopiaCanvas extends Canvas {
 			this.requestFocus();
 			return;
 		}
-		
+
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		
-		g.setColor(new Color(0xEEEEEE));
-		g.fillRect(0, 0, DisplayCarrier.getFrame().getWidth(), DisplayCarrier.getFrame().getHeight());
-		GridDisplay.drawGrid(g, Dystopia.grid, false);
+		for (int i = 0; i < 70; i++) {
+			lol = (int) ((Math.sin(((Dystopia.getGame().getTickCount() + i) * 50) / 4000.0 * (Math.PI)) * 75));
+			lol2 = (int) ((Math.cos(((Dystopia.getGame().getTickCount() + i) * 50) / 4000.0 * (Math.PI)) * 75));
+		}
+		DystopiaRenderer.render(g, lol, lol2);
+		
+//		g.setColor(new Color(0xEEEEEE));
+//		g.fillRect(0, 0, DisplayCarrier.getFrame().getWidth(), DisplayCarrier.getFrame().getHeight());
+//		GridDisplay.drawGrid(g, Dystopia.grid, false);
 		
         g.dispose();
         bs.show();
