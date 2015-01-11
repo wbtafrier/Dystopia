@@ -23,10 +23,10 @@ public class Grid {
 		quad3.growQuadrant(new Chunk(-2, -2));
 		quad4.growQuadrant(new Chunk(2, -2));
 		
-		System.out.println(quad1);
-		System.out.println(quad2);
-		System.out.println(quad3);
-		System.out.println(quad4);
+//		System.out.println(quad1);
+//		System.out.println(quad2);
+//		System.out.println(quad3);
+//		System.out.println(quad4);
 	}
 	
 	private void initializeMap() {

@@ -1,26 +1,21 @@
 package com.dreamstone.core;
 
-import com.dreamstone.tile.TileList;
 import com.dreamstone.world.Grid;
-import com.dreamstone.world.TestMap;
 
 public class Dystopia implements Runnable {
 	
 	static Dystopia gameInstance;
-	public static Grid grid;
-	private static int ticks;
-	private static int frames;
+	public Grid grid;
+	private int ticks;
+	private int frames;
 	
-	private static int avgFPSCount;
-	private static int avgFPS;
+	private int avgFPSCount;
+	private int avgFPS;
 	
 	private Thread gameThread;
 	private boolean running;
 	
 	protected Dystopia() {
-		TileList.registerTiles();
-		grid = new Grid();
-		TestMap.testWorld();
 		ticks = 0;
 		frames = 0;
 	}

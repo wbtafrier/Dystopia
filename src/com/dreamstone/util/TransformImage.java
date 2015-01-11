@@ -152,7 +152,6 @@ public class TransformImage {
 
 		int xTiles = bi.getWidth() / width;
 		int yTiles = bi.getHeight() / height;
-		System.out.println(xTiles * yTiles);
 
 		for (int y = 0; y < yTiles; y++) {
 			for (int x = 0; x < xTiles; x++) {

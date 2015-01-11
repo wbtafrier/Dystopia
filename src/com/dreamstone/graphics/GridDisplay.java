@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import com.dreamstone.core.DisplayCarrier;
+import com.dreamstone.util.DebugSettings;
 import com.dreamstone.world.Chunk;
 import com.dreamstone.world.Coordinate;
 import com.dreamstone.world.Grid;
@@ -17,7 +18,7 @@ import com.dreamstone.world.Quadrant;
 
 public class GridDisplay {
 
-	static void drawGrid(Graphics2D display, Grid grid, boolean showCoords) {
+	static void drawGrid(Graphics2D display, Grid grid) {
 		ArrayList<Quadrant> quads = grid.QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 		BufferedImage tileImg;
@@ -67,21 +68,25 @@ public class GridDisplay {
 							
 							display.drawImage(tileImg, startX, startY, null);
 							
-//							coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
-//							display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-//							Rectangle2D bounds = f.getStringBounds(coord, context);
+							if (DebugSettings.SHOW_GRIDLINES) {
+								display.setColor(Color.RED);
+								display.drawRect(startX, startY, startX * tileImg.getWidth(), startY * tileImg.getHeight());
+							}
 							
-							coord = c.getTile().getName();
-							display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-							Rectangle2D bounds = f.getStringBounds(coord, context);
+							if (DebugSettings.SHOW_COORDS) {
+								display.setColor(Color.WHITE);
+	//							coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
+								
+								coord = c.getTile().getName();
+								display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+								Rectangle2D bounds = f.getStringBounds(coord, context);
+								
+								strX = (float) (startX + (tileImg.getWidth() / 2 - bounds.getWidth() / 2));
+								strY = (float) (startY + (tileImg.getHeight() / 2 - bounds.getHeight() / 2));
+								
+								ascent = (float) -bounds.getY();
+								baseY = strY + ascent;
 							
-							strX = (float) (startX + (tileImg.getWidth() / 2 - bounds.getWidth() / 2));
-							strY = (float) (startY + (tileImg.getHeight() / 2 - bounds.getHeight() / 2));
-							
-							ascent = (float) -bounds.getY();
-							baseY = strY + ascent;
-							
-							if (showCoords) {
 								display.drawString(coord, (int) strX, (int) baseY);
 							}
 						}
@@ -89,9 +94,11 @@ public class GridDisplay {
 				}
 			}
 		}
-
-		display.setColor(Color.BLACK);
-		display.drawLine(0, screenHeight / 2, screenWidth, screenHeight / 2);
-		display.drawLine(screenWidth / 2, screenHeight, screenWidth / 2, 0);
+		
+		if (DebugSettings.SHOW_AXES) {
+			display.setColor(Color.BLACK);
+			display.drawLine(0, screenHeight / 2, screenWidth, screenHeight / 2);
+			display.drawLine(screenWidth / 2, screenHeight, screenWidth / 2, 0);
+		}
 	}
 }
