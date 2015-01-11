@@ -8,6 +8,7 @@ public class Dystopia implements Runnable {
 	static Dystopia gameInstance;
 	public static Grid grid;
 	private static int ticks;
+	private static int frames;
 	
 	private Thread gameThread;
 	private boolean running;
@@ -16,6 +17,7 @@ public class Dystopia implements Runnable {
 		grid = new Grid();
 		TestMap.testWorld();
 		ticks = 0;
+		frames = 0;
 	}
 	
 	public synchronized void start() {
@@ -37,7 +39,6 @@ public class Dystopia implements Runnable {
 
 	@Override
 	public void run() {
-		int frames = 0;
 		
 		double unproccessedSeconds = 0;
 		long lastTime = System.nanoTime();
@@ -93,6 +94,10 @@ public class Dystopia implements Runnable {
 	
 	public int getTickCount() {
 		return ticks;
+	}
+	
+	public int getFrameRate() {
+		return frames;
 	}
 	
 	public static Dystopia getGame() {

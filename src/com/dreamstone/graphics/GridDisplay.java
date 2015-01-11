@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import com.dreamstone.core.DisplayCarrier;
-import com.dreamstone.util.TransformImage;
 import com.dreamstone.world.Chunk;
 import com.dreamstone.world.Coordinate;
 import com.dreamstone.world.Grid;
@@ -21,6 +20,9 @@ public class GridDisplay {
 	static void drawGrid(Graphics2D display, Grid grid, boolean showCoords) {
 		ArrayList<Quadrant> quads = grid.QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
+		BufferedImage tileImg;
+		int startX, startY;
+		float strX, strY, ascent, baseY;
 
 		int screenWidth = DisplayCarrier.getCanvas().getWidth();
 		int screenHeight = DisplayCarrier.getCanvas().getHeight();
@@ -28,7 +30,7 @@ public class GridDisplay {
 
 		Font f = new Font("Comic Sans MS", Font.PLAIN, 16);
 		display.setFont(f);
-
+		
 		for (int i = 0; i < quads.size(); i++) {
 			chunks = quads.get(i).getChunks();
 			for (int y = 0; y < chunks.size(); y++) {
@@ -36,13 +38,14 @@ public class GridDisplay {
 					for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++) {
 						for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++) {
 							Coordinate c = chunks.get(y).get(x).getCoordinateFromIndex(xx, yy);
-							int startX = 0, startY = 0;
-							float strX, strY, ascent, baseY;
+							startX = 0;
+							startY = 0;
 							
 							if (c.getTile() == null) {
 								continue;
 							}
-							BufferedImage tileImg = TransformImage.scaleImage(c.getTile().getImage(), 5F);
+							
+							tileImg = c.getTile().getImage();
 							
 							if (i == 0) {
 								startX = screenWidth / 2 + c.xCoordinate * tileImg.getWidth();

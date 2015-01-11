@@ -1,6 +1,7 @@
 package com.dreamstone.world;
 
 import com.dreamstone.tile.Tile;
+import com.dreamstone.util.DystopiaLogger;
 
 public class Coordinate {
 
@@ -17,19 +18,38 @@ public class Coordinate {
 	}
 
 	protected Coordinate(int x, int y, Tile t) {
-		xCoordinate = x;
-		yCoordinate = y;
-		tileType = t;
+		this.xCoordinate = x;
+		this.yCoordinate = y;
+		this.tileType = t;
 	}
 
 	public void setTile(Tile t) {
-		tileType = t;
+		this.tileType = t;
 	}
 
 	public Tile getTile() {
-		return tileType;
+		return this.tileType;
 	}
 
+	public int getQuadrant() {
+		
+		if (this.xCoordinate >= 0 && this.yCoordinate >= 0) {
+			return 1;
+		}
+		else if (this.xCoordinate < 0 && this.yCoordinate >= 0) {
+			return 2;
+		}
+		else if (this.xCoordinate < 0 && this.yCoordinate < 0) {
+			return 3;
+		}
+		else if (this.xCoordinate >= 0 && this.yCoordinate < 0) {
+			return 4;
+		}
+		
+		DystopiaLogger.logSevere("COORDINATE IS CORUPT! RETURNING 0.");
+		return 0;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 
@@ -44,7 +64,7 @@ public class Coordinate {
 
 	@Override
 	public String toString() {
-		return "(" + xCoordinate + ", " + yCoordinate + ")";
+		return "(" + this.xCoordinate + ", " + this.yCoordinate + ")";
 
 	}
 }

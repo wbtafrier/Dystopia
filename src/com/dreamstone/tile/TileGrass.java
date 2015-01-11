@@ -7,7 +7,6 @@ public class TileGrass extends Tile {
 	}
 
 	public static int getRandomIndex() {
-		int r = (int)Math.random() * 2;
 		return 17; 
 	}
 }

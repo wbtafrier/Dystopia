@@ -1,7 +1,6 @@
 package com.dreamstone.util;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.dreamstone.graphics.DystopiaFrame;
