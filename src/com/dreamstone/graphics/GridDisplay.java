@@ -1,5 +1,6 @@
 package com.dreamstone.graphics;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -10,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import com.dreamstone.core.DisplayCarrier;
+import com.dreamstone.tile.Tile;
 import com.dreamstone.util.DebugSettings;
 import com.dreamstone.world.Chunk;
 import com.dreamstone.world.Coordinate;
@@ -22,7 +24,6 @@ public class GridDisplay {
 		ArrayList<Quadrant> quads = grid.QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 		BufferedImage tileImg;
-		int startX, startY;
 		float strX, strY, ascent, baseY;
 		String coord;
 
@@ -40,8 +41,6 @@ public class GridDisplay {
 					for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++) {
 						for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++) {
 							Coordinate c = chunks.get(y).get(x).getCoordinateFromIndex(xx, yy);
-							startX = 0;
-							startY = 0;
 							
 							if (c.getTile() == null) {
 								continue;
@@ -50,27 +49,27 @@ public class GridDisplay {
 							tileImg = c.getImage();
 							
 							if (i == 0) {
-								startX = screenWidth / 2 + c.xCoordinate * tileImg.getWidth();
-								startY = screenHeight / 2 - (c.yCoordinate + 1) * tileImg.getHeight();
+								c.setXScreenPosition(screenWidth / 2 + c.xCoordinate * Tile.getTileSize());
+								c.setYScreenPosition(screenHeight / 2 - (c.yCoordinate + 1) * Tile.getTileSize());
 							}
 							else if (i == 1) {
-								startX = screenWidth / 2 - Math.abs(c.xCoordinate) * tileImg.getWidth();
-								startY = screenHeight / 2 - (c.yCoordinate + 1) * tileImg.getHeight();
+								c.setXScreenPosition(screenWidth / 2 - Math.abs(c.xCoordinate) * Tile.getTileSize());
+								c.setYScreenPosition(screenHeight / 2 - (c.yCoordinate + 1) * Tile.getTileSize());
 							}
 							else if (i == 2) {
-								startX = screenWidth / 2 - Math.abs(c.xCoordinate) * tileImg.getWidth();
-								startY = screenHeight / 2 + Math.abs(c.yCoordinate + 1) * tileImg.getHeight();
+								c.setXScreenPosition(screenWidth / 2 - Math.abs(c.xCoordinate) * Tile.getTileSize());
+								c.setYScreenPosition(screenHeight / 2 + Math.abs(c.yCoordinate + 1) * Tile.getTileSize());
 							}
 							else if (i == 3) {
-								startX = screenWidth / 2 + c.xCoordinate * tileImg.getWidth();
-								startY = screenHeight / 2 + Math.abs(c.yCoordinate + 1) * tileImg.getHeight();
+								c.setXScreenPosition(screenWidth / 2 + c.xCoordinate * Tile.getTileSize());
+								c.setYScreenPosition(screenHeight / 2 + Math.abs(c.yCoordinate + 1) * Tile.getTileSize());
 							}
 							
-							display.drawImage(tileImg, startX, startY, null);
+							display.drawImage(tileImg, c.getXScreenPosition(), c.getYScreenPosition(), null);
 							
 							if (DebugSettings.SHOW_GRIDLINES) {
-								display.setColor(Color.RED);
-								display.drawRect(startX, startY, startX * tileImg.getWidth(), startY * tileImg.getHeight());
+								display.setColor(Color.DARK_GRAY);
+								display.drawRect(c.getXScreenPosition(), c.getYScreenPosition(), Tile.getTileSize(), Tile.getTileSize());
 							}
 							
 							if (DebugSettings.SHOW_COORDS) {
@@ -81,12 +80,12 @@ public class GridDisplay {
 								display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 								Rectangle2D bounds = f.getStringBounds(coord, context);
 								
-								strX = (float) (startX + (tileImg.getWidth() / 2 - bounds.getWidth() / 2));
-								strY = (float) (startY + (tileImg.getHeight() / 2 - bounds.getHeight() / 2));
+								strX = (float) (c.getXScreenPosition() + (Tile.getTileSize() / 2 - bounds.getWidth() / 2));
+								strY = (float) (c.getYScreenPosition() + (Tile.getTileSize() / 2 - bounds.getHeight() / 2));
 								
 								ascent = (float) -bounds.getY();
 								baseY = strY + ascent;
-							
+								
 								display.drawString(coord, (int) strX, (int) baseY);
 							}
 						}
@@ -97,8 +96,10 @@ public class GridDisplay {
 		
 		if (DebugSettings.SHOW_AXES) {
 			display.setColor(Color.BLACK);
-			display.drawLine(0, screenHeight / 2, screenWidth, screenHeight / 2);
-			display.drawLine(screenWidth / 2, screenHeight, screenWidth / 2, 0);
+			display.setStroke(new BasicStroke(4));
+			display.drawLine(0, grid.getCoordinate(0, -1).getYScreenPosition(), screenWidth, grid.getCoordinate(0, -1).getYScreenPosition());
+			display.drawLine(grid.getCoordinate(0, 0).getXScreenPosition(), screenHeight, grid.getCoordinate(0, 0).getXScreenPosition(), 0);
+			display.setStroke(new BasicStroke(1));
 		}
 	}
 }

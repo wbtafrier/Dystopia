@@ -26,8 +26,8 @@ public class Start {
 				Dystopia.gameInstance = new Dystopia();
 				
 				initializeTilesAndItems();
-				prepareWorld();
 				setupDisplay();
+				prepareWorld();
 				
 				//Start the game loop!!!!
 				Dystopia.getGame().start();

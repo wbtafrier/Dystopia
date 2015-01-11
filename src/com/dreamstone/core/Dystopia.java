@@ -73,6 +73,8 @@ public class Dystopia implements Runnable {
 					
 					if (avgFPSCount % 5 == 0) {
 						System.out.println("=========================\nAVERAGE FPS: " + avgFPS / avgFPSCount + "\n=========================");
+						avgFPSCount = 0;
+						avgFPS = 0;
 					}
 					System.out.println("Ticks: " + tickCount + ", Fps: " + frames);
 					lastTime += 1000;

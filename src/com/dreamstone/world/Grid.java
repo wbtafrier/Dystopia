@@ -18,10 +18,10 @@ public class Grid {
 		QUADRANTS = new ArrayList<>();
 		initializeMap();
 		
-		quad1.growQuadrant(new Chunk(1, 1));
-		quad2.growQuadrant(new Chunk(-2, 2));
-		quad3.growQuadrant(new Chunk(-2, -2));
-		quad4.growQuadrant(new Chunk(2, -2));
+//		quad1.growQuadrant(new Chunk(1, 1));
+//		quad2.growQuadrant(new Chunk(-2, 2));
+//		quad3.growQuadrant(new Chunk(-2, -2));
+//		quad4.growQuadrant(new Chunk(2, -2));
 		
 //		System.out.println(quad1);
 //		System.out.println(quad2);

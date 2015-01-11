@@ -3,6 +3,7 @@ package com.dreamstone.world;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import com.dreamstone.core.DisplayCarrier;
 import com.dreamstone.tile.Tile;
 import com.dreamstone.tile.TileList;
 import com.dreamstone.util.DystopiaLogger;
@@ -11,6 +12,8 @@ public class Coordinate {
 
 	public final int xCoordinate;
 	public final int yCoordinate;
+	private int xScreenCoordinate;
+	private int yScreenCoordinate;
 	private static Random rand = new Random();
 	private Tile tileType;
 //	private EnumDirection direction;
@@ -25,8 +28,14 @@ public class Coordinate {
 	}
 
 	protected Coordinate(int x, int y, Tile t) {
+		this(x, y, 0, 0, t);
+	}
+	
+	protected Coordinate(int x, int y, int screenXPos, int screenYPos, Tile t) {
 		this.xCoordinate = x;
 		this.yCoordinate = y;
+		this.xScreenCoordinate = screenXPos;
+		this.yScreenCoordinate = screenYPos;
 		this.setTileImage(t);
 	}
 	
@@ -68,6 +77,22 @@ public class Coordinate {
 		
 		DystopiaLogger.logSevere("COORDINATE IS CORUPT! RETURNING 0.");
 		return 0;
+	}
+	
+	public void setXScreenPosition(int x) {
+		this.xScreenCoordinate = x;
+	}
+	
+	public void setYScreenPosition(int y) {
+		this.yScreenCoordinate = y;
+	}
+	
+	public int getXScreenPosition() {
+		return this.xScreenCoordinate;
+	}
+	
+	public int getYScreenPosition() {
+		return this.yScreenCoordinate;
 	}
 	
 //	/**

@@ -7,7 +7,7 @@ import com.dreamstone.tile.TileList;
 
 public class TestMap {
 	
-	private static final int CHUNKS = Chunk.CHUNK_SIZE * 2;
+	private static final int CHUNKS = Chunk.CHUNK_SIZE;
 	
 	public static void testWorld() {
 		
