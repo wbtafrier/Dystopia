@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import com.dreamstone.core.DisplayCarrier;
+import com.dreamstone.file.ResourceLoader;
+import com.dreamstone.util.TransformImage;
 import com.dreamstone.world.Chunk;
 import com.dreamstone.world.Coordinate;
 import com.dreamstone.world.Grid;
@@ -84,8 +86,8 @@ public class GridDisplay {
 			}
 		}
 
-		display.setColor(Color.BLACK);
-		display.drawLine(0, screenHeight / 2, screenWidth, screenHeight / 2);
-		display.drawLine(screenWidth / 2, screenHeight, screenWidth / 2, 0);
+//		display.setColor(Color.BLACK);
+//		display.drawLine(0, screenHeight / 2, screenWidth, screenHeight / 2);
+//		display.drawLine(screenWidth / 2, screenHeight, screenWidth / 2, 0);
 	}
 }

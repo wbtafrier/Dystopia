@@ -9,8 +9,8 @@ public class TestMap {
 	public static void testWorld() {
 		
 		int r;
-		for (int y = -8; y < 8; y++) {
-			for (int x = -8; x < 8; x++) {
+		for (int y = -16; y < 16; y++) {
+			for (int x = -16; x < 16; x++) {
 				
 				r = (int) (Math.random() * 6);
 				

@@ -59,7 +59,7 @@ public class Tile {
 	protected void setImage(String img) {
 		this.imageName = img;
 		if (isIndexLegal(this.getIndex()) && this.imageName.equals("terrain.png")) {
-			this.image = TransformImage.getSubImageFromIndex(ResourceLoader.terrainSheet, 16, 16, this.getIndex());
+			this.image = TransformImage.getSubImageFromIndex(ResourceLoader.terrainSheet, 16 * 4, 16 * 4, this.getIndex());
 		}
 		else {
 			DystopiaLogger.logSevere("Failed to load tile " + this.getName() + " at index " + this.getIndex() + " from terrain.png");

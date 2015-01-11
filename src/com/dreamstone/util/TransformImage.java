@@ -2,6 +2,7 @@ package com.dreamstone.util;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -65,12 +66,14 @@ public class TransformImage {
 			DystopiaLogger.logWarning("THE PERCENTAGE: " + percentage + " CANNOT BE LESS THAN OR EQUAL TO ZERO. RETURNING IMAGE WITH DEFAULT SIZE.");
 			return bi;
 		}
-		
-		int width = (int)((bi.getWidth() * percentage) + 0.5);
+
+		int width = (int) ((bi.getWidth() * percentage) + 0.5);
 		int height = (int) ((bi.getHeight() * percentage) + 0.5);
+		System.out.println(width);
 		
 		BufferedImage scaledImage = new BufferedImage(width, height, bi.getType());
-		Graphics2D g = scaledImage.createGraphics();
+		Graphics2D g;
+		g = scaledImage.createGraphics();
 		g.drawImage(bi, 0, 0, width, height, null);
 		g.dispose();
 		return scaledImage;
@@ -159,14 +162,7 @@ public class TransformImage {
 				splitImages.add(tile);
 			}
 		}
-		try{
-			return splitImages.get(index);
-		}
-		catch(IndexOutOfBoundsException e) {
-			DystopiaLogger.logWarning("That index is not in the image provided. Returning image at index 0");
-			e.printStackTrace();
-		}
-		return splitImages.get(0);
+		return splitImages.get(index);
 	}
 	
 	/**

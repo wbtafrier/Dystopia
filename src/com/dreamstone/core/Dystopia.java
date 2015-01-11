@@ -10,6 +10,9 @@ public class Dystopia implements Runnable {
 	private static int ticks;
 	private static int frames;
 	
+	private static int avgFPSCount;
+	private static int avgFPS;
+	
 	private Thread gameThread;
 	private boolean running;
 	
@@ -68,6 +71,12 @@ public class Dystopia implements Runnable {
 				
 				tickCount++;
 				if (tickCount % 60 == 0) {
+					avgFPSCount++;
+					avgFPS += frames;
+					
+					if (avgFPSCount % 5 == 0) {
+						System.out.println("=========================\nAVERAGE FPS: " + avgFPS / avgFPSCount + "\n=========================");
+					}
 					System.out.println("Ticks: " + tickCount + ", Fps: " + frames);
 					lastTime += 1000;
 					frames = 0;
