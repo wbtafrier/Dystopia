@@ -23,7 +23,6 @@ public class Grid {
 		quad3.growQuadrant(new Chunk(-2, -2));
 		quad4.growQuadrant(new Chunk(2, -2));
 		
-		
 		System.out.println(quad1);
 		System.out.println(quad2);
 		System.out.println(quad3);
@@ -44,7 +43,7 @@ public class Grid {
 	}
 	
 	public void setTile(int x, int y, Tile t) {
-		this.getCoordinate(x, y).setTile(t);
+		this.getCoordinate(x, y).setTileType(t);
 	}
 	
 	public Tile getTileFromCoordinate(int x, int y) {

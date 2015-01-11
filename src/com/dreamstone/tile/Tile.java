@@ -1,47 +1,46 @@
 package com.dreamstone.tile;
 
 import java.awt.image.BufferedImage;
-import com.dreamstone.file.ResourceLoader;
-import com.dreamstone.util.DystopiaLogger;
-import com.dreamstone.util.TransformImage;
+import java.util.ArrayList;
 
-public class Tile {
+import com.dreamstone.graphics.GraphicsOptions;
+import com.dreamstone.util.DystopiaLogger;
+
+public abstract class Tile {
 	
 	private String tileName = "null";
-	private BufferedImage image;
-	private String imageName;
-	private int index = 0;
+	private String tileSheetName = "null";
+	protected ArrayList<BufferedImage> defaultImages;
+	protected int tileSize = (int)(16 * GraphicsOptions.getScale());
 	
 	/**
 	 * Instantiating this constructor will create a new Tile with a specific name and independent image file.
-	 * Sets the index to -1, representing no index.
 	 * @param name : The identity or ID of the Tile.
-	 * @param imgName : The independent file name of the image of this Tile (Include file extension).
 	 */
-	public Tile(String name, String imgName) {
-		this.setName(name);
-		this.setImage(imgName);
-		this.setIndex(-1);
+	public Tile(String name) {
+		this(name, "terrain.png");
 	}
 	
-	/**
-	 * Instantiating this constructor will create a new Tile with a specific name and index from a specific tilesheet.
-	 * @param name : The identity or ID of the Tile.
-	 * @param tileSheetName : The file name of the tilesheet sent in (Include file extension).
-	 * @param index : The index of this Tile's sprite from the specified tilesheet. 
-	 */
-	public Tile(String name, String tileSheetName, int index) {
-		this.setName(name);
-		
-		if (isIndexLegal(index)) {
-			this.setImage(tileSheetName);
-			this.setIndex(index);
+	public Tile(String name, String tileSheetName) {
+		this.tileName = name;
+		this.tileSheetName = tileSheetName;
+		this.defaultImages = new ArrayList<>();
+	}
+	
+	protected abstract void setImageTiles();
+	
+	public BufferedImage getImageTile(int index) {
+		if (!(index >= defaultImages.size() || index < 0)) {
+			return defaultImages.get(index);
 		}
 		else {
-			DystopiaLogger.logWarning("The index \"" + index + "\" is not a valid index number. Must be between 0 - 255.");
-			this.setImage(ResourceLoader.nullImage.toString());
-			this.setIndex(-1);
+			DystopiaLogger.logWarning("THE INDEX ASKED FOR IS NOT IN THE ARRAYLIST. RETURNING IMAGE AT INDEX 0.");
+			return defaultImages.get(0);
 		}
+	}
+	
+	public int getFullImageAmount() {
+		return defaultImages.size();
 	}
 	
 	/**
@@ -52,50 +51,20 @@ public class Tile {
 		this.tileName = name;
 	}
 	
-	/**
-	 * Sets the image or tilesheet file name.
-	 * @param img : The image or tilesheet file name (Include extension).
-	 */
-	protected void setImage(String img) {
-		this.imageName = img;
-		if (isIndexLegal(this.getIndex()) && this.imageName.equals("terrain.png")) {
-			this.image = TransformImage.getSubImageFromIndex(ResourceLoader.terrainSheet, 16 * 4, 16 * 4, this.getIndex());
-		}
-		else {
-			DystopiaLogger.logSevere("Failed to load tile " + this.getName() + " at index " + this.getIndex() + " from terrain.png");
-			this.image = ResourceLoader.nullImage;
-		}
-	}
-	
-	/**
-	 * Sets the index of this Tile in a tilesheet.
-	 * @param i : The index of this Tile in a tilesheet.
-	 */
-	public void setIndex(int i) {
-		this.index = i;
-		this.setImage(this.imageName);
-	}
-	
 	public String getName() {
 		return this.tileName;
 	}
 	
-	public BufferedImage getImage() {
-		return this.image;
-	}
-	
-	public int getIndex() {
-		return this.index;
-	}
-	
 	/**
-	 * Checks if the index is legal in a standard tilesheet. Must be between 0 and 255.
-	 * If this Tile is NOT in a tilesheet, index will automatically be set to -1.
-	 * @param i : The index being checked.
-	 * @return A boolean condition reflecting whether or not the index is legal in a tilesheet.
+	 * Sets the Tilesheet name of this Tile.
+	 * @param tileSheetName : Name of Tile as String.
 	 */
-	public static boolean isIndexLegal(int i) {
-		return i >= 0 && i < 256;
+	protected void setTileSheetName(String tileSheetName) {
+		this.tileSheetName = tileSheetName;
+	}
+	
+	public String getTileSheetName() {
+		return this.tileSheetName;
 	}
 	
 	@Override

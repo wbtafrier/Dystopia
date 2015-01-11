@@ -1,5 +1,6 @@
 package com.dreamstone.core;
 
+import com.dreamstone.tile.TileList;
 import com.dreamstone.world.Grid;
 import com.dreamstone.world.TestMap;
 
@@ -17,6 +18,7 @@ public class Dystopia implements Runnable {
 	private boolean running;
 	
 	protected Dystopia() {
+		TileList.registerTiles();
 		grid = new Grid();
 		TestMap.testWorld();
 		ticks = 0;

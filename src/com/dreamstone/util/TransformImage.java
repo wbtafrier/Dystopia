@@ -2,7 +2,6 @@ package com.dreamstone.util;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -69,7 +68,6 @@ public class TransformImage {
 
 		int width = (int) ((bi.getWidth() * percentage) + 0.5);
 		int height = (int) ((bi.getHeight() * percentage) + 0.5);
-		System.out.println(width);
 		
 		BufferedImage scaledImage = new BufferedImage(width, height, bi.getType());
 		Graphics2D g;
@@ -154,6 +152,7 @@ public class TransformImage {
 
 		int xTiles = bi.getWidth() / width;
 		int yTiles = bi.getHeight() / height;
+		System.out.println(xTiles * yTiles);
 
 		for (int y = 0; y < yTiles; y++) {
 			for (int x = 0; x < xTiles; x++) {
