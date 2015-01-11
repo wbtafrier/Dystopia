@@ -3,6 +3,7 @@ package com.dreamstone.world;
 import java.util.ArrayList;
 
 import com.dreamstone.tile.Tile;
+import com.dreamstone.util.DystopiaLogger;
 
 public class Grid {
 	
@@ -37,33 +38,40 @@ public class Grid {
 	}
 	
 	public void setTile(int x, int y, Tile t) {
-		
+		this.getCoordinate(x, y).setTile(t);
+	}
+	
+	public Tile getTileFromCoordinate(int x, int y) {
+		return this.getCoordinate(x, y).getTile();
+	}
+	
+	public Coordinate getCoordinate(int x, int y) {
+
 		int chunkX;
 		int chunkY;
 		
 		if (x >= 0 && y >= 0) {
 			chunkX = x / Chunk.CHUNK_SIZE;
 			chunkY = y / Chunk.CHUNK_SIZE;
-			quad1.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y).setTile(t);
+			return quad1.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y);
 		}
 		else if (x < 0 && y >= 0) {
 			chunkX = (Math.abs(x) - 1) / Chunk.CHUNK_SIZE;
 			chunkY = y / Chunk.CHUNK_SIZE;
-			quad2.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y).setTile(t);
+			return quad2.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y);
 		}
 		else if (x < 0 && y < 0) {
 			chunkX = (Math.abs(x) - 1) / Chunk.CHUNK_SIZE;
 			chunkY = (Math.abs(y) - 1) / Chunk.CHUNK_SIZE;
-			quad3.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y).setTile(t);
+			return quad3.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y);
 		}
 		else if (x >= 0 && y < 0) {
 			chunkX = x / Chunk.CHUNK_SIZE;
 			chunkY = (Math.abs(y) - 1) / Chunk.CHUNK_SIZE;
-			quad4.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y).setTile(t);
+			return quad4.getChunks().get(chunkY).get(chunkX).getCoordinate(x, y);
 		}
+
+		DystopiaLogger.logSevere("THIS COORDINATE IS NOT IN THE GRID. RETURNING NULL.");
+		return null;
 	}
-	
-//	public Tile getTile(int x, int y) {
-//		
-//	}
 }

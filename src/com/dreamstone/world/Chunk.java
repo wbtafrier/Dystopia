@@ -1,5 +1,6 @@
 package com.dreamstone.world;
 
+import com.dreamstone.tile.TileList;
 import com.dreamstone.util.DystopiaLogger;
 
 public class Chunk {
@@ -80,7 +81,7 @@ public class Chunk {
 			//QUADRANT 1
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
-					coordList[x][y] = new Coordinate(startX + x, startY + y);
+					coordList[x][y] = new Coordinate(startX + x, startY + y, TileList.grass1);
 				}
 			}
 		}
@@ -88,7 +89,7 @@ public class Chunk {
 			//QUADRANT 2
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
-					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX + x, startY - y);
+					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX + x, startY - y, TileList.grass1);
 				}
 			}
 		}
@@ -96,7 +97,7 @@ public class Chunk {
 			//QUADRANT 3
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
-					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX + x, startY + y);
+					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX + x, startY + y, TileList.grass1);
 				}
 			}
 		}
@@ -104,7 +105,7 @@ public class Chunk {
 			//QUADRANT 4
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
-					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX - x, startY + y);
+					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX - x, startY + y, TileList.grass1);
 				}
 			}
 		}
@@ -146,7 +147,6 @@ public class Chunk {
 			DystopiaLogger.logSevere("Coordinate is not in the chunk!");
 			return null;
 		}
-		
 	}
 	
 	public Coordinate[][] getCoords() {
