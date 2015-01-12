@@ -12,6 +12,6 @@ public class TileNull extends Tile {
 
 	@Override
 	protected void setImageTiles() {
-		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), this.tileSize, this.tileSize, 255));
+		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 255));
 	}
 }

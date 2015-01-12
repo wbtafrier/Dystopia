@@ -65,11 +65,11 @@ public class GridDisplay {
 								c.setYScreenPosition(screenHeight / 2 + Math.abs(c.yCoordinate + 1) * Tile.getTileSize());
 							}
 							
-							display.drawImage(tileImg, c.getXScreenPosition(), c.getYScreenPosition(), null);
+							display.drawImage(tileImg, c.getXScreenPos(), c.getYScreenPos(), null);
 							
 							if (DebugSettings.SHOW_GRIDLINES) {
 								display.setColor(Color.DARK_GRAY);
-								display.drawRect(c.getXScreenPosition(), c.getYScreenPosition(), Tile.getTileSize(), Tile.getTileSize());
+								display.drawRect(c.getXScreenPos(), c.getYScreenPos(), Tile.getTileSize(), Tile.getTileSize());
 							}
 							
 							if (DebugSettings.SHOW_COORDS) {
@@ -80,8 +80,8 @@ public class GridDisplay {
 								display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 								Rectangle2D bounds = f.getStringBounds(coord, context);
 								
-								strX = (float) (c.getXScreenPosition() + (Tile.getTileSize() / 2 - bounds.getWidth() / 2));
-								strY = (float) (c.getYScreenPosition() + (Tile.getTileSize() / 2 - bounds.getHeight() / 2));
+								strX = (float) (c.getXScreenPos() + (Tile.getTileSize() / 2 - bounds.getWidth() / 2));
+								strY = (float) (c.getYScreenPos() + (Tile.getTileSize() / 2 - bounds.getHeight() / 2));
 								
 								ascent = (float) -bounds.getY();
 								baseY = strY + ascent;
@@ -97,8 +97,8 @@ public class GridDisplay {
 		if (DebugSettings.SHOW_AXES) {
 			display.setColor(Color.BLACK);
 			display.setStroke(new BasicStroke(4));
-			display.drawLine(0, grid.getCoordinate(0, -1).getYScreenPosition(), screenWidth, grid.getCoordinate(0, -1).getYScreenPosition());
-			display.drawLine(grid.getCoordinate(0, 0).getXScreenPosition(), screenHeight, grid.getCoordinate(0, 0).getXScreenPosition(), 0);
+			display.drawLine(0, grid.getCoordinate(0, -1).getYScreenPos(), screenWidth, grid.getCoordinate(0, -1).getYScreenPos());
+			display.drawLine(grid.getCoordinate(0, 0).getXScreenPos(), screenHeight, grid.getCoordinate(0, 0).getXScreenPos(), 0);
 			display.setStroke(new BasicStroke(1));
 		}
 	}

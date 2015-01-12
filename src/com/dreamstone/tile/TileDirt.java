@@ -13,8 +13,8 @@ public class TileDirt extends TileTransition {
 	@Override
 	protected void setImageTiles() {
 		//Sets full images
-		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), this.tileSize, this.tileSize, 23));
-		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), this.tileSize, this.tileSize, 26));
+		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 23));
+		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 26));
 	}
 	
 	@Override

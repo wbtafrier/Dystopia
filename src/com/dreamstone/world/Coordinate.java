@@ -3,7 +3,6 @@ package com.dreamstone.world;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import com.dreamstone.core.DisplayCarrier;
 import com.dreamstone.tile.Tile;
 import com.dreamstone.tile.TileList;
 import com.dreamstone.util.DystopiaLogger;
@@ -87,11 +86,11 @@ public class Coordinate {
 		this.yScreenCoordinate = y;
 	}
 	
-	public int getXScreenPosition() {
+	public int getXScreenPos() {
 		return this.xScreenCoordinate;
 	}
 	
-	public int getYScreenPosition() {
+	public int getYScreenPos() {
 		return this.yScreenCoordinate;
 	}
 	
