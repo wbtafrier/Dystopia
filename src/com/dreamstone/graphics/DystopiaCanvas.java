@@ -46,25 +46,24 @@ public final class DystopiaCanvas extends Canvas {
 		g.setColor(new Color(0xEEEEEE));
 		g.fillRect(0, 0, DisplayCarrier.getFrame().getWidth(), DisplayCarrier.getFrame().getHeight());
 		
-		if (Dystopia.getGame().getTickCount() > ticks) {
-			if (movingListener.isMovingNorth) {
-				testWorld.setYOffset((int)(testWorld.getYOffset() - testWorld.getPlayer().getSpeed()));
-			}
-			else if (movingListener.isMovingSouth) {
-				testWorld.setYOffset((int)(testWorld.getYOffset() + testWorld.getPlayer().getSpeed()));
-			}
-			
+		int skip = Math.abs(Dystopia.getGame().getTickCount() - ticks);
+		if (!(ticks == Dystopia.getGame().getTickCount())) {
 			if (movingListener.isMovingEast) {
-				testWorld.setXOffset((int)(testWorld.getXOffset() + testWorld.getPlayer().getSpeed()));
+				testWorld.setXOffset(testWorld.getXOffset() - (testWorld.getPlayer().getSpeed()) * skip);
 			}
-			else if (movingListener.isMovingWest) {
-				testWorld.setXOffset((int)(testWorld.getXOffset() - testWorld.getPlayer().getSpeed()));
+			if (movingListener.isMovingWest) {
+				testWorld.setXOffset(testWorld.getXOffset() + (testWorld.getPlayer().getSpeed()) * skip);
+			}
+			if (movingListener.isMovingNorth) {
+				testWorld.setYOffset(testWorld.getYOffset() + (testWorld.getPlayer().getSpeed()) * skip);
+			}
+			if (movingListener.isMovingSouth) {
+				testWorld.setYOffset(testWorld.getYOffset() - (testWorld.getPlayer().getSpeed()) * skip);
 			}
 		}
-	
 		ticks = Dystopia.getGame().getTickCount();
 	
-		GridDisplay.drawGrid(g, Dystopia.getGame().grid, (int)testWorld.getXOffset(), (int)testWorld.getYOffset());
+		GridDisplay.drawGrid(g, Dystopia.getGame().grid, testWorld.getXOffset(), testWorld.getYOffset());
 		
         g.dispose();
         bs.show();

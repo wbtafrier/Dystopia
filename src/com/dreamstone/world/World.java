@@ -11,7 +11,7 @@ public class World {
 	public World() {
 		this.xOffset = 0;
 		this.yOffset = 0;
-		player = new EntityPlayer("Andy", 100, "terrain.png", 1F);
+		player = new EntityPlayer("Andy", 100, "terrain.png", 5.0F);
 	}
 	
 	public EntityPlayer getPlayer() {
@@ -26,11 +26,11 @@ public class World {
 		return this.yOffset;
 	}
 	
-	public void setXOffset(int x) {
+	public void setXOffset(float x) {
 		xOffset = x;
 	}
 	
-	public void setYOffset(int y) {
+	public void setYOffset(float y) {
 		yOffset = y;
 	}
 }

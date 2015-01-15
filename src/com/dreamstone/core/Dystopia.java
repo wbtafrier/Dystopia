@@ -59,12 +59,12 @@ public class Dystopia implements Runnable {
 			}
 			unproccessedSeconds += passedTime / 1_000_000_000.0;
 			
-			boolean ticked = false;
+//			boolean ticked = false;
 			while (unproccessedSeconds > secondsPerTick) {
 				tick();
 				
 				unproccessedSeconds -= secondsPerTick;
-				ticked = true;
+//				ticked = true;
 				
 				tickCount++;
 				if (tickCount % 60 == 0) {
@@ -84,14 +84,14 @@ public class Dystopia implements Runnable {
 			}
 			
 			//Updates frames independently from the game logic (ticks).
-//			DisplayCarrier.getCanvas().render();
-//			frames++;
+			DisplayCarrier.getCanvas().render();
+			frames++;
 			
 			//Controls the frames to update the same time as the game logic (ticks).
-			if (ticked) {
-				DisplayCarrier.getCanvas().render();
-				frames++;
-			}
+//			if (ticked) {
+//				DisplayCarrier.getCanvas().render();
+//				frames++;
+//			}
 		}
 	}
 	

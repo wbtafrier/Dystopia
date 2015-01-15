@@ -20,7 +20,7 @@ import com.dreamstone.world.Quadrant;
 
 public class GridDisplay {
 	
-	public static void drawGrid(Graphics2D display, Grid grid, int xOffset, int yOffset) {
+	public static void drawGrid(Graphics2D display, Grid grid, float xOffset, float yOffset) {
 		ArrayList<Quadrant> quads = grid.QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 		BufferedImage tileImg;
@@ -65,11 +65,11 @@ public class GridDisplay {
 								c.setYScreenPosition(screenHeight / 2 + Math.abs(c.yCoordinate + 1) * Tile.getTileSize());
 							}
 							
-							display.drawImage(tileImg, c.getXScreenPos() + xOffset, c.getYScreenPos() + yOffset, null);
+							display.drawImage(tileImg, c.getXScreenPos() + (int)xOffset, c.getYScreenPos() + (int)yOffset, null);
 							
 							if (DebugSettings.SHOW_GRIDLINES) {
 								display.setColor(Color.DARK_GRAY);
-								display.drawRect(c.getXScreenPos(), c.getYScreenPos(), Tile.getTileSize(), Tile.getTileSize());
+								display.drawRect(c.getXScreenPos(), c.getYScreenPos() + (int)xOffset, Tile.getTileSize(), Tile.getTileSize());
 							}
 							
 							if (DebugSettings.SHOW_COORDS) {
@@ -86,7 +86,7 @@ public class GridDisplay {
 								ascent = (float) -bounds.getY();
 								baseY = strY + ascent;
 								
-								display.drawString(coord, (int) strX, (int) baseY);
+								display.drawString(coord, (int) strX + xOffset, (int) baseY + yOffset);
 							}
 						}
 					}
@@ -97,8 +97,8 @@ public class GridDisplay {
 		if (DebugSettings.SHOW_AXES) {
 			display.setColor(Color.BLACK);
 			display.setStroke(new BasicStroke(4));
-			display.drawLine(0, grid.getCoordinate(0, -1).getYScreenPos(), screenWidth, grid.getCoordinate(0, -1).getYScreenPos());
-			display.drawLine(grid.getCoordinate(0, 0).getXScreenPos(), screenHeight, grid.getCoordinate(0, 0).getXScreenPos(), 0);
+			display.drawLine(0, grid.getCoordinate(0, -1).getYScreenPos() + (int)yOffset, screenWidth, grid.getCoordinate(0, -1).getYScreenPos() + (int)yOffset);
+			display.drawLine(grid.getCoordinate(0, 0).getXScreenPos() + (int)xOffset, screenHeight, grid.getCoordinate(0, 0).getXScreenPos() + (int)xOffset, 0);
 			display.setStroke(new BasicStroke(1));
 		}
 	}
