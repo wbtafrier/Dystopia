@@ -19,8 +19,8 @@ import com.dreamstone.world.Grid;
 import com.dreamstone.world.Quadrant;
 
 public class GridDisplay {
-
-	static void drawGrid(Graphics2D display, Grid grid) {
+	
+	public static void drawGrid(Graphics2D display, Grid grid, int xOffset, int yOffset) {
 		ArrayList<Quadrant> quads = grid.QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 		BufferedImage tileImg;
@@ -33,7 +33,7 @@ public class GridDisplay {
 
 		Font f = new Font("Comic Sans MS", Font.PLAIN, 16);
 		display.setFont(f);
-		
+
 		for (int i = 0; i < quads.size(); i++) {
 			chunks = quads.get(i).getChunks();
 			for (int y = 0; y < chunks.size(); y++) {
@@ -65,7 +65,7 @@ public class GridDisplay {
 								c.setYScreenPosition(screenHeight / 2 + Math.abs(c.yCoordinate + 1) * Tile.getTileSize());
 							}
 							
-							display.drawImage(tileImg, c.getXScreenPos(), c.getYScreenPos(), null);
+							display.drawImage(tileImg, c.getXScreenPos() + xOffset, c.getYScreenPos() + yOffset, null);
 							
 							if (DebugSettings.SHOW_GRIDLINES) {
 								display.setColor(Color.DARK_GRAY);

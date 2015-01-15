@@ -86,6 +86,11 @@ public class Coordinate {
 		this.yScreenCoordinate = y;
 	}
 	
+	public void setScreenPositions(int x, int y) {
+		this.xScreenCoordinate = x;
+		this.yScreenCoordinate = y;
+	}
+	
 	public int getXScreenPos() {
 		return this.xScreenCoordinate;
 	}
