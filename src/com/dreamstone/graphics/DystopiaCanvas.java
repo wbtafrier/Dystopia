@@ -16,10 +16,11 @@ import com.dreamstone.world.World;
 public final class DystopiaCanvas extends Canvas {
 
 	private static final long serialVersionUID = -5025704194120253102L;
-	private static final int BUFFERS = 3;
+	private static final int BUFFERS = 2;
 	public World testWorld;
 	private static Graphics2D g = null;
 	public PlayerMovingListener movingListener = new PlayerMovingListener();
+	private int ticks;
 	
 	public DystopiaCanvas() {
 		Dimension defaultSize = new Dimension((int)(DisplayCarrier.getDisplaySize().getWidth() / 2), (int)(DisplayCarrier.getDisplaySize().getHeight() / 2));
@@ -28,6 +29,7 @@ public final class DystopiaCanvas extends Canvas {
 		Toolkit.getDefaultToolkit().setDynamicLayout(false);
 		
 		testWorld = new World();
+		ticks = 0;
 	}
 	
 	public void render() {
@@ -44,21 +46,25 @@ public final class DystopiaCanvas extends Canvas {
 		g.setColor(new Color(0xEEEEEE));
 		g.fillRect(0, 0, DisplayCarrier.getFrame().getWidth(), DisplayCarrier.getFrame().getHeight());
 		
-		if (movingListener.isMovingNorth) {
-			testWorld.setYOffset(testWorld.getYOffset() - (int)testWorld.getPlayer().getSpeed());
+		if (Dystopia.getGame().getTickCount() > ticks) {
+			if (movingListener.isMovingNorth) {
+				testWorld.setYOffset((int)(testWorld.getYOffset() - testWorld.getPlayer().getSpeed()));
+			}
+			else if (movingListener.isMovingSouth) {
+				testWorld.setYOffset((int)(testWorld.getYOffset() + testWorld.getPlayer().getSpeed()));
+			}
+			
+			if (movingListener.isMovingEast) {
+				testWorld.setXOffset((int)(testWorld.getXOffset() + testWorld.getPlayer().getSpeed()));
+			}
+			else if (movingListener.isMovingWest) {
+				testWorld.setXOffset((int)(testWorld.getXOffset() - testWorld.getPlayer().getSpeed()));
+			}
 		}
-		else if (movingListener.isMovingSouth) {
-			testWorld.setYOffset(testWorld.getYOffset() + (int)testWorld.getPlayer().getSpeed());
-		}
-		
-		if (movingListener.isMovingEast) {
-			testWorld.setXOffset(testWorld.getXOffset() + (int)testWorld.getPlayer().getSpeed());
-		}
-		else if (movingListener.isMovingWest) {
-			testWorld.setXOffset(testWorld.getXOffset() - (int)testWorld.getPlayer().getSpeed());
-		}
-		
-		GridDisplay.drawGrid(g, Dystopia.getGame().grid, testWorld.getXOffset(), testWorld.getYOffset());
+	
+		ticks = Dystopia.getGame().getTickCount();
+	
+		GridDisplay.drawGrid(g, Dystopia.getGame().grid, (int)testWorld.getXOffset(), (int)testWorld.getYOffset());
 		
         g.dispose();
         bs.show();

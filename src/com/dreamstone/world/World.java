@@ -4,25 +4,25 @@ import com.dreamstone.entity.EntityPlayer;
 
 public class World {
 
-	private int xOffset;
-	private int yOffset;
+	private float xOffset;
+	private float yOffset;
 	private EntityPlayer player;
 	
 	public World() {
 		this.xOffset = 0;
 		this.yOffset = 0;
-		player = new EntityPlayer("Andy", 100, "terrain.png", 1.0F);
+		player = new EntityPlayer("Andy", 100, "terrain.png", 1F);
 	}
 	
 	public EntityPlayer getPlayer() {
 		return this.player;
 	}
 	
-	public int getXOffset() {
+	public float getXOffset() {
 		return this.xOffset;
 	}
 	
-	public int getYOffset() {
+	public float getYOffset() {
 		return this.yOffset;
 	}
 	

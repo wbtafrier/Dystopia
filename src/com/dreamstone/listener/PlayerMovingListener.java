@@ -40,26 +40,26 @@ public class PlayerMovingListener extends KeyAdapter implements KeyListener {
 			isMovingNorth = true;
 			//TODO: Add World class.
 //			World.getPlayer().setOrientation(PlayerOrientation.NORTH);
-			System.out.println("YAY! Key pressed: " + e.getKeyChar());
+//			System.out.println("YAY! Key pressed: " + e.getKeyChar());
 		}
 		else if (e.getKeyChar() == KeyOptions.playerMoveWest) {
 			isMovingWest = true;
 			//TODO: Add World class.
 //			World.getPlayer().setOrientation(PlayerOrientation.WEST);
-			System.out.println("YAY! Key pressed: " + e.getKeyChar());
+//			System.out.println("YAY! Key pressed: " + e.getKeyChar());
 		}
 		else if (e.getKeyChar() == KeyOptions.playerMoveSouth) {
 			isMovingSouth = true;
 			//TODO: Add World class.
 //			World.getPlayer().setOrientation(PlayerOrientation.SOUTH);
-			System.out.println("YAY! Key pressed: " + e.getKeyChar());
+//			System.out.println("YAY! Key pressed: " + e.getKeyChar());
 		}
 		else if (e.getKeyChar() == KeyOptions.playerMoveEast) {
 			isMovingEast = true;
 			//TODO: Add World class.
 //			World.getPlayer().setOrientation(PlayerOrientation.EAST);
 			
-			System.out.println("YAY! Key pressed: " + e.getKeyChar());
+//			System.out.println("YAY! Key pressed: " + e.getKeyChar());
 		}
 	}
 	
