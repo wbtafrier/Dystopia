@@ -69,14 +69,14 @@ public class GridDisplay {
 							
 							if (DebugSettings.SHOW_GRIDLINES) {
 								display.setColor(Color.DARK_GRAY);
-								display.drawRect(c.getXScreenPos(), c.getYScreenPos() + (int)xOffset, Tile.getTileSize(), Tile.getTileSize());
+								display.drawRect(c.getXScreenPos() + (int)xOffset, c.getYScreenPos() + (int)yOffset, Tile.getTileSize(), Tile.getTileSize());
 							}
 							
 							if (DebugSettings.SHOW_COORDS) {
 								display.setColor(Color.WHITE);
-	//							coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
+								coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
 								
-								coord = c.getTile().getName();
+//								coord = c.getTile().getName();
 								display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 								Rectangle2D bounds = f.getStringBounds(coord, context);
 								
