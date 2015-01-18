@@ -4,9 +4,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import com.dreamstone.graphics.DystopiaCanvas;
-import com.dreamstone.world.World;
-
 public class PlayerMovingListener extends KeyAdapter implements KeyListener {
 
 	//TODO: These can be useful in the future.

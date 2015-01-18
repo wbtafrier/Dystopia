@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import com.dreamstone.core.DisplayCarrier;
+import com.dreamstone.core.Dystopia;
 import com.dreamstone.tile.Tile;
 import com.dreamstone.util.DebugSettings;
 import com.dreamstone.world.Chunk;
@@ -93,13 +94,17 @@ public class GridDisplay {
 				}
 			}
 		}
-		
+
 		if (DebugSettings.SHOW_AXES) {
 			display.setColor(Color.BLACK);
 			display.setStroke(new BasicStroke(4));
 			display.drawLine(0, grid.getCoordinate(0, -1).getYScreenPos() + (int)yOffset, screenWidth, grid.getCoordinate(0, -1).getYScreenPos() + (int)yOffset);
 			display.drawLine(grid.getCoordinate(0, 0).getXScreenPos() + (int)xOffset, screenHeight, grid.getCoordinate(0, 0).getXScreenPos() + (int)xOffset, 0);
 			display.setStroke(new BasicStroke(1));
+		}
+		
+		if (Dystopia.getGame().getTickCount() % 20 == 0) {
+			System.out.println("xOffset: " + xOffset + ", yOffset: " + yOffset);
 		}
 	}
 }

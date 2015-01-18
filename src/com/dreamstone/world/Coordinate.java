@@ -17,6 +17,7 @@ public class Coordinate {
 	private Tile tileType;
 //	private EnumDirection direction;
 	private BufferedImage tileImage;
+	private int tileImageIndex;
 	
 	protected Coordinate() {
 		this(0, 0, TileList.nullTile);
@@ -38,6 +39,15 @@ public class Coordinate {
 		this.setTileImage(t);
 	}
 	
+	protected Coordinate(int x, int y, int screenXPos, int screenYPos, Tile t, int imageIndex) {
+		this.xCoordinate = x;
+		this.yCoordinate = y;
+		this.xScreenCoordinate = screenXPos;
+		this.yScreenCoordinate = screenYPos;
+		this.tileImageIndex = imageIndex;
+		this.setTileImage(t, this.tileImageIndex);
+	}
+	
 	public void setTileImage(Tile t) {
 		if (t == null) {
 			DystopiaLogger.logSevere("TILE EQUALS NULL!");
@@ -48,6 +58,10 @@ public class Coordinate {
 		else {
 			this.tileImage = t.getImageTile(rand.nextInt(t.getFullImageAmount()));
 		}
+	}
+	
+	private void setTileImage(Tile t, int imageIndex) {
+		this.tileImage = t.getImageTile(imageIndex);
 	}
 	
 	public void setTileType(Tile t) {
