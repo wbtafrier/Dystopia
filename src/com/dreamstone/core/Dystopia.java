@@ -1,6 +1,7 @@
 package com.dreamstone.core;
 
 import com.dreamstone.world.Grid;
+import com.dreamstone.world.World;
 
 public class Dystopia implements Runnable {
 	
@@ -14,6 +15,8 @@ public class Dystopia implements Runnable {
 	
 	private Thread gameThread;
 	private boolean running;
+	
+	public World currentWorld;
 	
 	protected Dystopia() {
 		ticks = 0;

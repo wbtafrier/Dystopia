@@ -8,7 +8,7 @@ public class DirectoryMaster {
 	public static final File gameFolder = FileSystem.getGameFolder();
 	
 	// Dystopia/...
-	public static final File savesFolder = FileSystem.makeFolder(gameFolder, "saves");
+	public static final File worldsFolder = FileSystem.makeFolder(gameFolder, "worlds");
 	public static final File logsFolder = FileSystem.makeFolder(gameFolder, "logs");
 	
 	//Master Directory (Resources)

@@ -29,8 +29,8 @@ public abstract class EntityMovable extends Entity {
 		this.speed = speed;
 	}
 	
-	/**
-	 * This method is meant to be used in different ways for different objects. ie: A wandering sheep, or speeding minecart.
-	 */
-	public abstract void moving();
+//	/**
+//	 * This method is meant to be used in different ways for different objects. ie: A wandering sheep, or speeding minecart.
+//	 */
+//	public abstract void moving();
 }

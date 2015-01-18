@@ -11,12 +11,11 @@ public class Coordinate {
 
 	public final int xCoordinate;
 	public final int yCoordinate;
-	private int xScreenCoordinate;
-	private int yScreenCoordinate;
 	private static Random rand = new Random();
 	private Tile tileType;
 //	private EnumDirection direction;
 	private BufferedImage tileImage;
+	private int tileImageIndex;
 	
 	protected Coordinate() {
 		this(0, 0, TileList.nullTile);
@@ -26,16 +25,18 @@ public class Coordinate {
 		this(x, y, TileList.nullTile);
 	}
 
-	protected Coordinate(int x, int y, Tile t) {
-		this(x, y, 0, 0, t);
-	}
 	
-	protected Coordinate(int x, int y, int screenXPos, int screenYPos, Tile t) {
+	protected Coordinate(int x, int y, Tile t) {
 		this.xCoordinate = x;
 		this.yCoordinate = y;
-		this.xScreenCoordinate = screenXPos;
-		this.yScreenCoordinate = screenYPos;
 		this.setTileImage(t);
+	}
+	
+	protected Coordinate(int x, int y, Tile t, int imageIndex) {
+		this.xCoordinate = x;
+		this.yCoordinate = y;
+		this.tileImageIndex = imageIndex;
+		this.setTileImage(t, this.tileImageIndex);
 	}
 	
 	public void setTileImage(Tile t) {
@@ -48,6 +49,18 @@ public class Coordinate {
 		else {
 			this.tileImage = t.getImageTile(rand.nextInt(t.getFullImageAmount()));
 		}
+	}
+	
+	private void setTileImage(Tile t, int imageIndex) {
+		this.tileImage = t.getImageTile(imageIndex);
+	}
+	
+	public void setImageIndex(int index) {
+		this.tileImageIndex = index;
+	}
+	
+	public int getImageIndex() {
+		return this.tileImageIndex;
 	}
 	
 	public void setTileType(Tile t) {
@@ -74,24 +87,8 @@ public class Coordinate {
 			return 4;
 		}
 		
-		DystopiaLogger.logSevere("COORDINATE IS CORUPT! RETURNING 0.");
+		DystopiaLogger.logSevere("COORDINATE IS CORRUPT! RETURNING 0.");
 		return 0;
-	}
-	
-	public void setXScreenPosition(int x) {
-		this.xScreenCoordinate = x;
-	}
-	
-	public void setYScreenPosition(int y) {
-		this.yScreenCoordinate = y;
-	}
-	
-	public int getXScreenPos() {
-		return this.xScreenCoordinate;
-	}
-	
-	public int getYScreenPos() {
-		return this.yScreenCoordinate;
 	}
 	
 //	/**
