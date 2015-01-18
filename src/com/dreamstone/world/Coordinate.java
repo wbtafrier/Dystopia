@@ -45,7 +45,7 @@ public class Coordinate {
 		this.setTileImage(t, this.tileImageIndex);
 	}
 	
-	protected Coordinate(int xCoord, int yCoord, int xScreenPos, int yScreenPos, Tile t, int imageIndex) {
+	public Coordinate(int xCoord, int yCoord, int xScreenPos, int yScreenPos, Tile t, int imageIndex) {
 		this.xCoordinate = xCoord;
 		this.yCoordinate = yCoord;
 		this.xScreenCoordinate = xScreenPos;

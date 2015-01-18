@@ -34,7 +34,7 @@ public class SaveManager {
 					for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++) {
 						for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++) {
 							Coordinate c = q.getChunks().get(y).get(x).getCoordinateFromIndex(xx, yy);
-							quadText.append("[" + c.xCoordinate + "," + c.yCoordinate + "," + c.getTile().getName() + "," + c.getImageIndex() + "]");
+							quadText.append("[" + c.xCoordinate + "," + c.yCoordinate + "," + c.getXScreenPos() + "," + c.getYScreenPos() + "," + c.getTile().getName() + "," + c.getImageIndex() + "]");
 						}
 					}
 				}
