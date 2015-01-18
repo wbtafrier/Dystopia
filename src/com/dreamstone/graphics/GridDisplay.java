@@ -103,8 +103,8 @@ public class GridDisplay {
 			display.setStroke(new BasicStroke(1));
 		}
 		
-		if (Dystopia.getGame().getTickCount() % 20 == 0) {
-			System.out.println("xOffset: " + xOffset + ", yOffset: " + yOffset);
-		}
+//		if (Dystopia.getGame().getTickCount() % 20 == 0) {
+//			System.out.println("xOffset: " + xOffset + ", yOffset: " + yOffset);
+//		}
 	}
 }

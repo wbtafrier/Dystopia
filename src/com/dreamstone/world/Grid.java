@@ -20,13 +20,13 @@ public class Grid {
 		
 //		quad1.growQuadrant(new Chunk(1, 0));
 //		quad2.growQuadrant(new Chunk(-2, 1));
-//		quad3.growQuadrant(new Chunk(-2, -1));
-//		quad4.growQuadrant(new Chunk(1, -1));
+		quad3.growQuadrant(new Chunk(-1, -2));
+		quad4.growQuadrant(new Chunk(2, -2));
 		
-//		quad1.growQuadrant(new Chunk(2, 2));
-//		quad2.growQuadrant(new Chunk(-3, 3));
-//		quad3.growQuadrant(new Chunk(-3, -3));
-//		quad4.growQuadrant(new Chunk(3, -3));
+//		quad1.growQuadrant(new Chunk(1, 1));
+//		quad2.growQuadrant(new Chunk(-2, 2));
+//		quad3.growQuadrant(new Chunk(-2, -2));
+//		quad4.growQuadrant(new Chunk(2, -2));
 		
 //		System.out.println(quad1);
 //		System.out.println(quad2);

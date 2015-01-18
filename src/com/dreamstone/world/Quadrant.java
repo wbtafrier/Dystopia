@@ -154,15 +154,15 @@ public class Quadrant {
 							quadrant.add(new ArrayList<Chunk>());
 						}
 					}
-					for (int x = 0; x <= chunk.X_VALUE; x++) {
+					for (int x = 0; x < chunk.X_VALUE; x++) {
 						Chunk fillerChunk = new Chunk(x + 1, y);
 
-						//If the chunk is not created, add the new chunk.
-							if (!(isChunkCreated(fillerChunk))) {
-								quadrant.get(Math.abs(y + 1)).add(fillerChunk);
-							}
+					//If the chunk is not created, add the new chunk.
+						if (!(isChunkCreated(fillerChunk))) {
+							quadrant.get(Math.abs(y + 1)).add(fillerChunk);
 						}
 					}
+				}
 			}
 		}
 		else {
