@@ -11,6 +11,8 @@ public class Coordinate {
 
 	public final int xCoordinate;
 	public final int yCoordinate;
+	private int xScreenCoordinate;
+	private int yScreenCoordinate;
 	private static Random rand = new Random();
 	private Tile tileType;
 //	private EnumDirection direction;
@@ -21,20 +23,33 @@ public class Coordinate {
 		this(0, 0, TileList.nullTile);
 	}
 
-	protected Coordinate(int x, int y) {
-		this(x, y, TileList.nullTile);
+	protected Coordinate(int xCoord, int yCoord) {
+		this(xCoord, yCoord, TileList.nullTile);
 	}
 
 	
-	protected Coordinate(int x, int y, Tile t) {
-		this.xCoordinate = x;
-		this.yCoordinate = y;
+	protected Coordinate(int xCoord, int yCoord, Tile t) {
+		this.xCoordinate = xCoord;
+		this.yCoordinate = yCoord;
+		this.xScreenCoordinate = this.xCoordinate;
+		this.yScreenCoordinate = this.yCoordinate;
 		this.setTileImage(t);
 	}
 	
-	protected Coordinate(int x, int y, Tile t, int imageIndex) {
-		this.xCoordinate = x;
-		this.yCoordinate = y;
+	protected Coordinate(int xCoord, int yCoord, Tile t, int imageIndex) {
+		this.xCoordinate = xCoord;
+		this.yCoordinate = yCoord;
+		this.xScreenCoordinate = this.xCoordinate;
+		this.yScreenCoordinate = this.yCoordinate;
+		this.tileImageIndex = imageIndex;
+		this.setTileImage(t, this.tileImageIndex);
+	}
+	
+	protected Coordinate(int xCoord, int yCoord, int xScreenPos, int yScreenPos, Tile t, int imageIndex) {
+		this.xCoordinate = xCoord;
+		this.yCoordinate = yCoord;
+		this.xScreenCoordinate = xScreenPos;
+		this.yScreenCoordinate = yScreenPos;
 		this.tileImageIndex = imageIndex;
 		this.setTileImage(t, this.tileImageIndex);
 	}
@@ -89,6 +104,27 @@ public class Coordinate {
 		
 		DystopiaLogger.logSevere("COORDINATE IS CORRUPT! RETURNING 0.");
 		return 0;
+	}
+	
+	public void setXScreenPosition(int x) {
+		this.xScreenCoordinate = x;
+	}
+	
+	public void setYScreenPosition(int y) {
+		this.yScreenCoordinate = y;
+	}
+	
+	public void setScreenPositions(int x, int y) {
+		this.xScreenCoordinate = x;
+		this.yScreenCoordinate = y;
+	}
+	
+	public int getXScreenPos() {
+		return this.xScreenCoordinate;
+	}
+	
+	public int getYScreenPos() {
+		return this.yScreenCoordinate;
 	}
 	
 //	/**

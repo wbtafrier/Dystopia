@@ -11,7 +11,8 @@ public class EntityPlayer extends EntityMovable {
 	private int playerCoordX, playerCoordY;
 	
 	public EntityPlayer(String name, int health, String imgName, float speed) {
-		this(name, 0, 0, health, imgName, speed, new Color(playerRand.nextInt(256), playerRand.nextInt(256), playerRand.nextInt(256)),
+		this(name, 0, 0, health, imgName, speed, 
+				new Color(playerRand.nextInt(256), playerRand.nextInt(256), playerRand.nextInt(256)),
 				new Color(playerRand.nextInt(256), playerRand.nextInt(256), playerRand.nextInt(256)),
 				new Color(playerRand.nextInt(256), playerRand.nextInt(256), playerRand.nextInt(256)));
 	}

@@ -40,7 +40,7 @@ public class LoadManager {
 							String tileName = args[2];
 							Tile tile = TileList.getTileFromString(tileName);
 							int tileImageIndex = Integer.parseInt(args[3]);
-//							Coordinate coord = new Coordinate(xCoord, yCoord, tile, tileImageIndex);
+							Coordinate coord = new Coordinate(xCoord, yCoord, tile, tileImageIndex);
 						}
 					}
 				}
@@ -49,7 +49,6 @@ public class LoadManager {
 				e.printStackTrace();
 			}
 		}
-		return null;
 	}
 
 }

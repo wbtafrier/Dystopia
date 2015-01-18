@@ -9,6 +9,7 @@ import com.dreamstone.tile.TileList;
 import com.dreamstone.util.LaunchHandler;
 import com.dreamstone.world.Grid;
 import com.dreamstone.world.TestMap;
+import com.dreamstone.world.World;
 
 public class Start {
 	
@@ -60,6 +61,7 @@ public class Start {
 	private static void prepareWorld() {
 		//Initialize the grid, quadrants, chunks, and coordinates of the starting world. 
 		Dystopia.getGame().grid = new Grid();
+		Dystopia.getGame().currentWorld = new World("tickle_shit", Dystopia.getGame().grid);
 		//Creates a random map for debugging.
 		TestMap.testWorld();
 	}
