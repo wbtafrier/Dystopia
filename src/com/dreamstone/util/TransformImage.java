@@ -167,18 +167,19 @@ public class TransformImage {
 	 * splitAnimation takes an image and splits it horizontally into a bunch of smaller images that are generally used for animation.
 	 * NOTE: If the image is not divisible by the width, THE GAME FORCE CRASHES.
 	 * @param bi : The original BufferedImage.
-	 * @param width : The width of every frame.
+	 * @param frames : How many frames there are.
 	 * @return : An array of frames all with the same height and specifed width.
 	 */
-	public static BufferedImage[] splitAnimation(BufferedImage bi, int width) {
+	public static BufferedImage[] splitAnimation(BufferedImage bi, int frames) {
 		
-		if (bi.getWidth() % width != 0) {
+		if (bi.getWidth() % frames != 0) {
 			DystopiaLogger.logSevere("It looks like there was a problem dividing up an animation strip. :(");
 			DisplayCarrier.getFrame().dispose();
 			throw new IllegalArgumentException();
 		}
 		
-		BufferedImage[] animation = new BufferedImage[bi.getWidth() / width];
+		BufferedImage[] animation = new BufferedImage[frames];
+		int width = bi.getWidth() / frames;
 		
 		for (int i = 0; i < animation.length; i++) {
 			BufferedImage frame = new BufferedImage(width, bi.getHeight(), bi.getType());

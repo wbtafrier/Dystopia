@@ -1,29 +1,35 @@
 package com.dreamstone.entity;
 
+import java.awt.image.BufferedImage;
+
+import com.dreamstone.file.EntityImage;
+import com.dreamstone.tile.EnumDirection;
+
 /**
  * The superclass for all entities.
  */
 public abstract class Entity {
 	
-	private String entityName;
-	private String imageName;
-	private int health;
+	protected String entityName;
+	protected EntityImage imageStorage;
+	protected BufferedImage currentImage;
+	protected int health;
 	
-	Entity(String name, int health) {
-		this.entityName = name;
-		this.health = health;
+	Entity(String name, EntityImage images, int health) {
+		this(name, images, images.getIdleImage(EnumDirection.SOUTH), health);
 	}
 	
 	/**
 	 * The main constructor for all entities.
 	 * @param name : The name of the entity.
 	 * @param health : The amount of health the entity has.
-	 * @param imgName : The name of the image for the entity.
+	 * @param defaultImage : The BufferedImage for the entity.
 	 */
-	Entity(String name, int health, String imgName) {
+	Entity(String name, EntityImage images, BufferedImage defaultImage, int health) {
 		this.entityName = name;
+		this.imageStorage = images;
+		this.currentImage = defaultImage;
 		this.health = health;
-		this.setImageName(imgName);
 	}
 	
 	/**
@@ -38,8 +44,8 @@ public abstract class Entity {
 	 * Returns the image name of the entity.
 	 * @return Entity image name.
 	 */
-	public String getImageName() {
-		return this.imageName;
+	public BufferedImage getImage() {
+		return this.currentImage;
 	}
 	
 	/**
@@ -59,11 +65,11 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * Sets the image name of the entity.
-	 * @param imgName
+	 * Sets the image for the entity.
+	 * @param img
 	 */
-	public void setImageName(String imgName) {
-		this.imageName = imgName + ".png";
+	public void setImage(BufferedImage img) {
+		this.currentImage = img;
 	}
 	
 	/**
@@ -79,5 +85,9 @@ public abstract class Entity {
 	 */
 	public String toString() {
 		return this.entityName;
+	}
+
+	public EntityImage getImageStorage() {
+		return this.imageStorage;
 	}
 }

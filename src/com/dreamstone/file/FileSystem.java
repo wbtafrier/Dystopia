@@ -27,38 +27,34 @@ public class FileSystem {
 	private static GraphicsDevice gd = ge.getDefaultScreenDevice();
 	private static GraphicsConfiguration gc = gd.getDefaultConfiguration();
 	private static ClassLoader classLoader = FileSystem.class.getClassLoader();
-	
+	public static final String LINE_BREAK = System.getProperty("line.separator");
+	public static final String TAB = "\t";
 	private static File gameFolder;
-	
+
 	public static File getGameFolder() {
 		return gameFolder;
 	}
-	
-	public static boolean createGameDirectory()
-	{
-		if (OS.contains("win"))
-		{
+
+	public static boolean createGameDirectory() {
+		if (OS.contains("win")) {
 			String env = System.getenv("APPDATA");
 			gameFolder = makeFolder(env, DYSTOPIA);
 		}
-		else if (OS.contains("mac"))
-		{
+		else if (OS.contains("mac")) {
 			String support = System.getProperty("user.home") + s + "Library" + s + "Application Support";
 			gameFolder = makeFolder(support, DYSTOPIA);
 		}
-		else if (OS.contains("nux"))
-		{
+		else if (OS.contains("nux")) {
 			String config = System.getProperty("user.home");
 			gameFolder = makeFolder(config, "." + DYSTOPIA);
 		}
-		else
-		{
+		else {
 			String dir = System.getProperty("user.dir");
 			gameFolder = makeFolder(dir, DYSTOPIA);
 		}
 		return gameFolder.exists();
 	}
-	
+
 	public static File makeFolder(File parent, String folderName) {
 		File folder = new File(parent.getAbsolutePath(), folderName);
 		if (!folder.exists() && !folder.mkdirs()) {
@@ -71,7 +67,7 @@ public class FileSystem {
 	public static File makeFolder(String parent, String folderName) {
 		return makeFolder(new File(parent), folderName);
 	}
-	
+
 	public static File makeFile(File file) {
 		if (file != null && !file.exists()) {
 			try {
@@ -82,16 +78,16 @@ public class FileSystem {
 		}
 		return file;
 	}
-	
+
 	public static File makeFile(File folder, String fileName) {
 		File file = new File(folder.getAbsolutePath() + s + fileName);
 		return makeFile(file);
 	}
-	
+
 	public static File makeFile(String folder, String fileName) {
 		return makeFile(new File(folder), fileName);
 	}
-	
+
 	public static String getClassLoaderResourceDirectory(String parent, String fileName) {
 		if (fileName != null && !fileName.isEmpty()) {
 			return parent + "/" + fileName;
@@ -100,7 +96,7 @@ public class FileSystem {
 			return parent;
 		}
 	}
-	
+
 	public static File getClassLoaderResourceFile(String directory, String fileName) {
 		URL url = null;
 		File f = null;
@@ -112,28 +108,24 @@ public class FileSystem {
 		}
 		return f;
 	}
-	
-	public static void writeTextFile(File f, StringBuilder builder) throws IOException
-	{
+
+	public static void writeTextFile(File f, StringBuilder builder) throws IOException {
 		writeTextFile(f, builder.toString());
 	}
-	
-	public static void writeTextFile(File f, String str) throws IOException
-	{
-		if (f == null || !f.exists())
-		{
+
+	public static void writeTextFile(File f, String str) throws IOException	{
+		if (f == null || !f.exists()) {
 			throw new IOException("Writing to null file");
 		}
-		
+
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f)));
 		pw.write(str);
 		pw.close();
 	}
-	
+
 	public static String readTextFile(File f) throws IOException
 	{
-		if (f != null && f.exists())
-		{
+		if (f != null && f.exists()) {
 			Scanner reader = new Scanner(f);
 			reader.useDelimiter("\\Z");
 			String str = reader.next();
@@ -142,11 +134,11 @@ public class FileSystem {
 		}
 		return null;
 	}
-	
+
 	public static BufferedImage readImageFile(File f) throws IOException {
 		Image im = null;
 		BufferedImage bi = null;
-		
+
 		try {
 			im = ImageIO.read(f);
 			bi = gc.createCompatibleImage(im.getWidth(null), im.getHeight(null), Transparency.TRANSLUCENT);
@@ -158,16 +150,15 @@ public class FileSystem {
 		g.dispose();
 		return bi;
 	}
-	
+
 	public static BufferedImage loadImageFromJar(String directory, String imageNameDotExtension) {
 		BufferedImage bi = null;
-		
+
 		try {
 			bi = FileSystem.readImageFile(FileSystem.getClassLoaderResourceFile(directory, imageNameDotExtension));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		return bi;
 	}
 }

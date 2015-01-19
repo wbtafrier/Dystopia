@@ -18,6 +18,6 @@ public class DirectoryMaster {
 	public static final String texturesFolder = FileSystem.getClassLoaderResourceDirectory(resourcesFolder, "textures");
 	
 	// textures/...
-	public static final String playersFolder = FileSystem.getClassLoaderResourceDirectory(texturesFolder, "players");
+	public static final String playersFolder = FileSystem.getClassLoaderResourceDirectory(texturesFolder, "player");
 	public static final String tilesFolder = FileSystem.getClassLoaderResourceDirectory(texturesFolder, "tiles");
 }

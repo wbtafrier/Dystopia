@@ -1,6 +1,8 @@
 package com.dreamstone.world;
 
 import com.dreamstone.entity.EntityPlayer;
+import com.dreamstone.file.EntityImage;
+import com.dreamstone.file.ResourceLoader;
 
 public class World {
 
@@ -13,6 +15,9 @@ public class World {
 	public World(String name, Grid grid) {
 		this.worldName = name;
 		this.worldGrid = grid;
+		
+		//TEMP
+		player = new EntityPlayer("Andy608", new EntityImage(ResourceLoader.playerIdle, ResourceLoader.playerNorthAnimation, ResourceLoader.playerSouthAnimation, ResourceLoader.playerHorizontalAnimation));
 		this.xOffset = 0;
 		this.yOffset = 0;
 	}
@@ -21,8 +26,8 @@ public class World {
 		this.worldName = name;
 		this.worldGrid = grid;
 		this.player = player;
-		this.xOffset = this.player.getX();
-		this.yOffset = this.player.getY();
+		this.xOffset = -this.player.getWalkingBoundsXPos();
+		this.yOffset = -this.player.getWalkingBoundsYPos();
 	}
 	
 	public int getXOffset() {

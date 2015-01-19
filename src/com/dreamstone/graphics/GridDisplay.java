@@ -21,7 +21,8 @@ import com.dreamstone.world.Quadrant;
 
 public class GridDisplay {
 
-	static void drawGrid(Graphics2D display, Grid grid) {
+	static void drawGrid(Graphics2D display) {
+		Grid grid = Dystopia.getGame().currentWorld.getGrid();
 		ArrayList<Quadrant> quads = grid.QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 		BufferedImage tileImg;

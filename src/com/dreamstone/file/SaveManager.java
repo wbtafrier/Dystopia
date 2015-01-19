@@ -39,7 +39,7 @@ public class SaveManager {
 					}
 				}
 			}
-			File quadFile = FileSystem.makeFile(mapFolder, "quad" + q.getQuadrant() + ".ds");
+			File quadFile = FileSystem.makeFile(mapFolder, "quad" + q.getQuadrant() + ".txt");
 			
 			try {
 				FileSystem.writeTextFile(quadFile, quadText);
@@ -52,12 +52,12 @@ public class SaveManager {
 	
 	private static void savePlayer() {
 		EntityPlayer player = world.getPlayer();
-		File playerFile = FileSystem.makeFile(worldFolder, player.getName() + ".ds");
+		File playerFile = FileSystem.makeFile(worldFolder, player.getName() + ".txt");
 		StringBuilder playerText = new StringBuilder();
-		playerText.append("health = " + player.getHealth() + "\n");
-		playerText.append("hairColor = [" + player.getHairColor().getRed() + "," + player.getHairColor().getGreen() + "," + player.getHairColor().getBlue() + "]\n");
-		playerText.append("eyeColor = [" + player.getEyeColor().getRed() + "," + player.getEyeColor().getGreen() + "," + player.getEyeColor().getBlue() + "]\n");
-		playerText.append("skinColor = [" + player.getSkinColor().getRed() + "," + player.getSkinColor().getGreen() + "," + player.getSkinColor().getBlue() + "]\n");
+		playerText.append("Player Health:" + FileSystem.TAB + "[" + player.getHealth() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("Hair Color:" + FileSystem.TAB + "[" + player.getHairColor().getRed() + "," + player.getHairColor().getGreen() + "," + player.getHairColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("Eye Color:" + FileSystem.TAB + "[" + player.getEyeColor().getRed() + "," + player.getEyeColor().getGreen() + "," + player.getEyeColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("Skin Color:" + FileSystem.TAB + "[" + player.getSkinColor().getRed() + "," + player.getSkinColor().getGreen() + "," + player.getSkinColor().getBlue() + "]" + FileSystem.LINE_BREAK);
 		
 		try {
 			FileSystem.writeTextFile(playerFile, playerText);
@@ -69,6 +69,6 @@ public class SaveManager {
 	
 	private static void saveWorldSettings() {
 		//TODO: Fill in zeh blanks
-		File settingsFile = FileSystem.makeFile(worldFolder, "settings.ds");
+		File settingsFile = FileSystem.makeFile(worldFolder, "settings.txt");
 	}
 }

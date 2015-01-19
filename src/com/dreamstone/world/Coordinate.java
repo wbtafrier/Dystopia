@@ -26,7 +26,6 @@ public class Coordinate {
 	protected Coordinate(int xCoord, int yCoord) {
 		this(xCoord, yCoord, TileList.nullTile);
 	}
-
 	
 	protected Coordinate(int xCoord, int yCoord, Tile t) {
 		this.xCoordinate = xCoord;
@@ -41,8 +40,8 @@ public class Coordinate {
 		this.yCoordinate = yCoord;
 		this.xScreenCoordinate = this.xCoordinate;
 		this.yScreenCoordinate = this.yCoordinate;
-		this.tileImageIndex = imageIndex;
 		this.setTileImage(t, this.tileImageIndex);
+		this.tileImageIndex = imageIndex;
 	}
 	
 	public Coordinate(int xCoord, int yCoord, int xScreenPos, int yScreenPos, Tile t, int imageIndex) {
@@ -50,8 +49,8 @@ public class Coordinate {
 		this.yCoordinate = yCoord;
 		this.xScreenCoordinate = xScreenPos;
 		this.yScreenCoordinate = yScreenPos;
-		this.tileImageIndex = imageIndex;
 		this.setTileImage(t, this.tileImageIndex);
+		this.tileImageIndex = imageIndex;
 	}
 	
 	public void setTileImage(Tile t) {

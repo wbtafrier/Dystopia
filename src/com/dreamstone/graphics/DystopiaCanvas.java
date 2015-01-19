@@ -8,7 +8,6 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
 import com.dreamstone.core.DisplayCarrier;
-import com.dreamstone.core.Dystopia;
 
 public final class DystopiaCanvas extends Canvas {
 
@@ -34,7 +33,8 @@ public final class DystopiaCanvas extends Canvas {
 		
 		g.setColor(new Color(0xEEEEEE));
 		g.fillRect(0, 0, DisplayCarrier.getFrame().getWidth(), DisplayCarrier.getFrame().getHeight());
-		GridDisplay.drawGrid(g, Dystopia.getGame().grid);
+		GridDisplay.drawGrid(g);
+		PlayerCamera.displayPlayer(g);
 		
         g.dispose();
         bs.show();
