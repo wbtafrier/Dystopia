@@ -1,5 +1,9 @@
 package com.dreamstone.entity;
 
+import java.awt.image.BufferedImage;
+
+import com.dreamstone.file.EntityImage;
+
 public abstract class EntityMovable extends Entity {
 
 	private float speed;
@@ -9,12 +13,11 @@ public abstract class EntityMovable extends Entity {
 	 * The consructor for the EntityMovale class.
 	 * @param name : The name of the entity.
 	 * @param health : The health of the entity.
-	 * @param imgName : The image name of the entity.
-	 * @param speed : the speed of the entity.
+	 * @param img : The image for the entity.
 	 */
-	EntityMovable(String name, int health, String imgName, float speed) {
-		super(name, health, imgName);
-		this.speed = speed;
+	EntityMovable(String name, EntityImage images, BufferedImage img, int health) {
+		super(name, images, img, health);
+		this.speed = 0;
 	}
 	
 	public float getSpeed() {
@@ -29,8 +32,8 @@ public abstract class EntityMovable extends Entity {
 		this.speed = speed;
 	}
 	
-	/**
-	 * This method is meant to be used in different ways for different objects. ie: A wandering sheep, or speeding minecart.
-	 */
-	public abstract void moving();
+//	/**
+//	 * This method is meant to be used in different ways for different objects. ie: A wandering sheep, or speeding minecart.
+//	 */
+//	public abstract void moving();
 }

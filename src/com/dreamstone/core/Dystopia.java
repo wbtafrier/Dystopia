@@ -1,11 +1,11 @@
 package com.dreamstone.core;
 
-import com.dreamstone.world.Grid;
+import com.dreamstone.world.World;
 
 public class Dystopia implements Runnable {
 	
+	public World currentWorld;
 	static Dystopia gameInstance;
-	public Grid grid;
 	private int ticks;
 	private int frames;
 	

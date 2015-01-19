@@ -4,11 +4,13 @@ import java.awt.EventQueue;
 
 import com.dreamstone.file.FileSystem;
 import com.dreamstone.file.ResourceLoader;
+import com.dreamstone.file.SaveManager;
 import com.dreamstone.graphics.GraphicsOptions;
 import com.dreamstone.tile.TileList;
 import com.dreamstone.util.LaunchHandler;
 import com.dreamstone.world.Grid;
-import com.dreamstone.world.TestMap;
+import com.dreamstone.world.TempWorldGen;
+import com.dreamstone.world.World;
 
 public class Start {
 	
@@ -31,6 +33,8 @@ public class Start {
 				
 				//Start the game loop!!!!
 				Dystopia.getGame().start();
+				SaveManager.saveWorld();
+//				LoadManager.loadWorld(Dystopia.getGame().currentWorld.getName());
 			}
 		});
 	}
@@ -49,6 +53,7 @@ public class Start {
 		GraphicsOptions.initializeGraphicsOptions();
 		//Loads all image, sound, text, and other resources into variables.
 		ResourceLoader.loadAllResources();
+		GraphicsOptions.updateGraphics(GraphicsOptions.getScale());
 	}
 	
 	private static void initializeTilesAndItems() {
@@ -59,9 +64,12 @@ public class Start {
 	//TODO: Move to World class.
 	private static void prepareWorld() {
 		//Initialize the grid, quadrants, chunks, and coordinates of the starting world. 
-		Dystopia.getGame().grid = new Grid();
+//		Dystopia.getGame().grid = new Grid();
+		
+		Dystopia.getGame().currentWorld = new World("tickle_shit", new Grid());
+		
 		//Creates a random map for debugging.
-		TestMap.testWorld();
+		TempWorldGen.setTilesForTestWorld();
 	}
 	
 	private static void setupDisplay() {

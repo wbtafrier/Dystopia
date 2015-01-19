@@ -1,7 +1,9 @@
 package com.dreamstone.world;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
+import com.dreamstone.core.Dystopia;
 import com.dreamstone.tile.Tile;
 import com.dreamstone.util.DystopiaLogger;
 
@@ -23,10 +25,10 @@ public class Grid {
 //		quad3.growQuadrant(new Chunk(-2, -2));
 //		quad4.growQuadrant(new Chunk(2, -2));
 		
-//		System.out.println(quad1);
-//		System.out.println(quad2);
-//		System.out.println(quad3);
-//		System.out.println(quad4);
+		System.out.println(quad1);
+		System.out.println(quad2);
+		System.out.println(quad3);
+		System.out.println(quad4);
 	}
 	
 	private void initializeMap() {
@@ -51,7 +53,6 @@ public class Grid {
 	}
 	
 	public Coordinate getCoordinate(int x, int y) {
-
 		int chunkX;
 		int chunkY;
 		
@@ -79,4 +80,77 @@ public class Grid {
 		DystopiaLogger.logSevere("THIS COORDINATE IS NOT IN THE GRID. RETURNING NULL.");
 		return null;
 	}
+	
+	/**
+	 * Takes in an x and y screen position and returns the coordinate at that spot.
+	 */
+	public Coordinate getCoordinateFromDisplay(int xCoord, int yCoord) {
+		
+//		int x1 = xCoord - Tile.getTileSize();
+//		int x2 = xCoord + Tile.getTileSize();
+//		int y1 = yCoord - Tile.getTileSize();
+//		int y2 = yCoord + Tile.getTileSize();
+		
+		ArrayList<ArrayList<Chunk>> chunks;
+		for (int i = 0; i < this.QUADRANTS.size(); i++) {
+			chunks = this.QUADRANTS.get(i).getChunks();
+			for (int y = 0; y < chunks.size(); y++) {
+				for (int x = 0; x < chunks.get(y).size(); x++) {
+					for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++) {
+						for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++) {
+							Coordinate c = chunks.get(y).get(x).getCoordinateFromIndex(xx, yy);
+							
+							if ((c.getXScreenPos() <= xCoord && xCoord < c.getXScreenPos() + Tile.getTileSize()) &&
+								(c.getYScreenPos() <= yCoord && yCoord < c.getYScreenPos() + Tile.getTileSize())) {
+								return c;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		DystopiaLogger.logSevere("GLITCHHH!");
+		return null;
+	}
+		
+	
+//	public Point getChunkFromCoordinate(int x, int y) {
+//		int chunkX;
+//		int chunkY;
+//		
+//		//QUADRANT 1
+//		//5, 5 ---> (0, 0)
+//		//5, 9 ---> (0, 1)
+//		
+//		//QUADRANT 2
+//		//-5, 5 ---> (-1, 1)
+//		//-5, 9 ---> (-1, 2)
+//		
+//		//QUADRANT 3
+//		//-5, -5 ---> (-1, -1)
+//		//-5, -9 ---> (-1, -2)
+//		
+//		//QUADRANT 4
+//		//5, -5 ---> (1, -1)
+//		//5, -9 ---> (1, -2)
+//		
+//		if (x >= 0 && y >= 0) {
+//			//QUADRANT 1
+//			return new Point(x / Chunk.CHUNK_SIZE, y / Chunk.CHUNK_SIZE);
+//		}
+//		else if (x < 0 && y >= 0) {
+//			//QUADRANT 2
+//		}
+//		else if (x < 0 && y < 0) {
+//			//QUADRANT 3
+//		}
+//		else if (x >= 0 && y < 0) {
+//			//QUADRANT 4
+//		}
+//		
+//		
+//		DystopiaLogger.logSevere("THIS COORDINATE IS NOT IN THE GRID. RETURNING NULL.");
+//		return null;
+//	}
 }

@@ -3,15 +3,19 @@ package com.dreamstone.file;
 import java.awt.image.BufferedImage;
 
 import com.dreamstone.core.Dystopia;
-import com.dreamstone.graphics.GraphicsOptions;
 import com.dreamstone.util.DystopiaLogger;
-import com.dreamstone.util.TransformImage;
 
 public class ResourceLoader {
-
+	
 	//Image Files
 	public static BufferedImage terrainSheet;
 	public static BufferedImage nullImage;
+	
+	//Player Files
+	public static BufferedImage playerIdle;
+	public static BufferedImage playerNorthAnimation;
+	public static BufferedImage playerSouthAnimation;
+	public static BufferedImage playerHorizontalAnimation;
 	
 	public static void loadAllResources() {
 		if (Dystopia.getGame() == null || !Dystopia.getGame().isRunning()) {
@@ -23,8 +27,24 @@ public class ResourceLoader {
 	}
 	
 	private static void loadImages() {
-		terrainSheet = TransformImage.scaleImage(FileSystem.loadImageFromJar(DirectoryMaster.tilesFolder, "terrain.png"), GraphicsOptions.getScale());
-		nullImage = TransformImage.scaleImage(FileSystem.loadImageFromJar(DirectoryMaster.tilesFolder, "null_image.png"), GraphicsOptions.getScale());
+		loadTileSheets();
+		loadIndependentTileImages();
+		loadPlayerImages();
+	}
+	
+	public static void loadTileSheets() {
+		terrainSheet = FileSystem.loadImageFromJar(DirectoryMaster.tilesFolder, "terrain.png");
+	}
+	
+	public static void loadIndependentTileImages() {
+		nullImage = FileSystem.loadImageFromJar(DirectoryMaster.tilesFolder, "null_image.png");
+	}
+	
+	public static void loadPlayerImages() {
+		playerIdle = FileSystem.loadImageFromJar(DirectoryMaster.playersFolder, "player_idle.png");
+		playerNorthAnimation = FileSystem.loadImageFromJar(DirectoryMaster.playersFolder, "player_walk_north.png");
+		playerSouthAnimation = FileSystem.loadImageFromJar(DirectoryMaster.playersFolder, "player_walk_south.png");
+		playerHorizontalAnimation = FileSystem.loadImageFromJar(DirectoryMaster.playersFolder, "player_walk_horizontal.png");
 	}
 	
 	public static BufferedImage getTileSheet(String tileSheetName) {

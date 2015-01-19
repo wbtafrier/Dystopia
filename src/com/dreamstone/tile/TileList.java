@@ -17,6 +17,14 @@ public class TileList {
 		tiles.add(normalDirtTile);
 	}
 		
+	public static Tile getTileFromString(String name) {
+		for (Tile t : tiles) {
+			if (t.getName().equalsIgnoreCase(name)) {
+				return t;
+			}
+		}
+		return nullTile;
+	}
 	
 //	public static final Tile dirt1 = new Tile("dirt", "terrain.png", 23);
 //	public static final Tile dirt2 = new Tile("dirt", "terrain.png", 26);
