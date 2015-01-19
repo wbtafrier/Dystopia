@@ -6,6 +6,7 @@ import com.dreamstone.file.FileSystem;
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.file.SaveManager;
 import com.dreamstone.graphics.GraphicsOptions;
+import com.dreamstone.input.KeyInputManager;
 import com.dreamstone.tile.TileList;
 import com.dreamstone.util.LaunchHandler;
 import com.dreamstone.world.Grid;
@@ -28,9 +29,9 @@ public class Start {
 				Dystopia.gameInstance = new Dystopia();
 				
 				initializeTilesAndItems();
-				setupDisplay();
 				prepareWorld();
-				
+				initializeListeners();
+				setupDisplay();
 				//Start the game loop!!!!
 				Dystopia.getGame().start();
 				SaveManager.saveWorld();
@@ -70,6 +71,10 @@ public class Start {
 		
 		//Creates a random map for debugging.
 		TempWorldGen.setTilesForTestWorld();
+	}
+	
+	private static void initializeListeners() {
+		Dystopia.keyListener = new KeyInputManager();
 	}
 	
 	private static void setupDisplay() {

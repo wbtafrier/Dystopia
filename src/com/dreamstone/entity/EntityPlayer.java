@@ -11,6 +11,11 @@ import com.dreamstone.world.Coordinate;
 public class EntityPlayer extends EntityMovable {
 	
 	private static Random rand = new Random();
+	private boolean isMovingNorth;
+	private boolean isMovingSouth;
+	private boolean isMovingEast;
+	private boolean isMovingWest;
+	
 	private Color hairColor;
 	private Color eyeColor;
 	private Color skinColor;
@@ -38,12 +43,61 @@ public class EntityPlayer extends EntityMovable {
 		
 		this.setWalkingBoundsXPos(xWalkingScreenPos);
 		this.setWalkingBoundsYPos(yWalkingScreenPos);
+		this.isMovingNorth = false;
+		this.isMovingSouth = false;
+		this.isMovingEast = false;
+		this.isMovingWest = false;
 		
-//		this.xMapLocation = 
-//		this.xMapLocation = 
 		this.hairColor = hairColor;
 		this.eyeColor = eyeColor;
-		this.skinColor = skinColor;		
+		this.skinColor = skinColor;
+	}
+	
+	public void setDirection(EnumDirection dir) {
+		switch(dir) {
+		case NORTH: this.setImage(this.imageStorage.getIdleImage(dir));
+		break;
+		case SOUTH: this.setImage(this.imageStorage.getIdleImage(dir));
+		break;
+		case EAST: this.setImage(this.imageStorage.getIdleImage(dir));
+		break;
+		case WEST: this.setImage(this.imageStorage.getIdleImage(dir));
+		break;
+		default:
+			break;
+		}
+	}
+	
+	public boolean isMovingNorth() {
+		return this.isMovingNorth;
+	}
+	
+	public void setMovingNorth(boolean b) {
+		this.isMovingNorth = b;
+	}
+	
+	public boolean isMovingSouth() {
+		return this.isMovingSouth;
+	}
+	
+	public void setMovingSouth(boolean b) {
+		this.isMovingSouth = b;
+	}
+	
+	public boolean isMovingEast() {
+		return this.isMovingEast;
+	}
+	
+	public void setMovingEast(boolean b) {
+		this.isMovingEast = b;
+	}
+	
+	public boolean isMovingWest() {
+		return this.isMovingWest;
+	}
+	
+	public void setMovingWest(boolean b) {
+		this.isMovingWest = b;
 	}
 	
 	public void setCurrentCoordinate(Coordinate c) {

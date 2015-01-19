@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
 import com.dreamstone.core.DisplayCarrier;
+import com.dreamstone.core.Dystopia;
 
 public final class DystopiaCanvas extends Canvas {
 
@@ -17,6 +18,7 @@ public final class DystopiaCanvas extends Canvas {
 	public DystopiaCanvas() {
 		Dimension defaultSize = new Dimension((int)(DisplayCarrier.getDisplaySize().getWidth() / 2), (int)(DisplayCarrier.getDisplaySize().getHeight() / 2));
 		this.setPreferredSize(defaultSize);
+		this.addKeyListener(Dystopia.keyListener);
 		Toolkit.getDefaultToolkit().setDynamicLayout(false);
 	}
 	

@@ -1,10 +1,13 @@
 package com.dreamstone.core;
 
+import com.dreamstone.input.KeyInputManager;
 import com.dreamstone.world.World;
 
 public class Dystopia implements Runnable {
 	
 	public World currentWorld;
+	public static KeyInputManager keyListener;
+	
 	static Dystopia gameInstance;
 	private int ticks;
 	private int frames;
@@ -85,6 +88,7 @@ public class Dystopia implements Runnable {
 			
 			//Updates frames independently from the game logic (ticks).
 			DisplayCarrier.getCanvas().render();
+			KeyInputManager.processInput();
 			frames++;
 			
 			//Controls the frames to update the same time as the game logic (ticks).
