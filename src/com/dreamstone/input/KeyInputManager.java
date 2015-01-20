@@ -3,36 +3,81 @@ package com.dreamstone.input;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import com.dreamstone.core.Dystopia;
 import com.dreamstone.entity.EntityPlayer;
-import com.dreamstone.tile.EnumDirection;
 
 public class KeyInputManager extends KeyAdapter implements KeyListener {
 	
 	public static EntityPlayer player = Dystopia.getGame().currentWorld.getPlayer();
+	
+	private final static ArrayList<Character> pressed = new ArrayList<Character>();
+	public static boolean isWalking;
 	public static boolean isNorth;
 	public static boolean isSouth;
 	public static boolean isEast;
 	public static boolean isWest;
+	private static boolean temp;
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
-		System.out.println(e.getKeyChar());
-		if (e.getKeyChar() == KeyOptions.getKeyNorth()[0] || e.getKeyChar() == KeyOptions.getKeyNorth()[1]) isNorth = true;
-		else if (e.getKeyChar() == KeyOptions.getKeySouth()[0] || e.getKeyChar() == KeyOptions.getKeySouth()[1]) isSouth = true;
-		else if (e.getKeyChar() == KeyOptions.getKeyEast()[0] || e.getKeyChar() == KeyOptions.getKeyEast()[1]) isEast = true;
-		else if (e.getKeyChar() == KeyOptions.getKeyWest()[0] || e.getKeyChar() == KeyOptions.getKeyWest()[1]) isWest = true;
+		for (int i = 0; i < pressed.size(); i++) {
+			if (e.getKeyChar() == pressed.get(i)) {
+				temp = true;
+				break;
+			}
+		}
+		if (!temp) {
+			pressed.add(e.getKeyChar());
+		}
+		temp = false;
+		
+		if (e.getKeyChar() == KeyOptions.getKeyNorth()[0] || e.getKeyChar() == KeyOptions.getKeyNorth()[1]) {
+			isNorth = true;
+		}
+		else if (e.getKeyChar() == KeyOptions.getKeySouth()[0] || e.getKeyChar() == KeyOptions.getKeySouth()[1]) {
+			isSouth = true;
+		}
+		else if (e.getKeyChar() == KeyOptions.getKeyEast()[0] || e.getKeyChar() == KeyOptions.getKeyEast()[1]) {
+			isEast = true;
+		}
+		else if (e.getKeyChar() == KeyOptions.getKeyWest()[0] || e.getKeyChar() == KeyOptions.getKeyWest()[1]) {
+			isWest = true;
+		}
+		
+		if (isNorth || isSouth || isEast || isWest) {
+			isWalking = true;
+		}
 	}
 
 //	@Override public void keyPressed(KeyEvent e) {}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyChar() == KeyOptions.getKeyNorth()[0] || e.getKeyChar() == KeyOptions.getKeyNorth()[1]) isNorth = false;
-		else if (e.getKeyChar() == KeyOptions.getKeySouth()[0] || e.getKeyChar() == KeyOptions.getKeySouth()[1]) isSouth = false;
-		else if (e.getKeyChar() == KeyOptions.getKeyEast()[0] || e.getKeyChar() == KeyOptions.getKeyEast()[1]) isEast = false;
-		else if (e.getKeyChar() == KeyOptions.getKeyWest()[0] || e.getKeyChar() == KeyOptions.getKeyWest()[1]) isWest = false;
+		for (int i = 0; i < pressed.size(); i++) {
+			if (e.getKeyChar() == pressed.get(i)) {
+				pressed.remove(i);
+				break;
+			}
+		}
+		
+		if (e.getKeyChar() == KeyOptions.getKeyNorth()[0] || e.getKeyChar() == KeyOptions.getKeyNorth()[1]) {
+			isNorth = false;
+		}
+		else if (e.getKeyChar() == KeyOptions.getKeySouth()[0] || e.getKeyChar() == KeyOptions.getKeySouth()[1]) {
+			isSouth = false;
+		}
+		else if (e.getKeyChar() == KeyOptions.getKeyEast()[0] || e.getKeyChar() == KeyOptions.getKeyEast()[1]) {
+			isEast = false;
+		}
+		else if (e.getKeyChar() == KeyOptions.getKeyWest()[0] || e.getKeyChar() == KeyOptions.getKeyWest()[1]) {
+			isWest = false;
+		}
+		
+		if (!isNorth && !isSouth && !isEast && !isWest) {
+			isWalking = false;
+		}
 	}
 	
 	public static void processInput() {
@@ -40,32 +85,53 @@ public class KeyInputManager extends KeyAdapter implements KeyListener {
 	}
 	
 	private static void processPlayerMovement() {
-		if (isNorth != player.isMovingNorth()) {
-			player.setMovingNorth(isNorth);
-			
-			if (player.isMovingNorth())
-				player.setDirection(EnumDirection.NORTH);
+		Character temp = KeyOptions.getKeySouth()[0];
+		
+		if (isWalking) player.setWalking(true);
+		else player.setWalking(false);
+		
+		System.out.println("Pressed Array: " + pressed);
+		
+		if (pressed.size() > 1) {
+            temp = (Character) pressed.get(pressed.size() - 1);
+            System.out.println("Temp: " + temp);
+        }
+		else if (pressed.size() == 1){
+			temp = (Character) pressed.get(0);
+			System.out.println("Temp: " + temp);
 		}
 		
-		if (isSouth != player.isMovingSouth()) {
-			player.setMovingSouth(isSouth);
-			
-			if (player.isMovingSouth())
-				player.setDirection(EnumDirection.SOUTH);
+		if (temp == KeyOptions.getKeyNorth()[0] || temp == KeyOptions.getKeyNorth()[1]) {
+			checkNorth();
 		}
-		
-		if (isEast != player.isMovingEast()) {
-			player.setMovingEast(isEast);
-			
-			if (player.isMovingEast())
-				player.setDirection(EnumDirection.EAST);
+		else if (temp == KeyOptions.getKeySouth()[0] || temp == KeyOptions.getKeySouth()[1]) {
+			checkSouth();
 		}
-		
-		if (isWest != player.isMovingWest()) {
-			player.setMovingWest(isWest);
-			
-			if (player.isMovingWest())
-				player.setDirection(EnumDirection.WEST);
+		else if (temp == KeyOptions.getKeyEast()[0] || temp == KeyOptions.getKeyEast()[1]) {
+			checkEast();
 		}
+		else {
+			checkWest();
+		}
+	}
+	
+	private static void checkNorth() {
+		if (isNorth) player.setNorth(true);
+		else player.setNorth(false);
+	}
+	
+	private static void checkSouth() {
+		if (isSouth) player.setSouth(true);
+		else player.setSouth(false);
+	}
+	
+	private static void checkEast() {
+		if (isEast) player.setEast(true);
+		else player.setEast(false);
+	}
+	
+	private static void checkWest() {
+		if (isWest) player.setWest(true);
+		else player.setWest(false);
 	}
 }

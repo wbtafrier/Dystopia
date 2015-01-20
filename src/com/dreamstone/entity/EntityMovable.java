@@ -2,12 +2,11 @@ package com.dreamstone.entity;
 
 import java.awt.image.BufferedImage;
 
-import com.dreamstone.file.EntityImage;
 
 public abstract class EntityMovable extends Entity {
 
-	private float speed;
-	private boolean isMoving;
+	protected float speed;
+	protected boolean isMoving;
 	
 	/**
 	 * The consructor for the EntityMovale class.
@@ -15,8 +14,8 @@ public abstract class EntityMovable extends Entity {
 	 * @param health : The health of the entity.
 	 * @param img : The image for the entity.
 	 */
-	EntityMovable(String name, EntityImage images, BufferedImage img, int health) {
-		super(name, images, img, health);
+	EntityMovable(String name, int health) {
+		super(name, health);
 		this.speed = 0;
 	}
 	

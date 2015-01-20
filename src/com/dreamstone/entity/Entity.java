@@ -2,22 +2,14 @@ package com.dreamstone.entity;
 
 import java.awt.image.BufferedImage;
 
-import com.dreamstone.file.EntityImage;
-import com.dreamstone.tile.EnumDirection;
-
 /**
  * The superclass for all entities.
  */
 public abstract class Entity {
 	
 	protected String entityName;
-	protected EntityImage imageStorage;
 	protected BufferedImage currentImage;
 	protected int health;
-	
-	Entity(String name, EntityImage images, int health) {
-		this(name, images, images.getIdleImage(EnumDirection.SOUTH), health);
-	}
 	
 	/**
 	 * The main constructor for all entities.
@@ -25,10 +17,8 @@ public abstract class Entity {
 	 * @param health : The amount of health the entity has.
 	 * @param defaultImage : The BufferedImage for the entity.
 	 */
-	Entity(String name, EntityImage images, BufferedImage defaultImage, int health) {
+	Entity(String name, int health) {
 		this.entityName = name;
-		this.imageStorage = images;
-		this.currentImage = defaultImage;
 		this.health = health;
 	}
 	
@@ -85,9 +75,5 @@ public abstract class Entity {
 	 */
 	public String toString() {
 		return this.entityName;
-	}
-
-	public EntityImage getImageStorage() {
-		return this.imageStorage;
 	}
 }

@@ -1,103 +1,140 @@
 package com.dreamstone.entity;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.util.Random;
-
-import com.dreamstone.file.EntityImage;
+import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.tile.EnumDirection;
 import com.dreamstone.world.Coordinate;
 
-public class EntityPlayer extends EntityMovable {
+public final class EntityPlayer extends EntityMovable {
 	
-	private static Random rand = new Random();
-	private boolean isMovingNorth;
-	private boolean isMovingSouth;
-	private boolean isMovingEast;
-	private boolean isMovingWest;
+	private EntityImageStorage imageStorage = new EntityImageStorage(
+		ResourceLoader.playerIdle, 
+		ResourceLoader.playerNorthAnimation, 
+		ResourceLoader.playerSouthAnimation, 
+		ResourceLoader.playerEastAnimation,
+		ResourceLoader.playerWestAnimation
+	);
 	
-	private Color hairColor;
-	private Color eyeColor;
-	private Color skinColor;
+	private boolean isWalking;
+	private boolean isNorth;
+	private boolean isSouth;
+	private boolean isEast;
+	private boolean isWest;
 	
 	private int xWalkingBoundsLocation;
 	private int yWalkingBoundsLocation;
 	
 	private Coordinate currentCoordinate;
+	private EnumDirection playerDirection;
+	private EntityCharacteristics playerOptions;
 	
-	public EntityPlayer(String name, EntityImage images) {
-		this(name, images, images.getIdleImage(EnumDirection.SOUTH));
+	public EntityPlayer(String name) {
+		this(name, 0, 0);
 	}
 	
-	public EntityPlayer(String name, EntityImage images, BufferedImage defaultImage) {
-		this(name, images, defaultImage, 0, 0);
+	public EntityPlayer(String name, int xWalkingScreenPos, int yWalkingScreenPos) {
+		this(name, xWalkingScreenPos, yWalkingScreenPos, 100);
 	}
 	
-	public EntityPlayer(String name, EntityImage images, BufferedImage defaultImage, int xWalkingScreenPos, int yWalkingScreenPos) {
-		this(name, images, defaultImage, xWalkingScreenPos, yWalkingScreenPos, 100, new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)), 
-		new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)), new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
+	public EntityPlayer(String name, int xWalkingScreenPos, int yWalkingScreenPos, int health) {
+		this(name, xWalkingScreenPos, yWalkingScreenPos, 100, new EntityCharacteristics());
 	}
 	
-	public EntityPlayer(String name, EntityImage images, BufferedImage defaultImage, int xWalkingScreenPos, int yWalkingScreenPos, int health, Color hairColor, Color eyeColor, Color skinColor) {
-		super(name, images, defaultImage, health);
+	public EntityPlayer(String name, int xWalkingScreenPos, int yWalkingScreenPos, int health, EntityCharacteristics playerType) {
+		super(name, health);
+		this.initializeWalking();
+		this.setDirection(EnumDirection.SOUTH);
 		
 		this.setWalkingBoundsXPos(xWalkingScreenPos);
 		this.setWalkingBoundsYPos(yWalkingScreenPos);
-		this.isMovingNorth = false;
-		this.isMovingSouth = false;
-		this.isMovingEast = false;
-		this.isMovingWest = false;
-		
-		this.hairColor = hairColor;
-		this.eyeColor = eyeColor;
-		this.skinColor = skinColor;
+		this.playerOptions = playerType;
+//		this.imageStorage.updateImages(this.playerOptions);
 	}
 	
 	public void setDirection(EnumDirection dir) {
-		switch(dir) {
-		case NORTH: this.setImage(this.imageStorage.getIdleImage(dir));
-		break;
-		case SOUTH: this.setImage(this.imageStorage.getIdleImage(dir));
-		break;
-		case EAST: this.setImage(this.imageStorage.getIdleImage(dir));
-		break;
-		case WEST: this.setImage(this.imageStorage.getIdleImage(dir));
-		break;
-		default:
-			break;
+		this.playerDirection = dir;
+		this.updatePlayerImage();
+	}
+	
+	public void updatePlayerImage() {
+		if (!this.isWalking) {
+			this.setIdleImage();
+		}
+		else if (this.isWalking) {
+			switch(this.playerDirection) {
+			case NORTH: this.currentImage = this.imageStorage.getNorthAnimationStrip()[0];
+				break;
+			case SOUTH: this.currentImage = this.imageStorage.getSouthAnimationStrip()[0];
+				break;
+			case EAST: this.currentImage = this.imageStorage.getEastAnimationStrip()[0];
+				break;
+			case WEST: this.currentImage = this.imageStorage.getWestAnimationStrip()[0];
+				break;
+			default:
+				this.setIdleImage();
+			}
 		}
 	}
 	
-	public boolean isMovingNorth() {
-		return this.isMovingNorth;
+	private void setIdleImage() {
+		this.currentImage = this.imageStorage.getIdleImage(this.playerDirection);
 	}
 	
-	public void setMovingNorth(boolean b) {
-		this.isMovingNorth = b;
+	private void initializeWalking() {
+		this.playerDirection = EnumDirection.SOUTH;
+		this.speed = 0;
+		this.isNorth = false;
+		this.isSouth = true;
+		this.isEast = false;
+		this.isWest = false;
 	}
 	
-	public boolean isMovingSouth() {
-		return this.isMovingSouth;
+	public boolean isWalking() {
+		return this.isWalking;
 	}
 	
-	public void setMovingSouth(boolean b) {
-		this.isMovingSouth = b;
+	public void setWalking(boolean b) {
+		this.isWalking = b;
+		this.updatePlayerImage();
 	}
 	
-	public boolean isMovingEast() {
-		return this.isMovingEast;
+	public boolean isNorth() {
+		return this.isNorth;
 	}
 	
-	public void setMovingEast(boolean b) {
-		this.isMovingEast = b;
+	public void setNorth(boolean b) {
+		this.isNorth = b;
+		if (this.isNorth)
+			this.setDirection(EnumDirection.NORTH);
 	}
 	
-	public boolean isMovingWest() {
-		return this.isMovingWest;
+	public boolean isSouth() {
+		return this.isSouth;
 	}
 	
-	public void setMovingWest(boolean b) {
-		this.isMovingWest = b;
+	public void setSouth(boolean b) {
+		this.isSouth = b;
+		if(this.isSouth)
+			this.setDirection(EnumDirection.SOUTH);
+	}
+	
+	public boolean isEast() {
+		return this.isEast;
+	}
+	
+	public void setEast(boolean b) {
+		this.isEast = b;
+		if (this.isEast)
+			this.setDirection(EnumDirection.EAST);
+	}
+	
+	public boolean isWest() {
+		return this.isWest;
+	}
+	
+	public void setWest(boolean b) {
+		this.isWest = b;
+		if (this.isWest)
+			this.setDirection(EnumDirection.WEST);
 	}
 	
 	public void setCurrentCoordinate(Coordinate c) {
@@ -125,46 +162,22 @@ public class EntityPlayer extends EntityMovable {
 	}
 	
 	public void setWalkingBoundsXPos(int x) {
-		this.xWalkingBoundsLocation = x - this.getImage().getWidth() / 2;
+		this.xWalkingBoundsLocation = x - this.currentImage.getWidth() / 2;
 	}
 	
 	public void setWalkingBoundsYPos(int y) {
 		this.yWalkingBoundsLocation = y - this.currentImage.getHeight();
 	}
- 	
-	public Color getHairColor() {
-		return this.hairColor;
-	}
-	
-	public Color getEyeColor() {
-		return this.eyeColor;
+
+	public EntityCharacteristics getPlayerOptions() {
+		return this.playerOptions;
 	}
 
-	public Color getSkinColor() {
-		return this.skinColor;
+	public void setPlayerOptions(EntityCharacteristics playerType) {
+		this.playerOptions = playerType;
 	}
 	
-	public void setHairColor(Color c) {
-		this.hairColor = c;
-	}
-	
-	public void setHairColor(int r, int g, int b) {
-		this.hairColor = new Color(r, g, b);
-	}
-	
-	public void setEyeColor(Color c) {
-		this.eyeColor = c;
-	}
-	
-	public void setEyeColor(int r, int g, int b) {
-		this.eyeColor = new Color(r, g, b);
-	}
-	
-	public void setSkinColor(Color c) {
-		this.skinColor = c;
-	}
-	
-	public void setSkinColor(int r, int g, int b) {
-		this.skinColor = new Color(r, g, b);
+	public EntityImageStorage getImageStorage() {
+		return this.imageStorage;
 	}
 }

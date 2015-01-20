@@ -20,6 +20,10 @@ public class GraphicsOptions {
 		ResourceLoader.terrainSheet = TransformImage.scaleImage(ResourceLoader.terrainSheet, scale);
 		ResourceLoader.nullImage = TransformImage.scaleImage(ResourceLoader.nullImage, scale);
 		ResourceLoader.playerIdle = TransformImage.scaleImage(ResourceLoader.playerIdle, scale);
+		ResourceLoader.playerNorthAnimation = TransformImage.scaleImage(ResourceLoader.playerNorthAnimation, scale);
+		ResourceLoader.playerSouthAnimation = TransformImage.scaleImage(ResourceLoader.playerSouthAnimation, scale);
+		ResourceLoader.playerEastAnimation = TransformImage.scaleImage(ResourceLoader.playerEastAnimation, scale);
+		ResourceLoader.playerWestAnimation = TransformImage.scaleImage(ResourceLoader.playerWestAnimation, scale);
 	}
 	
 	public static float getScale() {

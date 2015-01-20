@@ -55,9 +55,9 @@ public class SaveManager {
 		File playerFile = FileSystem.makeFile(worldFolder, player.getName() + ".txt");
 		StringBuilder playerText = new StringBuilder();
 		playerText.append("Player Health:" + FileSystem.TAB + "[" + player.getHealth() + "]" + FileSystem.LINE_BREAK);
-		playerText.append("Hair Color:" + FileSystem.TAB + "[" + player.getHairColor().getRed() + "," + player.getHairColor().getGreen() + "," + player.getHairColor().getBlue() + "]" + FileSystem.LINE_BREAK);
-		playerText.append("Eye Color:" + FileSystem.TAB + "[" + player.getEyeColor().getRed() + "," + player.getEyeColor().getGreen() + "," + player.getEyeColor().getBlue() + "]" + FileSystem.LINE_BREAK);
-		playerText.append("Skin Color:" + FileSystem.TAB + "[" + player.getSkinColor().getRed() + "," + player.getSkinColor().getGreen() + "," + player.getSkinColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("Hair Color:" + FileSystem.TAB + "[" + player.getPlayerOptions().getHairColor().getRed() + "," + player.getPlayerOptions().getHairColor().getGreen() + "," + player.getPlayerOptions().getHairColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("Eye Color:" + FileSystem.TAB + "[" + player.getPlayerOptions().getEyeColor().getRed() + "," + player.getPlayerOptions().getEyeColor().getGreen() + "," + player.getPlayerOptions().getEyeColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("Skin Color:" + FileSystem.TAB + "[" + player.getPlayerOptions().getSkinColor().getRed() + "," + player.getPlayerOptions().getSkinColor().getGreen() + "," + player.getPlayerOptions().getSkinColor().getBlue() + "]" + FileSystem.LINE_BREAK);
 		
 		try {
 			FileSystem.writeTextFile(playerFile, playerText);

@@ -1,24 +1,29 @@
-package com.dreamstone.file;
+package com.dreamstone.entity;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import com.dreamstone.tile.EnumDirection;
 import com.dreamstone.util.TransformImage;
 
-public class EntityImage {
+public class EntityImageStorage {
 	
-	private BufferedImage idleStrip;
-	private BufferedImage northAnimationStrip;
-	private BufferedImage southAnimationStrip;
-	private BufferedImage eastAnimationStrip;
-	private BufferedImage westAnimationStrip;
+	private ArrayList<BufferedImage> images;
+	private final BufferedImage idleStrip;
+	private final BufferedImage northAnimationStrip;
+	private final BufferedImage southAnimationStrip;
+	private final BufferedImage eastAnimationStrip;
+	private final BufferedImage westAnimationStrip;
+	public int animationIterator;
 	
-	public EntityImage(BufferedImage idleStrip, BufferedImage northStrip, BufferedImage southStrip, BufferedImage walkingHorizontalStrip) {
+	public EntityImageStorage(BufferedImage idleStrip, BufferedImage northStrip, BufferedImage southStrip, BufferedImage eastStrip, BufferedImage westStrip) {
 		this.idleStrip = idleStrip;
 		this.northAnimationStrip = northStrip;
 		this.southAnimationStrip = southStrip;
-		this.eastAnimationStrip = walkingHorizontalStrip;
-		this.westAnimationStrip = TransformImage.flipHorizontally(walkingHorizontalStrip);
+		this.eastAnimationStrip = eastStrip;
+		this.westAnimationStrip = westStrip;
+		this.initiaizeImageList(this.idleStrip, this.northAnimationStrip, this.southAnimationStrip, this.eastAnimationStrip, this.westAnimationStrip);
+		animationIterator = 0;
 	}
 
 	public BufferedImage getIdleImage(EnumDirection dir) {
@@ -85,11 +90,42 @@ public class EntityImage {
 		return TransformImage.splitAnimation(southAnimationStrip, 4);
 	}
 	
-	public BufferedImage[] getEasthAnimationStrip() {
+	public BufferedImage[] getEastAnimationStrip() {
 		return TransformImage.splitAnimation(eastAnimationStrip, 8);
 	}
 	
 	public BufferedImage[] getWestAnimationStrip() {
 		return TransformImage.splitAnimation(westAnimationStrip, 8);
+	}
+	
+	
+	//THIS IS FOR UPDATING COLOR
+//	public void updateImages(EntityCharacteristics characteristics) {
+//		
+//		int[] imagePixels;
+//		int width;
+//		int height;
+//		
+//		for (BufferedImage bi : images) {
+//			imagePixels = ((DataBufferInt)bi.getRaster().getDataBuffer()).getData();
+//			width = bi.getWidth();
+//			height = bi.getHeight();
+//			
+//			for (int y = 0; y < height; y++) {
+//				for (int x = 0; x < width; x++) {
+//					
+//					
+//					
+//				}
+//			}
+//		}
+//	}
+	
+	private ArrayList<BufferedImage> initiaizeImageList(BufferedImage... imageList) {
+		images = new ArrayList<>();
+		for (int i = 0; i < imageList.length; i++) {
+			images.add(imageList[i]);
+		}
+		return images;
 	}
 }

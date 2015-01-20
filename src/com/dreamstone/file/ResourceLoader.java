@@ -15,7 +15,8 @@ public class ResourceLoader {
 	public static BufferedImage playerIdle;
 	public static BufferedImage playerNorthAnimation;
 	public static BufferedImage playerSouthAnimation;
-	public static BufferedImage playerHorizontalAnimation;
+	public static BufferedImage playerEastAnimation;
+	public static BufferedImage playerWestAnimation;
 	
 	public static void loadAllResources() {
 		if (Dystopia.getGame() == null || !Dystopia.getGame().isRunning()) {
@@ -44,7 +45,8 @@ public class ResourceLoader {
 		playerIdle = FileSystem.loadImageFromJar(DirectoryMaster.playersFolder, "player_idle.png");
 		playerNorthAnimation = FileSystem.loadImageFromJar(DirectoryMaster.playersFolder, "player_walk_north.png");
 		playerSouthAnimation = FileSystem.loadImageFromJar(DirectoryMaster.playersFolder, "player_walk_south.png");
-		playerHorizontalAnimation = FileSystem.loadImageFromJar(DirectoryMaster.playersFolder, "player_walk_horizontal.png");
+		playerEastAnimation = FileSystem.loadImageFromJar(DirectoryMaster.playersFolder, "player_walk_east.png");
+		playerWestAnimation = FileSystem.loadImageFromJar(DirectoryMaster.playersFolder, "player_walk_west.png");
 	}
 	
 	public static BufferedImage getTileSheet(String tileSheetName) {
