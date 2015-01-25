@@ -14,6 +14,9 @@ public class Grid {
 	private Quadrant quad3;
 	private Quadrant quad4;
 	
+	/**
+	 * Creates a new Grid by initializing the map and printing the initialized coordinates.
+	 */
 	public Grid() {
 		
 		QUADRANTS = new ArrayList<>();
@@ -30,6 +33,9 @@ public class Grid {
 		System.out.println(quad4);
 	}
 	
+	/**
+	 * Initializes the map by adding the first four Chunks to each Quadrant, and adding the quadrants to the grid.
+	 */
 	private void initializeMap() {
 		
 		QUADRANTS.add(new Quadrant(new Chunk(0, 0)));
@@ -43,14 +49,32 @@ public class Grid {
 		quad4 = QUADRANTS.get(3);
 	}
 	
+	/**
+	 * Modifies the Tile of a specific coordinate.
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
+	 * @param t The Tile.
+	 */
 	public void setTile(int x, int y, Tile t) {
 		this.getCoordinate(x, y).setTileType(t);
 	}
 	
+	/**
+	 * Gets a Tile from a specific coordinate.
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
+	 * @return The Tile at this coordinate.
+	 */
 	public Tile getTileFromCoordinate(int x, int y) {
 		return this.getCoordinate(x, y).getTile();
 	}
 	
+	/**
+	 * Gets a Coordinate object based on an x and y location.
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
+	 * @return The correct Coordinate object.
+	 */
 	public Coordinate getCoordinate(int x, int y) {
 		int chunkX;
 		int chunkY;
@@ -114,6 +138,9 @@ public class Grid {
 	}
 		
 	
+	/**
+	 * Determines what Chunk a coordinate point is in and returns it as a Point object.
+	 */
 	public static Point getChunkFromCoordinate(int x, int y) {
 		int chunkX = 0;
 		int chunkY = 0;

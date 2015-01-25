@@ -2,8 +2,8 @@ package com.dreamstone.core;
 
 import java.awt.EventQueue;
 
+import com.dreamstone.entity.EntityPlayer;
 import com.dreamstone.file.FileSystem;
-import com.dreamstone.file.LoadManager;
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.file.SaveManager;
 import com.dreamstone.graphics.GraphicsOptions;
@@ -68,14 +68,16 @@ public class Start {
 		//Initialize the grid, quadrants, chunks, and coordinates of the starting world. 
 //		Dystopia.getGame().grid = new Grid();
 		
-		Dystopia.getGame().currentWorld = new World("tickle_shit", new Grid());
+		World world = new World("tickle_shit", new Grid());
+		world.setPlayer(new EntityPlayer("Andy608"));
+		Dystopia.getGame().setCurrentWorld(world);
 		
 		//Creates a random map for debugging.
 		TempWorldGen.setTilesForTestWorld();
 	}
 	
 	private static void initializeListeners() {
-		Dystopia.keyListener = new KeyInputManager();
+		Dystopia.getGame().keyListener = new KeyInputManager();
 	}
 	
 	private static void setupDisplay() {

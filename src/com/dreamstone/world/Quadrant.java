@@ -9,6 +9,9 @@ public class Quadrant {
 	private ArrayList<ArrayList<Chunk>> quadrant;
 	private final int QUADRANT_NUMBER;
 
+	/**
+	 * Initializes this Quadrant with a starting Chunk and determines what Quadrant this is based on the Chunk's starting Coordinate values.
+	 */
 	public Quadrant(Chunk startChunk) {
 		quadrant = new ArrayList<>();
 		if (startChunk.getCoordinateFromIndex(0, 0).xCoordinate >= 0 && startChunk.getCoordinateFromIndex(0, 0).yCoordinate >= 0) {
@@ -31,6 +34,11 @@ public class Quadrant {
 		growQuadrant(startChunk);
 	}
 
+	/**
+	 * Add a Chunk to this Quadrant, and add any other necessary Chunks (with null Tiles in each additional Chunk).
+	 * This does NOT replace an already existing Chunk!
+	 * @param chunk The chunk to add to this Quadrant.
+	 */
 	public void growQuadrant(Chunk chunk) {
 		
 		if (!(isChunkLegal(chunk))) {
@@ -47,6 +55,29 @@ public class Quadrant {
 		}
 	}
 	
+	public void replaceChunk(Chunk chunk) {
+		if (!isChunkLegal(chunk)) {
+			DystopiaLogger.logWarning("CHUNK WITH STARTING COORDS (" + chunk.getStartingCoord().xCoordinate + ", "
+					+ chunk.getStartingCoord().yCoordinate + ") IS NOT LEGAL AND 	CANNOT BE REPLACED IN QUADRANT " + getQuadrant() + "!");
+			return;
+		}
+		if (!isChunkCreated(chunk)) {
+			this.growQuadrant(chunk);
+		}
+		else {
+			for (int y = 0; y < this.quadrant.size(); y++) {
+				ArrayList<Chunk> col = this.quadrant.get(y);
+				for (int x = 0; x < col.size(); x++) {
+					Chunk currentChunk = col.get(x);
+					if (currentChunk.getStartingCoord().xCoordinate == chunk.getStartingCoord().xCoordinate &&
+							currentChunk.getStartingCoord().yCoordinate == chunk.getStartingCoord().yCoordinate) {
+						col.set(x, chunk);
+					}
+				}
+			}
+		}
+	}
+	
 	private boolean isChunkCreated(Chunk c) {
 
 		//Gets the first coordinate point in the chunk.
@@ -58,17 +89,6 @@ public class Quadrant {
 				Coordinate check = quadrant.get(y).get(x).getCoords()[0][0];
 				
 				if (coords.equals(check)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	private boolean isChunkNull(Chunk c) {
-		for (Coordinate[] coordCol : c.getCoords()) {
-			for (Coordinate coord : coordCol) {
-				if (coord == null || coord.getTile() == null) {
 					return true;
 				}
 			}

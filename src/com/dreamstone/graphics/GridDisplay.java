@@ -22,7 +22,7 @@ import com.dreamstone.world.Quadrant;
 public class GridDisplay {
 
 	static void drawGrid(Graphics2D display) {
-		Grid grid = Dystopia.getGame().currentWorld.getGrid();
+		Grid grid = Dystopia.getGame().getCurrentWorld().getGrid();
 		ArrayList<Quadrant> quads = grid.QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 		BufferedImage tileImg;
@@ -53,20 +53,20 @@ public class GridDisplay {
 							tileImg = c.getImage();
 							
 							if (i == 0) {
-								c.setXScreenPosition(xCenter + (c.xCoordinate * Tile.getTileSize()) + Dystopia.getGame().currentWorld.getXOffset());
-								c.setYScreenPosition(yCenter - ((c.yCoordinate + 1) * Tile.getTileSize()) + Dystopia.getGame().currentWorld.getYOffset());
+								c.setXScreenPosition(xCenter + (c.xCoordinate * Tile.getTileSize()) + Dystopia.getGame().getCurrentWorld().getXOffset());
+								c.setYScreenPosition(yCenter - ((c.yCoordinate + 1) * Tile.getTileSize()) + Dystopia.getGame().getCurrentWorld().getYOffset());
 							}
 							else if (i == 1) {
-								c.setXScreenPosition(xCenter - (Math.abs(c.xCoordinate) * Tile.getTileSize()) + Dystopia.getGame().currentWorld.getXOffset());
-								c.setYScreenPosition(yCenter - ((c.yCoordinate + 1) * Tile.getTileSize()) + Dystopia.getGame().currentWorld.getYOffset());
+								c.setXScreenPosition(xCenter - (Math.abs(c.xCoordinate) * Tile.getTileSize()) + Dystopia.getGame().getCurrentWorld().getXOffset());
+								c.setYScreenPosition(yCenter - ((c.yCoordinate + 1) * Tile.getTileSize()) + Dystopia.getGame().getCurrentWorld().getYOffset());
 							}
 							else if (i == 2) {
-								c.setXScreenPosition(xCenter - (Math.abs(c.xCoordinate) * Tile.getTileSize()) + Dystopia.getGame().currentWorld.getXOffset());
-								c.setYScreenPosition(yCenter + (Math.abs(c.yCoordinate + 1) * Tile.getTileSize()) + Dystopia.getGame().currentWorld.getYOffset());
+								c.setXScreenPosition(xCenter - (Math.abs(c.xCoordinate) * Tile.getTileSize()) + Dystopia.getGame().getCurrentWorld().getXOffset());
+								c.setYScreenPosition(yCenter + (Math.abs(c.yCoordinate + 1) * Tile.getTileSize()) + Dystopia.getGame().getCurrentWorld().getYOffset());
 							}
 							else if (i == 3) {
-								c.setXScreenPosition(xCenter + (c.xCoordinate * Tile.getTileSize()) + Dystopia.getGame().currentWorld.getXOffset());
-								c.setYScreenPosition(yCenter + (Math.abs(c.yCoordinate + 1) * Tile.getTileSize()) + Dystopia.getGame().currentWorld.getYOffset());
+								c.setXScreenPosition(xCenter + (c.xCoordinate * Tile.getTileSize()) + Dystopia.getGame().getCurrentWorld().getXOffset());
+								c.setYScreenPosition(yCenter + (Math.abs(c.yCoordinate + 1) * Tile.getTileSize()) + Dystopia.getGame().getCurrentWorld().getYOffset());
 							}
 							
 							display.drawImage(tileImg, c.getXScreenPos(), c.getYScreenPos(), null);

@@ -15,10 +15,23 @@ import com.dreamstone.world.World;
 public class LoadManager {
 	
 	private static final int COORDINATE_ARGUMENTS = 6;
+	private static File worldFolder;
+	private static World loadedWorld;
 	
+	/**
+	 * Creates a new World object that loads all of the properties of the specified World file.
+	 * @param worldName The name of the World to load. MUST exist!
+	 * @return A World object containing all of the properties of the data belonging to the specified World name.
+	 */
 	public static World loadWorld(String worldName) {
 		
-		File worldFolder = FileSystem.makeFolder(DirectoryMaster.worldsFolder, worldName);
+		worldFolder = FileSystem.makeFolder(DirectoryMaster.worldsFolder, worldName);
+		loadedWorld = new World(worldName, loadGrid());
+		
+		return null;
+	}
+
+	private static Grid loadGrid() {
 		File mapFolder = FileSystem.makeFolder(worldFolder, "map");
 		File[] mapFiles = mapFolder.listFiles();
 		
@@ -28,10 +41,10 @@ public class LoadManager {
 		int tempStart, xCoord, yCoord, xDisplay, yDisplay, tileImageIndex, chunkX = 0, chunkY = 0;
 		Tile tile;
 		Coordinate coord;
-		World loadedWorld = new World(worldName, new Grid());
-		Grid loadedGrid = loadedWorld.getGrid();
+		Grid loadedGrid = new Grid();
 		Chunk currentChunk = null;
 		
+		//Load the quadrant files first.
 		for (int quadFiles = 0; quadFiles < mapFiles.length; quadFiles++) {
 			try {
 				worldText = FileSystem.readTextFile(mapFiles[quadFiles]);
@@ -67,7 +80,7 @@ public class LoadManager {
 							else if (currentChunk.getCoordinateFromIndex(Chunk.CHUNK_SIZE - 1, Chunk.CHUNK_SIZE - 1).xCoordinate == coord.xCoordinate &&
 									currentChunk.getCoordinateFromIndex(Chunk.CHUNK_SIZE - 1, Chunk.CHUNK_SIZE - 1).yCoordinate == coord.yCoordinate) {
 								currentChunk.getCoords()[coord.yCoordinate][coord.xCoordinate] = coord;
-								loadedGrid.QUADRANTS.get(currentChunk.getQuadrantNumber() - 1).growQuadrant(currentChunk);
+								loadedGrid.QUADRANTS.get(currentChunk.getQuadrantNumber() - 1).replaceChunk(currentChunk);
 								currentChunk = null;
 							}
 							else {
@@ -76,13 +89,18 @@ public class LoadManager {
 						}
 					}
 				}
-			} catch (IOException e) {
-				DystopiaLogger.logSevere("Could not load World file. It may be corrupt.");
-				e.printStackTrace();
+			} catch (IOException ioe) {
+				DystopiaLogger.logSevere("Could not load World file. Does the World exist in save data? Is it corrupt?");
+				ioe.printStackTrace();
+			} catch (NumberFormatException nfe) {
+				DystopiaLogger.logSevere("World file is incorrectly formatted! Has the file been tampered with?");
+				nfe.printStackTrace();
 			}
 		}
-		//TODO: Remove temporary fix
-		return null;
+		return loadedGrid;
 	}
-
+	
+//	private static EntityPlayer loadPlayer() {
+//		
+//	}
 }

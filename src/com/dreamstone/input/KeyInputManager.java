@@ -10,7 +10,7 @@ import com.dreamstone.entity.EntityPlayer;
 
 public class KeyInputManager extends KeyAdapter implements KeyListener {
 	
-	public static EntityPlayer player = Dystopia.getGame().currentWorld.getPlayer();
+	public static EntityPlayer player = Dystopia.getGame().getCurrentWorld().getPlayer();
 	
 	private final static ArrayList<Character> pressed = new ArrayList<Character>();
 	public static boolean isWalking;

@@ -14,8 +14,6 @@ public class World {
 		this.worldName = name;
 		this.worldGrid = grid;
 		
-		//TEMP
-		player = new EntityPlayer("Andy608");
 		this.xOffset = 0;
 		this.yOffset = 0;
 	}
