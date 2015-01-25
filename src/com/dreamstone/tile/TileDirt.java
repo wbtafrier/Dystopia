@@ -1,5 +1,7 @@
 package com.dreamstone.tile;
 
+import java.awt.image.BufferedImage;
+
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.util.TransformImage;
 
@@ -35,5 +37,15 @@ public class TileDirt extends TileTransition {
 		
 		//Southeast Image
 	}
-	
+
+	@Override
+	public BufferedImage getImageTile() {
+		
+		int percent = rand.nextInt(100);
+		
+		if (percent >= 50)
+			return defaultImages.get(0);
+		else
+			return defaultImages.get(1);
+	}
 }

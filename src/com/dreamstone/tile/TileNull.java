@@ -1,5 +1,7 @@
 package com.dreamstone.tile;
 
+import java.awt.image.BufferedImage;
+
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.util.TransformImage;
 
@@ -13,5 +15,10 @@ public class TileNull extends Tile {
 	@Override
 	protected void setImageTiles() {
 		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 255));
+	}
+
+	@Override
+	public BufferedImage getImageTile() {
+		return defaultImages.get(0);
 	}
 }

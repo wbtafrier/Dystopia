@@ -2,11 +2,13 @@ package com.dreamstone.tile;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.dreamstone.util.DystopiaLogger;
 
 public abstract class TileTransition extends Tile {
 	
+	protected static Random rand = new Random();
 	protected ArrayList<ArrayList<BufferedImage>> transitionImages;
 	
 	/**

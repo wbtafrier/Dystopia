@@ -10,7 +10,7 @@ public class TempWorldGen {
 	
 	public static void setTilesForTestWorld() {
 		
-		Random rand = new Random();
+//		Random rand = new Random();
 		ArrayList<Quadrant> quads = Dystopia.getGame().currentWorld.getGrid().QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 		
@@ -21,7 +21,8 @@ public class TempWorldGen {
 					for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++) {
 						for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++) {
 							Coordinate c = chunks.get(y).get(x).getCoordinateFromIndex(xx, yy);
-							c.setTileType(TileList.tiles.get(rand.nextInt(TileList.tiles.size())));
+//							c.setTileType(TileList.tiles.get(rand.nextInt(TileList.tiles.size())));
+							c.setTileType(TileList.tiles.get(1));
 						}
 					}
 				}

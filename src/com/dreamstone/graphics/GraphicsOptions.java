@@ -5,10 +5,12 @@ import com.dreamstone.util.TransformImage;
 
 public class GraphicsOptions {
 	
+	private static int tileSize;
 	private static float scale;
 	
 	public static void initializeGraphicsOptions() {
-		scale = 5F;
+		tileSize = 128;
+		scale = 1F;
 	}
 	
 	public static void updateGraphics(float s) {
@@ -24,6 +26,10 @@ public class GraphicsOptions {
 		ResourceLoader.playerSouthAnimation = TransformImage.scaleImage(ResourceLoader.playerSouthAnimation, scale);
 		ResourceLoader.playerEastAnimation = TransformImage.scaleImage(ResourceLoader.playerEastAnimation, scale);
 		ResourceLoader.playerWestAnimation = TransformImage.scaleImage(ResourceLoader.playerWestAnimation, scale);
+	}
+	
+	public static int getTileSize() {
+		return tileSize;
 	}
 	
 	public static float getScale() {

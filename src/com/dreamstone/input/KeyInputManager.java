@@ -90,15 +90,15 @@ public class KeyInputManager extends KeyAdapter implements KeyListener {
 		if (isWalking) player.setWalking(true);
 		else player.setWalking(false);
 		
-		System.out.println("Pressed Array: " + pressed);
+//		System.out.println("Pressed Array: " + pressed);
 		
 		if (pressed.size() > 1) {
             temp = (Character) pressed.get(pressed.size() - 1);
-            System.out.println("Temp: " + temp);
+//            System.out.println("Temp: " + temp);
         }
 		else if (pressed.size() == 1){
 			temp = (Character) pressed.get(0);
-			System.out.println("Temp: " + temp);
+//			System.out.println("Temp: " + temp);
 		}
 		
 		if (temp == KeyOptions.getKeyNorth()[0] || temp == KeyOptions.getKeyNorth()[1]) {

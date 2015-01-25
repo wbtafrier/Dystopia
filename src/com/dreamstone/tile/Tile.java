@@ -11,7 +11,7 @@ public abstract class Tile {
 	private String tileName = "null";
 	private String tileSheetName = "null";
 	protected ArrayList<BufferedImage> defaultImages;
-	protected static int tileSize = (int)(16 * GraphicsOptions.getScale());
+	protected static int tileSize = (int)(GraphicsOptions.getTileSize() * GraphicsOptions.getScale());
 	
 	/**
 	 * Instantiating this constructor will create a new Tile with a specific name and independent image file.
@@ -28,6 +28,7 @@ public abstract class Tile {
 	}
 	
 	protected abstract void setImageTiles();
+	public abstract BufferedImage getImageTile();
 	
 	public BufferedImage getImageTile(int index) {
 		if (!(index >= defaultImages.size() || index < 0)) {

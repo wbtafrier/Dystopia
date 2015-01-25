@@ -54,15 +54,10 @@ public class Coordinate {
 	}
 	
 	public void setTileImage(Tile t) {
-		if (t == null) {
+		if (t == null)
 			DystopiaLogger.logSevere("TILE EQUALS NULL!");
-		}
-		else if (t.getFullImageAmount() == 0) {
-			this.tileImage = t.getImageTile(0);
-		}
-		else {
-			this.tileImage = t.getImageTile(rand.nextInt(t.getFullImageAmount()));
-		}
+		else
+			this.tileImage = t.getImageTile();
 	}
 	
 	private void setTileImage(Tile t, int imageIndex) {
