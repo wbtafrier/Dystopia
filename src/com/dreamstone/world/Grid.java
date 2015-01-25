@@ -1,9 +1,8 @@
 package com.dreamstone.world;
 
-import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 
-import com.dreamstone.core.Dystopia;
 import com.dreamstone.tile.Tile;
 import com.dreamstone.util.DystopiaLogger;
 
@@ -115,42 +114,27 @@ public class Grid {
 	}
 		
 	
-//	public Point getChunkFromCoordinate(int x, int y) {
-//		int chunkX;
-//		int chunkY;
-//		
-//		//QUADRANT 1
-//		//5, 5 ---> (0, 0)
-//		//5, 9 ---> (0, 1)
-//		
-//		//QUADRANT 2
-//		//-5, 5 ---> (-1, 1)
-//		//-5, 9 ---> (-1, 2)
-//		
-//		//QUADRANT 3
-//		//-5, -5 ---> (-1, -1)
-//		//-5, -9 ---> (-1, -2)
-//		
-//		//QUADRANT 4
-//		//5, -5 ---> (1, -1)
-//		//5, -9 ---> (1, -2)
-//		
-//		if (x >= 0 && y >= 0) {
-//			//QUADRANT 1
-//			return new Point(x / Chunk.CHUNK_SIZE, y / Chunk.CHUNK_SIZE);
-//		}
-//		else if (x < 0 && y >= 0) {
-//			//QUADRANT 2
-//		}
-//		else if (x < 0 && y < 0) {
-//			//QUADRANT 3
-//		}
-//		else if (x >= 0 && y < 0) {
-//			//QUADRANT 4
-//		}
-//		
-//		
-//		DystopiaLogger.logSevere("THIS COORDINATE IS NOT IN THE GRID. RETURNING NULL.");
-//		return null;
-//	}
+	public static Point getChunkFromCoordinate(int x, int y) {
+		int chunkX = 0;
+		int chunkY = 0;
+		
+		if (x >= 0 && y >= 0) {
+			chunkX = x / Chunk.CHUNK_SIZE;
+			chunkY = y / Chunk.CHUNK_SIZE;
+		}
+		else if (x < 0 && y >= 0) {
+			chunkX = (x + 1) / Chunk.CHUNK_SIZE - 1;
+			chunkY = y / Chunk.CHUNK_SIZE;
+		}
+		else if (x < 0 && y < 0) {
+			chunkX = (x + 1) / Chunk.CHUNK_SIZE - 1;
+			chunkY = (y + 1) / Chunk.CHUNK_SIZE - 1;
+		}
+		else if (x >= 0 && y < 0) {
+			chunkX = x / Chunk.CHUNK_SIZE;
+			chunkY = (y + 1) / Chunk.CHUNK_SIZE - 1;
+		}
+		
+		return new Point(chunkX, chunkY);
+	}
 }

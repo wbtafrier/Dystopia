@@ -3,6 +3,7 @@ package com.dreamstone.core;
 import java.awt.EventQueue;
 
 import com.dreamstone.file.FileSystem;
+import com.dreamstone.file.LoadManager;
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.file.SaveManager;
 import com.dreamstone.graphics.GraphicsOptions;

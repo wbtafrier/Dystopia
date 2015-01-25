@@ -3,6 +3,7 @@ package com.dreamstone.world;
 import com.dreamstone.util.DystopiaLogger;
 
 public class Chunk {
+	private int quadrantNum;
 	private Coordinate[][] coordList;
 	public static final int CHUNK_SIZE = 8;
 	public final int X_VALUE;
@@ -78,6 +79,7 @@ public class Chunk {
 	private void setChunkCoords(int startX, int startY) {
 		if (startX >= 0 && startY >= 0) {
 			//QUADRANT 1
+			quadrantNum = 1;
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
 					coordList[x][y] = new Coordinate(startX + x, startY + y);
@@ -86,6 +88,7 @@ public class Chunk {
 		}
 		else if (startX < 0 && startY >= 0) {
 			//QUADRANT 2
+			quadrantNum = 2;
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
 					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX + x, startY - y);
@@ -94,6 +97,7 @@ public class Chunk {
 		}
 		else if (startX < 0 && startY < 0) {
 			//QUADRANT 3
+			quadrantNum = 3;
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
 					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX + x, startY + y);
@@ -102,6 +106,7 @@ public class Chunk {
 		}
 		else if (startX >= 0 && startY < 0) {
 			//QUADRANT 4
+			quadrantNum = 4;
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int y = 0; y < CHUNK_SIZE; y++) {
 					coordList[(CHUNK_SIZE - x) - 1][(CHUNK_SIZE - y) - 1] = new Coordinate(startX - x, startY + y);
@@ -112,6 +117,10 @@ public class Chunk {
 			DystopiaLogger.logWarning("COORDINATE IS NOT VALID, NOT CREATING CHUNK.");
 			return;
 		}
+	}
+	
+	public int getQuadrantNumber() {
+		return this.quadrantNum;
 	}
 	
 	public Coordinate getStartingCoord() {

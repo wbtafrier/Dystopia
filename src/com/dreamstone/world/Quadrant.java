@@ -65,6 +65,17 @@ public class Quadrant {
 		return false;
 	}
 	
+	private boolean isChunkNull(Chunk c) {
+		for (Coordinate[] coordCol : c.getCoords()) {
+			for (Coordinate coord : coordCol) {
+				if (coord == null || coord.getTile() == null) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public boolean isChunkLegal(Chunk chunk) {
 		
 		if (quadrant.size() > 0) {
