@@ -11,7 +11,7 @@ public class TempWorldGen {
 	public static void setTilesForTestWorld() {
 		
 //		Random rand = new Random();
-		ArrayList<Quadrant> quads = Dystopia.getGame().currentWorld.getGrid().QUADRANTS;
+		ArrayList<Quadrant> quads = Dystopia.getGame().getCurrentWorld().getGrid().QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 		
 		for (int i = 0; i < quads.size(); i++) {

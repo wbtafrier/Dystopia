@@ -16,8 +16,11 @@ public class SaveManager {
 	private static World world;
 	private static File worldFolder;
 	
+	/**
+	 * Saves the currently loaded World to the world's save data.
+	 */
 	public static void saveWorld() {
-		world = Dystopia.getGame().currentWorld;
+		world = Dystopia.getGame().getCurrentWorld();
 		worldFolder = FileSystem.makeFolder(DirectoryMaster.worldsFolder, world.getName());
 		saveGrid();
 		savePlayer();
@@ -54,10 +57,10 @@ public class SaveManager {
 		EntityPlayer player = world.getPlayer();
 		File playerFile = FileSystem.makeFile(worldFolder, player.getName() + ".txt");
 		StringBuilder playerText = new StringBuilder();
-		playerText.append("Player Health:" + FileSystem.TAB + "[" + player.getHealth() + "]" + FileSystem.LINE_BREAK);
-		playerText.append("Hair Color:" + FileSystem.TAB + "[" + player.getPlayerOptions().getHairColor().getRed() + "," + player.getPlayerOptions().getHairColor().getGreen() + "," + player.getPlayerOptions().getHairColor().getBlue() + "]" + FileSystem.LINE_BREAK);
-		playerText.append("Eye Color:" + FileSystem.TAB + "[" + player.getPlayerOptions().getEyeColor().getRed() + "," + player.getPlayerOptions().getEyeColor().getGreen() + "," + player.getPlayerOptions().getEyeColor().getBlue() + "]" + FileSystem.LINE_BREAK);
-		playerText.append("Skin Color:" + FileSystem.TAB + "[" + player.getPlayerOptions().getSkinColor().getRed() + "," + player.getPlayerOptions().getSkinColor().getGreen() + "," + player.getPlayerOptions().getSkinColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("playerHealth:" + FileSystem.TAB + "[" + player.getHealth() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("hairColor:" + FileSystem.TAB + "[" + player.getPlayerOptions().getHairColor().getRed() + "," + player.getPlayerOptions().getHairColor().getGreen() + "," + player.getPlayerOptions().getHairColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("eyeColor:" + FileSystem.TAB + "[" + player.getPlayerOptions().getEyeColor().getRed() + "," + player.getPlayerOptions().getEyeColor().getGreen() + "," + player.getPlayerOptions().getEyeColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("skinColor:" + FileSystem.TAB + "[" + player.getPlayerOptions().getSkinColor().getRed() + "," + player.getPlayerOptions().getSkinColor().getGreen() + "," + player.getPlayerOptions().getSkinColor().getBlue() + "]" + FileSystem.LINE_BREAK);
 		
 		try {
 			FileSystem.writeTextFile(playerFile, playerText);

@@ -5,8 +5,9 @@ import com.dreamstone.world.World;
 
 public class Dystopia implements Runnable {
 	
-	public World currentWorld;
-	public static KeyInputManager keyListener;
+	private World currentWorld;
+	private String playerName;
+	public KeyInputManager keyListener;
 	
 	static Dystopia gameInstance;
 	private int ticks;
@@ -118,6 +119,22 @@ public class Dystopia implements Runnable {
 	
 	public boolean isRunning() {
 		return this.running;
+	}
+	
+	protected void setCurrentWorld(World w) {
+		this.currentWorld = w;
+	}
+	
+	public World getCurrentWorld() {
+		return this.currentWorld;
+	}
+	
+	protected void setPlayerName(String name) {
+		this.playerName = name;
+	}
+	
+	public String getPlayerName() {
+		return this.playerName;
 	}
 	
 }

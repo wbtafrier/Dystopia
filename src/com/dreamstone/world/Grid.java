@@ -1,5 +1,6 @@
 package com.dreamstone.world;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import com.dreamstone.tile.Tile;
@@ -13,6 +14,9 @@ public class Grid {
 	private Quadrant quad3;
 	private Quadrant quad4;
 	
+	/**
+	 * Creates a new Grid by initializing the map and printing the initialized coordinates.
+	 */
 	public Grid() {
 		
 		QUADRANTS = new ArrayList<>();
@@ -29,6 +33,9 @@ public class Grid {
 		System.out.println(quad4);
 	}
 	
+	/**
+	 * Initializes the map by adding the first four Chunks to each Quadrant, and adding the quadrants to the grid.
+	 */
 	private void initializeMap() {
 		
 		QUADRANTS.add(new Quadrant(new Chunk(0, 0)));
@@ -42,14 +49,32 @@ public class Grid {
 		quad4 = QUADRANTS.get(3);
 	}
 	
+	/**
+	 * Modifies the Tile of a specific coordinate.
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
+	 * @param t The Tile.
+	 */
 	public void setTile(int x, int y, Tile t) {
 		this.getCoordinate(x, y).setTileType(t);
 	}
 	
+	/**
+	 * Gets a Tile from a specific coordinate.
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
+	 * @return The Tile at this coordinate.
+	 */
 	public Tile getTileFromCoordinate(int x, int y) {
 		return this.getCoordinate(x, y).getTile();
 	}
 	
+	/**
+	 * Gets a Coordinate object based on an x and y location.
+	 * @param x The x coordinate.
+	 * @param y The y coordinate.
+	 * @return The correct Coordinate object.
+	 */
 	public Coordinate getCoordinate(int x, int y) {
 		int chunkX;
 		int chunkY;
@@ -113,42 +138,30 @@ public class Grid {
 	}
 		
 	
-//	public Point getChunkFromCoordinate(int x, int y) {
-//		int chunkX;
-//		int chunkY;
-//		
-//		//QUADRANT 1
-//		//5, 5 ---> (0, 0)
-//		//5, 9 ---> (0, 1)
-//		
-//		//QUADRANT 2
-//		//-5, 5 ---> (-1, 1)
-//		//-5, 9 ---> (-1, 2)
-//		
-//		//QUADRANT 3
-//		//-5, -5 ---> (-1, -1)
-//		//-5, -9 ---> (-1, -2)
-//		
-//		//QUADRANT 4
-//		//5, -5 ---> (1, -1)
-//		//5, -9 ---> (1, -2)
-//		
-//		if (x >= 0 && y >= 0) {
-//			//QUADRANT 1
-//			return new Point(x / Chunk.CHUNK_SIZE, y / Chunk.CHUNK_SIZE);
-//		}
-//		else if (x < 0 && y >= 0) {
-//			//QUADRANT 2
-//		}
-//		else if (x < 0 && y < 0) {
-//			//QUADRANT 3
-//		}
-//		else if (x >= 0 && y < 0) {
-//			//QUADRANT 4
-//		}
-//		
-//		
-//		DystopiaLogger.logSevere("THIS COORDINATE IS NOT IN THE GRID. RETURNING NULL.");
-//		return null;
-//	}
+	/**
+	 * Determines what Chunk a coordinate point is in and returns it as a Point object.
+	 */
+	public static Point getChunkFromCoordinate(int x, int y) {
+		int chunkX = 0;
+		int chunkY = 0;
+		
+		if (x >= 0 && y >= 0) {
+			chunkX = x / Chunk.CHUNK_SIZE;
+			chunkY = y / Chunk.CHUNK_SIZE;
+		}
+		else if (x < 0 && y >= 0) {
+			chunkX = (x + 1) / Chunk.CHUNK_SIZE - 1;
+			chunkY = y / Chunk.CHUNK_SIZE;
+		}
+		else if (x < 0 && y < 0) {
+			chunkX = (x + 1) / Chunk.CHUNK_SIZE - 1;
+			chunkY = (y + 1) / Chunk.CHUNK_SIZE - 1;
+		}
+		else if (x >= 0 && y < 0) {
+			chunkX = x / Chunk.CHUNK_SIZE;
+			chunkY = (y + 1) / Chunk.CHUNK_SIZE - 1;
+		}
+		
+		return new Point(chunkX, chunkY);
+	}
 }

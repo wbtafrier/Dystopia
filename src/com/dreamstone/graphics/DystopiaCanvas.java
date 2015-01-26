@@ -18,7 +18,7 @@ public final class DystopiaCanvas extends Canvas {
 	public DystopiaCanvas() {
 		Dimension defaultSize = new Dimension((int)(DisplayCarrier.getDisplaySize().getWidth() / 2), (int)(DisplayCarrier.getDisplaySize().getHeight() / 2));
 		this.setPreferredSize(defaultSize);
-		this.addKeyListener(Dystopia.keyListener);
+		this.addKeyListener(Dystopia.getGame().keyListener);
 		Toolkit.getDefaultToolkit().setDynamicLayout(false);
 	}
 	

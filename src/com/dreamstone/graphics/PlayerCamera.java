@@ -9,8 +9,8 @@ import com.dreamstone.world.Grid;
 
 public class PlayerCamera {
 
-	public static EntityPlayer player = Dystopia.getGame().currentWorld.getPlayer();
-	public static Grid grid = Dystopia.getGame().currentWorld.getGrid();
+	public static EntityPlayer player = Dystopia.getGame().getCurrentWorld().getPlayer();
+	public static Grid grid = Dystopia.getGame().getCurrentWorld().getGrid();
 	
 	public static void displayPlayer(Graphics g) {
 		
