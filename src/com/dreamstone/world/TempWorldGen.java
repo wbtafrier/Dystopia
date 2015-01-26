@@ -1,7 +1,6 @@
 package com.dreamstone.world;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.dreamstone.core.Dystopia;
 import com.dreamstone.tile.TileList;
@@ -10,7 +9,7 @@ public class TempWorldGen {
 	
 	public static void setTilesForTestWorld() {
 		
-//		Random rand = new Random();
+//		RandomEngine rand = new RandomEngine();
 		ArrayList<Quadrant> quads = Dystopia.getGame().getCurrentWorld().getGrid().QUADRANTS;
 		ArrayList<ArrayList<Chunk>> chunks;
 		

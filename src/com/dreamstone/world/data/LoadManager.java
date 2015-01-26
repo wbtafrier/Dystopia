@@ -1,9 +1,11 @@
-package com.dreamstone.file;
+package com.dreamstone.world.data;
 
 import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 
+import com.dreamstone.file.DirectoryMaster;
+import com.dreamstone.file.FileSystem;
 import com.dreamstone.tile.Tile;
 import com.dreamstone.tile.TileList;
 import com.dreamstone.util.DystopiaLogger;

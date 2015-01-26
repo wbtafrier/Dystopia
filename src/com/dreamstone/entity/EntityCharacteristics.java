@@ -1,11 +1,12 @@
 package com.dreamstone.entity;
 
 import java.awt.Color;
-import java.util.Random;
+
+import com.dreamstone.util.RandomEngine;
 
 public class EntityCharacteristics {
 
-	private static Random rand = new Random();
+	private static RandomEngine rand = new RandomEngine();
 	
 	private Color hairColor;
 	private Color eyeColor;

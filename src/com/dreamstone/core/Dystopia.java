@@ -6,7 +6,6 @@ import com.dreamstone.world.World;
 public class Dystopia implements Runnable {
 	
 	private World currentWorld;
-	private String playerName;
 	public KeyInputManager keyListener;
 	
 	static Dystopia gameInstance;
@@ -72,15 +71,15 @@ public class Dystopia implements Runnable {
 				
 				tickCount++;
 				if (tickCount % 60 == 0) {
-//					avgFPSCount++;
-//					avgFPS += frames;
+					avgFPSCount++;
+					avgFPS += frames;
 					
-//					System.out.println("Ticks: " + tickCount + ", Fps: " + frames);
-//					if (avgFPSCount == 5) {
-//						System.out.println("=========================\nAVERAGE FPS: " + avgFPS / avgFPSCount + "\n=========================");
-//						avgFPSCount = 0;
-//						avgFPS = 0;
-//					}
+					System.out.println("Ticks: " + tickCount + ", Fps: " + frames);
+					if (avgFPSCount == 5) {
+						System.out.println("=========================\nAVERAGE FPS: " + avgFPS / avgFPSCount + "\n=========================");
+						avgFPSCount = 0;
+						avgFPS = 0;
+					}
 					lastTime += 1000;
 					frames = 0;
 					tickCount = 0;
@@ -128,13 +127,4 @@ public class Dystopia implements Runnable {
 	public World getCurrentWorld() {
 		return this.currentWorld;
 	}
-	
-	protected void setPlayerName(String name) {
-		this.playerName = name;
-	}
-	
-	public String getPlayerName() {
-		return this.playerName;
-	}
-	
 }

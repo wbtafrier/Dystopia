@@ -27,8 +27,8 @@ public abstract class Tile {
 		this.defaultImages = new ArrayList<>();
 	}
 	
-	protected abstract void setImageTiles();
-	public abstract BufferedImage getImageTile();
+	protected abstract void initializeImageTiles();
+	public abstract int setRandomImageIndex();
 	
 	public BufferedImage getImageTile(int index) {
 		if (!(index >= defaultImages.size() || index < 0)) {

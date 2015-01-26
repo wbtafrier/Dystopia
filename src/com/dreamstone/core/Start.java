@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import com.dreamstone.entity.EntityPlayer;
 import com.dreamstone.file.FileSystem;
 import com.dreamstone.file.ResourceLoader;
-import com.dreamstone.file.SaveManager;
 import com.dreamstone.graphics.GraphicsOptions;
 import com.dreamstone.input.KeyInputManager;
 import com.dreamstone.tile.TileList;
@@ -13,6 +12,7 @@ import com.dreamstone.util.LaunchHandler;
 import com.dreamstone.world.Grid;
 import com.dreamstone.world.TempWorldGen;
 import com.dreamstone.world.World;
+import com.dreamstone.world.data.SaveManager;
 
 public class Start {
 	

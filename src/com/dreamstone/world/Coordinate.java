@@ -1,11 +1,11 @@
 package com.dreamstone.world;
 
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 import com.dreamstone.tile.Tile;
 import com.dreamstone.tile.TileList;
 import com.dreamstone.util.DystopiaLogger;
+import com.dreamstone.util.RandomEngine;
 
 public class Coordinate {
 
@@ -13,35 +13,26 @@ public class Coordinate {
 	public final int yCoordinate;
 	private int xScreenCoordinate;
 	private int yScreenCoordinate;
-	private static Random rand = new Random();
+	private static RandomEngine rand = new RandomEngine();
 	private Tile tileType;
 //	private EnumDirection direction;
 	private BufferedImage tileImage;
 	private int tileImageIndex;
 	
-	protected Coordinate() {
+	public Coordinate() {
 		this(0, 0, TileList.nullTile);
 	}
 
-	protected Coordinate(int xCoord, int yCoord) {
+	public Coordinate(int xCoord, int yCoord) {
 		this(xCoord, yCoord, TileList.nullTile);
 	}
 	
-	protected Coordinate(int xCoord, int yCoord, Tile t) {
-		this.xCoordinate = xCoord;
-		this.yCoordinate = yCoord;
-		this.xScreenCoordinate = this.xCoordinate;
-		this.yScreenCoordinate = this.yCoordinate;
-		this.setTileImage(t);
+	public Coordinate(int xCoord, int yCoord, Tile t) {
+		this(xCoord, yCoord, t, 0);
 	}
 	
-	protected Coordinate(int xCoord, int yCoord, Tile t, int imageIndex) {
-		this.xCoordinate = xCoord;
-		this.yCoordinate = yCoord;
-		this.xScreenCoordinate = this.xCoordinate;
-		this.yScreenCoordinate = this.yCoordinate;
-		this.setTileImage(t, this.tileImageIndex);
-		this.tileImageIndex = imageIndex;
+	public Coordinate(int xCoord, int yCoord, Tile t, int imageIndex) {
+		this(xCoord, yCoord, xCoord, yCoord, t, imageIndex);
 	}
 	
 	public Coordinate(int xCoord, int yCoord, int xScreenPos, int yScreenPos, Tile t, int imageIndex) {
@@ -49,15 +40,18 @@ public class Coordinate {
 		this.yCoordinate = yCoord;
 		this.xScreenCoordinate = xScreenPos;
 		this.yScreenCoordinate = yScreenPos;
-		this.setTileImage(t, this.tileImageIndex);
 		this.tileImageIndex = imageIndex;
+		this.setTileImage(t, this.tileImageIndex);
 	}
 	
 	public void setTileImage(Tile t) {
 		if (t == null)
 			DystopiaLogger.logSevere("TILE EQUALS NULL!");
-		else
-			this.tileImage = t.getImageTile();
+		else if (this.tileImageIndex == 0) {
+			this.tileImageIndex = t.setRandomImageIndex();
+		}
+		
+		this.tileImage = t.getImageTile(this.tileImageIndex);
 	}
 	
 	private void setTileImage(Tile t, int imageIndex) {

@@ -1,7 +1,5 @@
 package com.dreamstone.tile;
 
-import java.awt.image.BufferedImage;
-
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.util.TransformImage;
 
@@ -9,11 +7,11 @@ public class TileDirt extends TileTransition {
 
 	public TileDirt(String name, String tileSheetName) {
 		super(name, tileSheetName);
-		this.setImageTiles();
+		this.initializeImageTiles();
 	}
 	
 	@Override
-	protected void setImageTiles() {
+	protected void initializeImageTiles() {
 		//Sets full images
 		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 23));
 		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 26));
@@ -39,13 +37,13 @@ public class TileDirt extends TileTransition {
 	}
 
 	@Override
-	public BufferedImage getImageTile() {
+	public int setRandomImageIndex() {
 		
 		int percent = rand.nextInt(100);
 		
 		if (percent >= 50)
-			return defaultImages.get(0);
+			return 0;
 		else
-			return defaultImages.get(1);
+			return 1;
 	}
 }
