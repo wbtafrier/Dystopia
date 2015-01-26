@@ -1,9 +1,7 @@
 package com.dreamstone.world;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
 
-import com.dreamstone.core.Dystopia;
 import com.dreamstone.tile.Tile;
 import com.dreamstone.util.DystopiaLogger;
 
