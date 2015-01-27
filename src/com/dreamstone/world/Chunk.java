@@ -1,5 +1,6 @@
 package com.dreamstone.world;
 
+import com.dreamstone.tile.Tile;
 import com.dreamstone.util.DystopiaLogger;
 
 public class Chunk {
@@ -154,6 +155,17 @@ public class Chunk {
 		else {
 			DystopiaLogger.logSevere("Coordinate is not in the chunk!");
 			return null;
+		}
+	}
+	
+	public void setCoordinate(Coordinate coord) {
+		for (int y = 0; y < CHUNK_SIZE; y++) {
+			for (int x = 0; x < CHUNK_SIZE; x++) {
+				if (this.getCoordinateFromIndex(x, y).xCoordinate == coord.xCoordinate &&
+						this.getCoordinateFromIndex(x, y).yCoordinate == coord.yCoordinate) {
+					this.getCoords()[y][x] = coord;
+				}
+			}
 		}
 	}
 	

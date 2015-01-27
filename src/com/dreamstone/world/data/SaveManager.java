@@ -23,14 +23,14 @@ public class SaveManager {
 	 */
 	public static void saveWorld() {
 		world = Dystopia.getGame().getCurrentWorld();
-		worldFolder = FileSystem.makeFolder(DirectoryMaster.worldsFolder, world.getName());
+		worldFolder = FileSystem.getFolder(DirectoryMaster.worldsFolder, world.getName());
 		saveGrid();
 		savePlayer();
-		saveWorldSettings();
+		saveWorldProperties();
 	}
 	
 	private static void saveGrid() {
-		File mapFolder = FileSystem.makeFolder(worldFolder, "map");
+		File mapFolder = FileSystem.getFolder(worldFolder, "map");
 		
 		for (Quadrant q : world.getGrid().QUADRANTS) {
 			StringBuilder quadText = new StringBuilder();
@@ -39,12 +39,18 @@ public class SaveManager {
 					for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++) {
 						for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++) {
 							Coordinate c = q.getChunks().get(y).get(x).getCoordinateFromIndex(xx, yy);
-							quadText.append("[" + c.xCoordinate + "," + c.yCoordinate + "," + c.getXScreenPos() + "," + c.getYScreenPos() + "," + c.getTile().getName() + "," + c.getImageIndex() + "]");
+							quadText.append("[" + 
+							c.xCoordinate + "," + 
+									c.yCoordinate + "," + 
+							c.getXScreenPos() + "," + 
+									c.getYScreenPos() + "," + 
+							c.getTile().getName() + "," + 
+									c.getImageIndex() + "]");
 						}
 					}
 				}
 			}
-			File quadFile = FileSystem.makeFile(mapFolder, "quad" + q.getQuadrant() + ".txt");
+			File quadFile = FileSystem.getFile(mapFolder, "quad" + q.getQuadrant() + ".txt");
 			
 			try {
 				FileSystem.writeTextFile(quadFile, quadText);
@@ -56,13 +62,15 @@ public class SaveManager {
 	}
 	
 	private static void savePlayer() {
+		File playerFolder = FileSystem.getFolder(worldFolder, "players");
+		
 		EntityPlayer player = world.getPlayer();
-		File playerFile = FileSystem.makeFile(worldFolder, player.getName() + ".txt");
+		File playerFile = FileSystem.getFile(playerFolder, player.getName() + ".txt");
 		StringBuilder playerText = new StringBuilder();
-		playerText.append("playerHealth:" + FileSystem.TAB + "[" + player.getHealth() + "]" + FileSystem.LINE_BREAK);
-		playerText.append("hairColor:" + FileSystem.TAB + "[" + player.getPlayerOptions().getHairColor().getRed() + "," + player.getPlayerOptions().getHairColor().getGreen() + "," + player.getPlayerOptions().getHairColor().getBlue() + "]" + FileSystem.LINE_BREAK);
-		playerText.append("eyeColor:" + FileSystem.TAB + "[" + player.getPlayerOptions().getEyeColor().getRed() + "," + player.getPlayerOptions().getEyeColor().getGreen() + "," + player.getPlayerOptions().getEyeColor().getBlue() + "]" + FileSystem.LINE_BREAK);
-		playerText.append("skinColor:" + FileSystem.TAB + "[" + player.getPlayerOptions().getSkinColor().getRed() + "," + player.getPlayerOptions().getSkinColor().getGreen() + "," + player.getPlayerOptions().getSkinColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("Health: [" + player.getHealth() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("Hair Color: [" + player.getPlayerOptions().getHairColor().getRed() + "," + player.getPlayerOptions().getHairColor().getGreen() + "," + player.getPlayerOptions().getHairColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("Eye Color: [" + player.getPlayerOptions().getEyeColor().getRed() + "," + player.getPlayerOptions().getEyeColor().getGreen() + "," + player.getPlayerOptions().getEyeColor().getBlue() + "]" + FileSystem.LINE_BREAK);
+		playerText.append("Skin Color: [" + player.getPlayerOptions().getSkinColor().getRed() + "," + player.getPlayerOptions().getSkinColor().getGreen() + "," + player.getPlayerOptions().getSkinColor().getBlue() + "]" + FileSystem.LINE_BREAK);
 		
 		try {
 			FileSystem.writeTextFile(playerFile, playerText);
@@ -72,8 +80,8 @@ public class SaveManager {
 		}
 	}
 	
-	private static void saveWorldSettings() {
+	private static void saveWorldProperties() {
 		//TODO: Fill in zeh blanks
-		File settingsFile = FileSystem.makeFile(worldFolder, "settings.txt");
+		File propertiesFile = FileSystem.getFile(worldFolder, "worldProperties.txt");
 	}
 }

@@ -2,17 +2,13 @@ package com.dreamstone.core;
 
 import java.awt.EventQueue;
 
-import com.dreamstone.entity.EntityPlayer;
 import com.dreamstone.file.FileSystem;
 import com.dreamstone.file.ResourceLoader;
 import com.dreamstone.graphics.GraphicsOptions;
+import com.dreamstone.graphics.TempLoginFrame;
 import com.dreamstone.input.KeyInputManager;
 import com.dreamstone.tile.TileList;
 import com.dreamstone.util.LaunchHandler;
-import com.dreamstone.world.Grid;
-import com.dreamstone.world.TempWorldGen;
-import com.dreamstone.world.World;
-import com.dreamstone.world.data.SaveManager;
 
 public class Start {
 	
@@ -28,17 +24,17 @@ public class Start {
 				
 				//Create the instance of the game and call the constructor. Prepares the game loop instance variables.
 				Dystopia.gameInstance = new Dystopia();
-				
 				initializeTilesAndItems();
-				prepareWorld();
-				initializeListeners();
-				setupDisplay();
-				//Start the game loop!!!!
-				Dystopia.getGame().start();
-				SaveManager.saveWorld();
-//				LoadManager.loadWorld(Dystopia.getGame().currentWorld.getName());
+				new TempLoginFrame();
 			}
 		});
+	}
+	
+	public static void startGame() {
+		initializeListeners();
+		setupDisplay();
+		//Start the game loop!!!!
+		Dystopia.getGame().start();
 	}
 	
 	private static void createDirectories() {
@@ -61,19 +57,6 @@ public class Start {
 	private static void initializeTilesAndItems() {
 		//Add all Tiles to the tile list.
 		TileList.registerTiles();
-	}
-	
-	//TODO: Move to World class.
-	private static void prepareWorld() {
-		//Initialize the grid, quadrants, chunks, and coordinates of the starting world. 
-//		Dystopia.getGame().grid = new Grid();
-		
-		World world = new World("tickle_shit", new Grid());
-		world.setPlayer(new EntityPlayer("Andy608"));
-		Dystopia.getGame().setCurrentWorld(world);
-		
-		//Creates a random map for debugging.
-		TempWorldGen.setTilesForTestWorld();
 	}
 	
 	private static void initializeListeners() {

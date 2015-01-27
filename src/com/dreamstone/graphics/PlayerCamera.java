@@ -16,7 +16,7 @@ public class PlayerCamera {
 		
 		player.setWalkingBoundsXPos((DisplayCarrier.getCanvas().getWidth() / 2));
 		player.setWalkingBoundsYPos((DisplayCarrier.getCanvas().getHeight() / 2));
-		player.setCurrentCoordinate(grid.getCoordinateFromDisplay(player.getWalkingBoundsXPos(), player.getWalkingBoundsYPos()));
+//		player.setCurrentCoordinate(grid.getCoordinateFromDisplay(player.getWalkingBoundsXPos(), player.getWalkingBoundsYPos()));
 		
 		g.drawImage(player.getImage(), player.getPlayerOriginX(), player.getPlayerOriginY(), null);
 	}

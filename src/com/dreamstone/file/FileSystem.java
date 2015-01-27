@@ -38,24 +38,24 @@ public class FileSystem {
 	public static boolean createGameDirectory() {
 		if (OS.contains("win")) {
 			String env = System.getenv("APPDATA");
-			gameFolder = makeFolder(env, DYSTOPIA);
+			gameFolder = getFolder(env, DYSTOPIA);
 		}
 		else if (OS.contains("mac")) {
 			String support = System.getProperty("user.home") + s + "Library" + s + "Application Support";
-			gameFolder = makeFolder(support, DYSTOPIA);
+			gameFolder = getFolder(support, DYSTOPIA);
 		}
 		else if (OS.contains("nux")) {
 			String config = System.getProperty("user.home");
-			gameFolder = makeFolder(config, "." + DYSTOPIA);
+			gameFolder = getFolder(config, "." + DYSTOPIA);
 		}
 		else {
 			String dir = System.getProperty("user.dir");
-			gameFolder = makeFolder(dir, DYSTOPIA);
+			gameFolder = getFolder(dir, DYSTOPIA);
 		}
 		return gameFolder.exists();
 	}
 
-	public static File makeFolder(File parent, String folderName) {
+	public static File getFolder(File parent, String folderName) {
 		File folder = new File(parent.getAbsolutePath(), folderName);
 		if (!folder.exists() && !folder.mkdirs()) {
 			boolean dirsMade = createGameDirectory();
@@ -64,12 +64,12 @@ public class FileSystem {
 		return folder;
 	}
 
-	public static File makeFolder(String parent, String folderName) {
-		return makeFolder(new File(parent), folderName);
+	public static File getFolder(String parent, String folderName) {
+		return getFolder(new File(parent), folderName);
 	}
 
-	public static File makeFile(File file) {
-		if (file != null && !file.exists()) {
+	public static File getFile(File file) {
+		if (!fileExists(file)) {
 			try {
 				file.createNewFile();
 			} catch (IOException ioe) {
@@ -78,14 +78,23 @@ public class FileSystem {
 		}
 		return file;
 	}
-
-	public static File makeFile(File folder, String fileName) {
+	
+	public static File getFile(File folder, String fileName) {
 		File file = new File(folder.getAbsolutePath() + s + fileName);
-		return makeFile(file);
+		return getFile(file);
 	}
 
-	public static File makeFile(String folder, String fileName) {
-		return makeFile(new File(folder), fileName);
+	public static File getFile(String folder, String fileName) {
+		return getFile(new File(folder), fileName);
+	}
+	
+	public static boolean fileExists(File parent, String fileName) {
+		File file = new File(parent.getAbsolutePath() + s + fileName);
+		return fileExists(file);
+	}
+	
+	public static boolean fileExists(File file) {
+		return file != null && file.exists();
 	}
 
 	public static String getClassLoaderResourceDirectory(String parent, String fileName) {

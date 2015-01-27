@@ -6,11 +6,11 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import com.dreamstone.core.Dystopia;
-import com.dreamstone.entity.EntityPlayer;
+import com.dreamstone.world.World;
 
 public class KeyInputManager extends KeyAdapter implements KeyListener {
 	
-	public static EntityPlayer player = Dystopia.getGame().getCurrentWorld().getPlayer();
+	public static World world = Dystopia.getGame().getCurrentWorld();
 	
 	private final static ArrayList<Character> pressed = new ArrayList<Character>();
 	public static boolean isWalking;
@@ -87,8 +87,8 @@ public class KeyInputManager extends KeyAdapter implements KeyListener {
 	private static void processPlayerMovement() {
 		Character temp = KeyOptions.getKeySouth()[0];
 		
-		if (isWalking) player.setWalking(true);
-		else player.setWalking(false);
+		if (isWalking) world.getPlayer().setWalking(true);
+		else world.getPlayer().setWalking(false);
 		
 //		System.out.println("Pressed Array: " + pressed);
 		
@@ -116,22 +116,22 @@ public class KeyInputManager extends KeyAdapter implements KeyListener {
 	}
 	
 	private static void checkNorth() {
-		if (isNorth) player.setNorth(true);
-		else player.setNorth(false);
+		if (isNorth) world.getPlayer().setNorth(true);
+		else world.getPlayer().setNorth(false);
 	}
 	
 	private static void checkSouth() {
-		if (isSouth) player.setSouth(true);
-		else player.setSouth(false);
+		if (isSouth) world.getPlayer().setSouth(true);
+		else world.getPlayer().setSouth(false);
 	}
 	
 	private static void checkEast() {
-		if (isEast) player.setEast(true);
-		else player.setEast(false);
+		if (isEast) world.getPlayer().setEast(true);
+		else world.getPlayer().setEast(false);
 	}
 	
 	private static void checkWest() {
-		if (isWest) player.setWest(true);
-		else player.setWest(false);
+		if (isWest) world.getPlayer().setWest(true);
+		else world.getPlayer().setWest(false);
 	}
 }

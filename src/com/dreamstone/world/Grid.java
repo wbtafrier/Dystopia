@@ -161,7 +161,6 @@ public class Grid {
 			chunkX = x / Chunk.CHUNK_SIZE;
 			chunkY = (y + 1) / Chunk.CHUNK_SIZE - 1;
 		}
-		
 		return new Point(chunkX, chunkY);
 	}
 }

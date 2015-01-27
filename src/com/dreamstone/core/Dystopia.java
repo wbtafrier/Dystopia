@@ -120,7 +120,7 @@ public class Dystopia implements Runnable {
 		return this.running;
 	}
 	
-	protected void setCurrentWorld(World w) {
+	public void setCurrentWorld(World w) {
 		this.currentWorld = w;
 	}
 	

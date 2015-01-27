@@ -56,9 +56,10 @@ public class Quadrant {
 	}
 	
 	public void replaceChunk(Chunk chunk) {
+		System.out.println(chunk);
 		if (!isChunkLegal(chunk)) {
 			DystopiaLogger.logWarning("CHUNK WITH STARTING COORDS (" + chunk.getStartingCoord().xCoordinate + ", "
-					+ chunk.getStartingCoord().yCoordinate + ") IS NOT LEGAL AND 	CANNOT BE REPLACED IN QUADRANT " + getQuadrant() + "!");
+					+ chunk.getStartingCoord().yCoordinate + ") IS NOT LEGAL AND CANNOT BE REPLACED IN QUADRANT " + getQuadrant() + "!");
 			return;
 		}
 		if (!isChunkCreated(chunk)) {
