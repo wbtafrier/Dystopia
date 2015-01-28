@@ -9,11 +9,11 @@ import com.dreamstone.util.RandomEngine;
 
 public class Coordinate {
 
+	private static RandomEngine rand = new RandomEngine();
 	public final int xCoordinate;
 	public final int yCoordinate;
 	private int xScreenCoordinate;
 	private int yScreenCoordinate;
-	private static RandomEngine rand = new RandomEngine();
 	private Tile tileType;
 //	private EnumDirection direction;
 	private BufferedImage tileImage;
@@ -40,6 +40,7 @@ public class Coordinate {
 		this.yCoordinate = yCoord;
 		this.xScreenCoordinate = xScreenPos;
 		this.yScreenCoordinate = yScreenPos;
+		this.tileType = t;
 		this.tileImageIndex = imageIndex;
 		this.setTileImage(t, this.tileImageIndex);
 	}
@@ -169,7 +170,17 @@ public class Coordinate {
 
 	@Override
 	public String toString() {
-		return "(" + this.xCoordinate + ", " + this.yCoordinate + ")";
+//		return "(" + this.xCoordinate + ", " + this.yCoordinate + ")";
+		return "World Coordinates: (" + this.xCoordinate + ", " + this.yCoordinate + ") " + "Screen Coordinates: (" + this.xScreenCoordinate + ", " + this.yScreenCoordinate + ") " +  "Tile Type: " + this.tileType + " Tile Index: " + this.tileImageIndex;
 
+	}
+
+	public void setCoordinate(Coordinate copyCoord) {
+		this.xScreenCoordinate = copyCoord.xScreenCoordinate;
+		this.yScreenCoordinate = copyCoord.yScreenCoordinate;
+		this.tileType = copyCoord.tileType;
+//		this.direction = copyCoord.direction;
+		this.tileImage = copyCoord.tileImage;
+		this.tileImageIndex = copyCoord.tileImageIndex;
 	}
 }

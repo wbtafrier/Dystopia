@@ -78,10 +78,10 @@ public class GridDisplay {
 							
 							if (DebugSettings.SHOW_COORDS) {
 								display.setColor(Color.WHITE);
-								coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
+//								coord = "(" + Integer.toString(c.xCoordinate) + ", " + Integer.toString(c.yCoordinate) + ")";
 //								coord = "(" + Integer.toString(c.getXScreenPos()) + ", " + Integer.toString(c.getYScreenPos()) + ")";
 								
-//								coord = c.getTile().getName();
+								coord = c.getTile().getName();
 								display.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 								Rectangle2D bounds = f.getStringBounds(coord, context);
 								

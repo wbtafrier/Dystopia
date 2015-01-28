@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 import com.dreamstone.core.DisplayCarrier;
+import com.dreamstone.util.DystopiaLogger;
 import com.dreamstone.world.data.SaveManager;
 
 public final class DystopiaFrame extends JFrame {
@@ -29,6 +30,7 @@ public final class DystopiaFrame extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				SaveManager.saveWorld();
+				DystopiaLogger.logInfo("Save Complete!");
 			}
 		});
 		this.setVisible(true);

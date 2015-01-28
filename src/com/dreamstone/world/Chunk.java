@@ -1,6 +1,5 @@
 package com.dreamstone.world;
 
-import com.dreamstone.tile.Tile;
 import com.dreamstone.util.DystopiaLogger;
 
 public class Chunk {
@@ -49,7 +48,7 @@ public class Chunk {
 			- Always use inc8 for the y coordinate. This will give you the correct coordinate when multiplied.
 			- The values start at -1 and move their way DOWN.	
 	 */
-	
+
 	public Chunk(int startX, int startY) {
 		X_VALUE = startX;
 		Y_VALUE = startY;
@@ -76,7 +75,7 @@ public class Chunk {
 		}
 		setChunkCoords(startX, startY);
 	}
-	
+
 	private void setChunkCoords(int startX, int startY) {
 		if (startX >= 0 && startY >= 0) {
 			//QUADRANT 1
@@ -163,7 +162,7 @@ public class Chunk {
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				if (this.getCoordinateFromIndex(x, y).xCoordinate == coord.xCoordinate &&
 						this.getCoordinateFromIndex(x, y).yCoordinate == coord.yCoordinate) {
-					this.getCoords()[y][x] = coord;
+					this.getCoords()[x][y] = coord;
 				}
 			}
 		}

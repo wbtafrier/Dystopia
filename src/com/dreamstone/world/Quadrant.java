@@ -43,7 +43,7 @@ public class Quadrant {
 		
 		if (!(isChunkLegal(chunk))) {
 			System.out.println("(" + chunk.getCoordinateFromIndex(0, 0).xCoordinate + ", " + chunk.getCoordinateFromIndex(0, 0).yCoordinate + ")");
-			DystopiaLogger.logWarning("THIS CHUNK CANNOT BE ADDED TO QUADRANT " + getQuadrant() + ". RETURNING.");
+			DystopiaLogger.logWarning("THIS CHUNK CANNOT BE ADDED TO QUADRANT " + getQuadrantNumber() + ". RETURNING.");
 			return;
 		}
 		if (isChunkCreated(chunk)) {
@@ -56,26 +56,43 @@ public class Quadrant {
 	}
 	
 	public void replaceChunk(Chunk chunk) {
-		System.out.println(chunk);
 		if (!isChunkLegal(chunk)) {
 			DystopiaLogger.logWarning("CHUNK WITH STARTING COORDS (" + chunk.getStartingCoord().xCoordinate + ", "
-					+ chunk.getStartingCoord().yCoordinate + ") IS NOT LEGAL AND CANNOT BE REPLACED IN QUADRANT " + getQuadrant() + "!");
+					+ chunk.getStartingCoord().yCoordinate + ") IS NOT LEGAL AND CANNOT BE REPLACED IN QUADRANT " + getQuadrantNumber() + "!");
 			return;
 		}
 		if (!isChunkCreated(chunk)) {
 			this.growQuadrant(chunk);
 		}
 		else {
+			
 			for (int y = 0; y < this.quadrant.size(); y++) {
-				ArrayList<Chunk> col = this.quadrant.get(y);
-				for (int x = 0; x < col.size(); x++) {
-					Chunk currentChunk = col.get(x);
-					if (currentChunk.getStartingCoord().xCoordinate == chunk.getStartingCoord().xCoordinate &&
-							currentChunk.getStartingCoord().yCoordinate == chunk.getStartingCoord().yCoordinate) {
-						col.set(x, chunk);
+				for (int x = 0; x < this.quadrant.get(y).size(); x++) {
+					
+					if (this.getChunks().get(y).get(x).getStartingCoord().xCoordinate == chunk.getStartingCoord().xCoordinate &&
+						this.getChunks().get(y).get(x).getStartingCoord().yCoordinate == chunk.getStartingCoord().yCoordinate) {
+						
+						for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++) {
+							for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++) {
+								
+								this.getChunks().get(y).get(x).getCoordinateFromIndex(xx, yy).setCoordinate(chunk.getCoordinateFromIndex(xx, yy));
+							}
+						}
 					}
+					
 				}
 			}
+			
+//			for (int y = 0; y < this.quadrant.size(); y++) {
+//				ArrayList<Chunk> col = this.quadrant.get(y);
+//				for (int x = 0; x < col.size(); x++) {
+//					Chunk currentChunk = col.get(x);
+//					if (currentChunk.getStartingCoord().xCoordinate == chunk.getStartingCoord().xCoordinate &&
+//							currentChunk.getStartingCoord().yCoordinate == chunk.getStartingCoord().yCoordinate) {
+//						col.set(x, chunk);
+//					}
+//				}
+//			}
 		}
 	}
 	
@@ -208,7 +225,7 @@ public class Quadrant {
 	 * getQuadrant returns what number the quadrant is on a graph.
 	 * @return : int - either 1, 2, 3, or 4 representing what a traditional graph looks like. Returns 0 if nothing else works.
 	 */
-	public int getQuadrant() {
+	public int getQuadrantNumber() {
 			return QUADRANT_NUMBER;
 	}
 	
@@ -220,7 +237,7 @@ public class Quadrant {
 	public String toString() {
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("\n\nQuadrant " + getQuadrant() + ":\n");
+		sb.append("\n\nQuadrant " + getQuadrantNumber() + ":\n");
 		sb.append(quadrant);
 		return sb.toString();
 	}

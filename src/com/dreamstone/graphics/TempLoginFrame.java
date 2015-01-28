@@ -22,6 +22,7 @@ import com.dreamstone.core.Dystopia;
 import com.dreamstone.core.Start;
 import com.dreamstone.file.DirectoryMaster;
 import com.dreamstone.file.FileSystem;
+import com.dreamstone.util.DystopiaLogger;
 import com.dreamstone.world.TempWorldGen;
 import com.dreamstone.world.data.LoadManager;
 
@@ -199,7 +200,12 @@ public class TempLoginFrame extends JFrame {
 		begin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				beginWorldLoading(worldDropdown.getItemAt(worldDropdown.getSelectedIndex()), usernameField.getText(), false);
+				if (worldDropdown.getSelectedItem() != null) {
+					beginWorldLoading(worldDropdown.getItemAt(worldDropdown.getSelectedIndex()), usernameField.getText(), false);
+				} else {
+					DystopiaLogger.logWarning("YOU HAVE NO WORLD SELECTED!");
+					return;
+				}
 			}
 		});
 		
@@ -233,6 +239,7 @@ public class TempLoginFrame extends JFrame {
 		}
 		
 		Start.startGame();
+		DystopiaLogger.logInfo("Loading Complete!");
 	}
 
 	private static void clearPanel(JPanel jp) {

@@ -39,29 +39,23 @@ public class SaveManager {
 					for (int yy = 0; yy < Chunk.CHUNK_SIZE; yy++) {
 						for (int xx = 0; xx < Chunk.CHUNK_SIZE; xx++) {
 							Coordinate c = q.getChunks().get(y).get(x).getCoordinateFromIndex(xx, yy);
-							quadText.append("[" + 
-							c.xCoordinate + "," + 
-									c.yCoordinate + "," + 
-							c.getXScreenPos() + "," + 
-									c.getYScreenPos() + "," + 
-							c.getTile().getName() + "," + 
-									c.getImageIndex() + "]");
+							quadText.append("[" + c.xCoordinate + "," + c.yCoordinate + "," + c.getXScreenPos() + "," + c.getYScreenPos() + "," + c.getTile().getName() + "," + c.getImageIndex() + "]");
 						}
 					}
 				}
 			}
-			File quadFile = FileSystem.getFile(mapFolder, "quad" + q.getQuadrant() + ".txt");
+			File quadFile = FileSystem.getFile(mapFolder, "quad" + q.getQuadrantNumber() + ".txt");
 			
 			try {
 				FileSystem.writeTextFile(quadFile, quadText);
 			} catch (IOException e) {
-				DystopiaLogger.logSevere("Could not save Quadrant " + q.getQuadrant() + " into world file. Your world file may be corrupt.");
+				DystopiaLogger.logSevere("Could not save Quadrant " + q.getQuadrantNumber() + " into world file. Your world file may be corrupt.");
 				e.printStackTrace();
 			}
 		}
 	}
 	
-	private static void savePlayer() {
+	protected static void savePlayer() {
 		File playerFolder = FileSystem.getFolder(worldFolder, "players");
 		
 		EntityPlayer player = world.getPlayer();

@@ -77,20 +77,25 @@ public class LoadManager {
 							tileImageIndex = Integer.parseInt(args[5]);
 							
 							coord = new Coordinate(xCoord, yCoord, xDisplay, yDisplay, tile, tileImageIndex);
+							
 							Point p = Grid.getChunkFromCoordinate(coord.xCoordinate, coord.yCoordinate);
 							if (currentChunk == null) {
 								currentChunk = new Chunk(p.x, p.y);
-//								currentChunk.getCoords()[coord.yCoordinate][coord.xCoordinate] = coord;
-//								currentChunk.setCoordinate(coord);
+								currentChunk.setCoordinate(coord);
 							}
 							else if (currentChunk.getCoordinateFromIndex(Chunk.CHUNK_SIZE - 1, Chunk.CHUNK_SIZE - 1).xCoordinate == coord.xCoordinate &&
 									currentChunk.getCoordinateFromIndex(Chunk.CHUNK_SIZE - 1, Chunk.CHUNK_SIZE - 1).yCoordinate == coord.yCoordinate) {
-//								currentChunk.setCoordinate(coord);
+								
+								Chunk c = loadedGrid.QUADRANTS.get(currentChunk.getQuadrantNumber() - 1).getChunks()
+									.get(loadedGrid.getIndexOfChunkFromList(p.x, p.y).x)
+									.get(loadedGrid.getIndexOfChunkFromList(p.x, p.y).y);
+								
+								currentChunk.setCoordinate(coord);
 								loadedGrid.QUADRANTS.get(currentChunk.getQuadrantNumber() - 1).replaceChunk(currentChunk);
 								currentChunk = null;
 							}
 							else {
-//								currentChunk.setCoordinate(coord);
+								currentChunk.setCoordinate(coord);
 							}
 						}
 					}
@@ -116,7 +121,7 @@ public class LoadManager {
 		
 		try {
 			playerFileText = FileSystem.readTextFile(playerFile);
-		
+			
 			for (int i = 0; i < playerFileText.length(); i++) {
 				if (playerFileText.charAt(i) == '[') {
 					tempStart = i + 1;
@@ -160,7 +165,6 @@ public class LoadManager {
 			DystopiaLogger.logSevere("Player file is incorrectly formatted! Has the file been tampered with?");
 			nfe.printStackTrace();
 		}
-		
 		return player;
 	}
 	
@@ -169,5 +173,4 @@ public class LoadManager {
 		loadedWorld.setPlayer(new EntityPlayer(username));
 		return loadedWorld;
 	}
-	
 }

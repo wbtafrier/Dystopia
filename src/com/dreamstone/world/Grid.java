@@ -26,11 +26,6 @@ public class Grid {
 //		quad2.growQuadrant(new Chunk(-2, 2));
 //		quad3.growQuadrant(new Chunk(-2, -2));
 //		quad4.growQuadrant(new Chunk(2, -2));
-		
-		System.out.println(quad1);
-		System.out.println(quad2);
-		System.out.println(quad3);
-		System.out.println(quad4);
 	}
 	
 	/**
@@ -136,6 +131,24 @@ public class Grid {
 		DystopiaLogger.logSevere("GLITCHHH!");
 		return null;
 	}
+	
+	public Point getIndexOfChunkFromList(int xChunkCoord, int yChunkCoord) {
+		
+		for (int i = 0; i < QUADRANTS.size(); i++) {
+			
+			for (int y = 0; y < QUADRANTS.get(i).getChunks().size(); y++) {
+				for (int x = 0; x < QUADRANTS.get(i).getChunks().get(y).size(); x++) {
+					
+					if (this.QUADRANTS.get(i).getChunks().get(y).get(x).X_VALUE == xChunkCoord && this.QUADRANTS.get(i).getChunks().get(y).get(x).Y_VALUE == yChunkCoord) {
+						return new Point(x, y);
+					}
+				}
+			}
+		}
+		
+		DystopiaLogger.logSevere("The Chunk: (" + xChunkCoord + ", " + yChunkCoord + ") is not in the world. Returning null");
+		return null;
+	}
 		
 	
 	/**
@@ -151,14 +164,14 @@ public class Grid {
 		}
 		else if (x < 0 && y >= 0) {
 			chunkX = (x + 1) / Chunk.CHUNK_SIZE - 1;
-			chunkY = y / Chunk.CHUNK_SIZE;
+			chunkY = y / Chunk.CHUNK_SIZE + 1;
 		}
 		else if (x < 0 && y < 0) {
 			chunkX = (x + 1) / Chunk.CHUNK_SIZE - 1;
 			chunkY = (y + 1) / Chunk.CHUNK_SIZE - 1;
 		}
 		else if (x >= 0 && y < 0) {
-			chunkX = x / Chunk.CHUNK_SIZE;
+			chunkX = x / Chunk.CHUNK_SIZE + 1;
 			chunkY = (y + 1) / Chunk.CHUNK_SIZE - 1;
 		}
 		return new Point(chunkX, chunkY);
