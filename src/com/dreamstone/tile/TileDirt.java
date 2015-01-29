@@ -13,8 +13,9 @@ public class TileDirt extends TileTransition {
 	@Override
 	protected void initializeImageTiles() {
 		//Sets full images
-		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 23));
-		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 26));
+		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 65));
+		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 68));
+//		defaultImages.add(TransformImage.getSubImageFromIndex(ResourceLoader.getTileSheet(this.getTileSheetName()), tileSize, tileSize, 71));
 	}
 	
 	@Override
@@ -45,5 +46,12 @@ public class TileDirt extends TileTransition {
 			return 0;
 		else
 			return 1;
+		
+//		if (percent >= 60)
+//			return 0;
+//		else if (percent < 60 && percent >= 30) 
+//			return 1;
+//		else
+//			return 0;
 	}
 }

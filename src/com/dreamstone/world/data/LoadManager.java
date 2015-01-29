@@ -86,10 +86,6 @@ public class LoadManager {
 							else if (currentChunk.getCoordinateFromIndex(Chunk.CHUNK_SIZE - 1, Chunk.CHUNK_SIZE - 1).xCoordinate == coord.xCoordinate &&
 									currentChunk.getCoordinateFromIndex(Chunk.CHUNK_SIZE - 1, Chunk.CHUNK_SIZE - 1).yCoordinate == coord.yCoordinate) {
 								
-								Chunk c = loadedGrid.QUADRANTS.get(currentChunk.getQuadrantNumber() - 1).getChunks()
-									.get(loadedGrid.getIndexOfChunkFromList(p.x, p.y).x)
-									.get(loadedGrid.getIndexOfChunkFromList(p.x, p.y).y);
-								
 								currentChunk.setCoordinate(coord);
 								loadedGrid.QUADRANTS.get(currentChunk.getQuadrantNumber() - 1).replaceChunk(currentChunk);
 								currentChunk = null;
