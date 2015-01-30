@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -135,9 +136,17 @@ public class FileSystem {
 	public static String readTextFile(File f) throws IOException
 	{
 		if (f != null && f.exists()) {
+			String str;
 			Scanner reader = new Scanner(f);
 			reader.useDelimiter("\\Z");
-			String str = reader.next();
+			
+			try {
+				str = reader.next();
+			} catch (NoSuchElementException nsee) {
+				reader.close();
+				return null;
+			}
+			
 			reader.close();
 			return str;
 		}

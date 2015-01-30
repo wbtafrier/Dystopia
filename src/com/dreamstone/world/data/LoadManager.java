@@ -111,12 +111,18 @@ public class LoadManager {
 		EntityPlayer player = new EntityPlayer(username);
 		File playerFolder = FileSystem.getFolder(worldFolder, "players");
 		File playerFile = FileSystem.getFile(playerFolder, username + ".txt");
+		
 		String playerFileText;
 		int tempStart = 0;
 		ArrayList<String> args = new ArrayList<>();
 		
 		try {
 			playerFileText = FileSystem.readTextFile(playerFile);
+			
+			if (playerFileText == null || playerFileText.isEmpty()) {
+				SaveManager.savePlayer(worldFolder, player);
+				playerFileText = FileSystem.readTextFile(playerFile);
+			}
 			
 			for (int i = 0; i < playerFileText.length(); i++) {
 				if (playerFileText.charAt(i) == '[') {

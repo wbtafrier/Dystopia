@@ -25,7 +25,7 @@ public class SaveManager {
 		world = Dystopia.getGame().getCurrentWorld();
 		worldFolder = FileSystem.getFolder(DirectoryMaster.worldsFolder, world.getName());
 		saveGrid();
-		savePlayer();
+		savePlayer(worldFolder, world.getPlayer());
 		saveWorldProperties();
 	}
 	
@@ -55,10 +55,9 @@ public class SaveManager {
 		}
 	}
 	
-	protected static void savePlayer() {
+	protected static void savePlayer(File worldFolder, EntityPlayer player) {
 		File playerFolder = FileSystem.getFolder(worldFolder, "players");
 		
-		EntityPlayer player = world.getPlayer();
 		File playerFile = FileSystem.getFile(playerFolder, player.getName() + ".txt");
 		StringBuilder playerText = new StringBuilder();
 		playerText.append("Health: [" + player.getHealth() + "]" + FileSystem.LINE_BREAK);
