@@ -1,6 +1,5 @@
 package com.dreamstone.entity;
 
-import java.awt.image.BufferedImage;
 
 
 public abstract class EntityMovable extends Entity {
@@ -31,8 +30,5 @@ public abstract class EntityMovable extends Entity {
 		this.speed = speed;
 	}
 	
-//	/**
-//	 * This method is meant to be used in different ways for different objects. ie: A wandering sheep, or speeding minecart.
-//	 */
-//	public abstract void moving();
+	public abstract void setCurrentSpeed();
 }

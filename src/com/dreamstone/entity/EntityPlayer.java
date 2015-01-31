@@ -15,13 +15,16 @@ public final class EntityPlayer extends EntityMovable {
 	);
 	
 	private boolean isWalking;
-	private boolean isNorth;
-	private boolean isSouth;
-	private boolean isEast;
-	private boolean isWest;
+//	private boolean isNorth;
+//	private boolean isSouth;
+//	private boolean isEast;
+//	private boolean isWest;
 	
-	private int xWalkingBoundsLocation;
-	private int yWalkingBoundsLocation;
+	//[north][south][east][west]
+	public boolean[] directions;
+	
+	private int xCenterOffset;
+	private int yCenterOffset;
 	
 	private Coordinate currentCoordinate;
 	private EnumDirection playerDirection;
@@ -31,21 +34,22 @@ public final class EntityPlayer extends EntityMovable {
 		this(name, 0, 0);
 	}
 	
-	public EntityPlayer(String name, int xWalkingScreenPos, int yWalkingScreenPos) {
-		this(name, xWalkingScreenPos, yWalkingScreenPos, 100);
+	public EntityPlayer(String name, int xCenterOffset, int yCenterOffset) {
+		this(name, xCenterOffset, yCenterOffset, 100);
 	}
 	
-	public EntityPlayer(String name, int xWalkingScreenPos, int yWalkingScreenPos, int health) {
-		this(name, xWalkingScreenPos, yWalkingScreenPos, 100, new EntityCharacteristics());
+	public EntityPlayer(String name, int xCenterOffset, int yCenterOffset, int health) {
+		this(name, xCenterOffset, yCenterOffset, 100, new EntityCharacteristics());
 	}
 	
-	public EntityPlayer(String name, int xWalkingScreenPos, int yWalkingScreenPos, int health, EntityCharacteristics playerType) {
+	public EntityPlayer(String name, int xCenterOffset, int yCenterOffset, int health, EntityCharacteristics playerType) {
 		super(name, health);
+		this.directions = new boolean[4];
 		this.initializeWalking();
 		this.setDirection(EnumDirection.SOUTH);
 		
-		this.setWalkingBoundsXPos(xWalkingScreenPos);
-		this.setWalkingBoundsYPos(yWalkingScreenPos);
+		this.setXCenterOffset(xCenterOffset);
+		this.setYCenterOffset(yCenterOffset);
 		this.playerOptions = playerType;
 //		this.imageStorage.updateImages(this.playerOptions);
 	}
@@ -55,7 +59,16 @@ public final class EntityPlayer extends EntityMovable {
 		this.updatePlayerImage();
 	}
 	
+	public EnumDirection getDirection() {
+		return this.playerDirection;
+	}
+	
+	public boolean[] getDirectionBools() {
+		return this.directions;
+	}
+	
 	public void updatePlayerImage() {
+		
 		if (!this.isWalking) {
 			this.setIdleImage();
 		}
@@ -82,10 +95,11 @@ public final class EntityPlayer extends EntityMovable {
 	private void initializeWalking() {
 		this.playerDirection = EnumDirection.SOUTH;
 		this.speed = 0;
-		this.isNorth = false;
-		this.isSouth = true;
-		this.isEast = false;
-		this.isWest = false;
+		
+		for (int i = 0; i < directions.length; i++) {
+			directions[i] = false;
+		}
+		System.out.println(directions[0] + ", " + directions[1] + ", " + directions[2] + ", " + directions[3]);
 	}
 	
 	public boolean isWalking() {
@@ -98,42 +112,42 @@ public final class EntityPlayer extends EntityMovable {
 	}
 	
 	public boolean isNorth() {
-		return this.isNorth;
+		return this.directions[0];
 	}
 	
 	public void setNorth(boolean b) {
-		this.isNorth = b;
-		if (this.isNorth)
+		this.directions[0] = b;
+		if(this.directions[0])
 			this.setDirection(EnumDirection.NORTH);
 	}
 	
 	public boolean isSouth() {
-		return this.isSouth;
+		return this.directions[1];
 	}
 	
 	public void setSouth(boolean b) {
-		this.isSouth = b;
-		if(this.isSouth)
+		this.directions[1] = b;
+		if(this.directions[1])
 			this.setDirection(EnumDirection.SOUTH);
 	}
 	
 	public boolean isEast() {
-		return this.isEast;
+		return this.directions[2];
 	}
 	
 	public void setEast(boolean b) {
-		this.isEast = b;
-		if (this.isEast)
+		this.directions[2] = b;
+		if (this.directions[2])
 			this.setDirection(EnumDirection.EAST);
 	}
 	
 	public boolean isWest() {
-		return this.isWest;
+		return this.directions[3];
 	}
 	
 	public void setWest(boolean b) {
-		this.isWest = b;
-		if (this.isWest)
+		this.directions[3] = b;
+		if (this.directions[3])
 			this.setDirection(EnumDirection.WEST);
 	}
 	
@@ -145,28 +159,32 @@ public final class EntityPlayer extends EntityMovable {
 		return this.currentCoordinate;
 	}
 	
-	public int getWalkingBoundsXPos() {
-		return this.xWalkingBoundsLocation + this.getImage().getWidth() / 2;
+	public void setXCenterOffset(int x) {
+		this.xCenterOffset = x;
 	}
 	
-	public int getWalkingBoundsYPos() {
-		return this.yWalkingBoundsLocation + this.currentImage.getHeight();
+	public void setYCenterOffset(int y) {
+		this.yCenterOffset = y;
 	}
 	
-	public int getPlayerOriginX() {
-		return this.xWalkingBoundsLocation;
+	public int getXCenterOffset () {
+		return this.xCenterOffset;
 	}
 	
-	public int getPlayerOriginY() {
-		return this.yWalkingBoundsLocation;
+	public int getYCenterOffset () {
+		return this.yCenterOffset;
 	}
 	
-	public void setWalkingBoundsXPos(int x) {
-		this.xWalkingBoundsLocation = x - this.currentImage.getWidth() / 2;
-	}
-	
-	public void setWalkingBoundsYPos(int y) {
-		this.yWalkingBoundsLocation = y - this.currentImage.getHeight();
+	public void setCurrentSpeed() {
+		if (isWalking) {
+			this.setSpeed(2.0F);
+		}
+		/*else if (isRunning) {
+			this.setSpeed(4.0F);
+		}*/
+		else {
+			this.setSpeed(0.0F);
+		}
 	}
 
 	public EntityCharacteristics getPlayerOptions() {

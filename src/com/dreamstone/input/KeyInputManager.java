@@ -64,15 +64,19 @@ public class KeyInputManager extends KeyAdapter implements KeyListener {
 		
 		if (e.getKeyChar() == KeyOptions.getKeyNorth()[0] || e.getKeyChar() == KeyOptions.getKeyNorth()[1]) {
 			isNorth = false;
+			checkNorth();
 		}
 		else if (e.getKeyChar() == KeyOptions.getKeySouth()[0] || e.getKeyChar() == KeyOptions.getKeySouth()[1]) {
 			isSouth = false;
+			checkSouth();
 		}
 		else if (e.getKeyChar() == KeyOptions.getKeyEast()[0] || e.getKeyChar() == KeyOptions.getKeyEast()[1]) {
 			isEast = false;
+			checkEast();
 		}
 		else if (e.getKeyChar() == KeyOptions.getKeyWest()[0] || e.getKeyChar() == KeyOptions.getKeyWest()[1]) {
 			isWest = false;
+			checkWest();
 		}
 		
 		if (!isNorth && !isSouth && !isEast && !isWest) {
@@ -85,33 +89,36 @@ public class KeyInputManager extends KeyAdapter implements KeyListener {
 	}
 	
 	private static void processPlayerMovement() {
-		Character temp = KeyOptions.getKeySouth()[0];
+		Character temp = null;
 		
-		if (isWalking) world.getPlayer().setWalking(true);
-		else world.getPlayer().setWalking(false);
+		if (isWalking) {
+			world.getPlayer().setWalking(true);
+		}
+		else {
+			world.getPlayer().setWalking(false);
+		}
 		
-//		System.out.println("Pressed Array: " + pressed);
 		
 		if (pressed.size() > 1) {
             temp = (Character) pressed.get(pressed.size() - 1);
-//            System.out.println("Temp: " + temp);
         }
 		else if (pressed.size() == 1){
 			temp = (Character) pressed.get(0);
-//			System.out.println("Temp: " + temp);
 		}
 		
-		if (temp == KeyOptions.getKeyNorth()[0] || temp == KeyOptions.getKeyNorth()[1]) {
-			checkNorth();
-		}
-		else if (temp == KeyOptions.getKeySouth()[0] || temp == KeyOptions.getKeySouth()[1]) {
-			checkSouth();
-		}
-		else if (temp == KeyOptions.getKeyEast()[0] || temp == KeyOptions.getKeyEast()[1]) {
-			checkEast();
-		}
-		else {
-			checkWest();
+		if (temp != null) {
+			if (temp == KeyOptions.getKeyNorth()[0] || temp == KeyOptions.getKeyNorth()[1]) {
+				checkNorth();
+			}
+			if (temp == KeyOptions.getKeySouth()[0] || temp == KeyOptions.getKeySouth()[1]) {
+				checkSouth();
+			}
+			if (temp == KeyOptions.getKeyEast()[0] || temp == KeyOptions.getKeyEast()[1]) {
+				checkEast();
+			}
+			if (temp == KeyOptions.getKeyWest()[0] || temp == KeyOptions.getKeyWest()[1]){
+				checkWest();
+			}
 		}
 	}
 	

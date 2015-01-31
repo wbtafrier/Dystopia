@@ -36,9 +36,11 @@ public final class DystopiaCanvas extends Canvas {
 		g.setColor(new Color(0xEEEEEE));
 		g.fillRect(0, 0, DisplayCarrier.getFrame().getWidth(), DisplayCarrier.getFrame().getHeight());
 		GridDisplay.drawGrid(g);
-		PlayerCamera.displayPlayer(g);
+		PlayerCamera.drawPlayer(g);
 		
         g.dispose();
         bs.show();
+        Toolkit.getDefaultToolkit().sync();
+
 	}
 }

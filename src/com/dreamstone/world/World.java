@@ -13,7 +13,6 @@ public class World {
 	public World(String name, Grid grid) {
 		this.worldName = name;
 		this.worldGrid = grid;
-		
 		this.xOffset = 0;
 		this.yOffset = 0;
 	}
@@ -22,16 +21,24 @@ public class World {
 		this.worldName = name;
 		this.worldGrid = grid;
 		this.player = player;
-		this.xOffset = -this.player.getWalkingBoundsXPos();
-		this.yOffset = -this.player.getWalkingBoundsYPos();
+		this.xOffset = 0;
+		this.yOffset = 0;
 	}
 	
 	public int getXOffset() {
 		return this.xOffset;
 	}
 	
+	public void setXOffset(int x) {
+		this.xOffset = x;
+	}
+	
 	public int getYOffset() {
 		return this.yOffset;
+	}
+	
+	public void setYOffset(int y) {
+		this.yOffset = y;
 	}
 	
 	public void setPlayer(EntityPlayer player) {
