@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import com.dreamstone.core.DisplayCarrier;
 import com.dreamstone.core.Dystopia;
 import com.dreamstone.entity.EntityPlayer;
+import com.dreamstone.tile.EnumDirection;
 import com.dreamstone.tile.Tile;
 import com.dreamstone.world.World;
 
@@ -19,35 +20,15 @@ public class PlayerCamera {
 		
 		if (player.getDirectionBools()[0]) {
 			movePlayerNorth();
-//			moveWorldNorth();
 		}
 		if (player.getDirectionBools()[1]) {
 			movePlayerSouth();
-//			moveWorldSouth();
 		}
 		if (player.getDirectionBools()[2]) {
 			movePlayerEast();
-//			moveWorldEast();
 		}
 		if (player.getDirectionBools()[3]) {
 			movePlayerWest();
-//			moveWorldWest();
-		}
-//		System.out.println(player.directions[0] + ", " + player.directions[1] + ", " + player.directions[2] + ", " + player.directions[3]);
-	}
-	
-	public static void moveWorld() {
-		if (player.getDirectionBools()[0]) {
-			moveWorldNorth();
-		}
-		if (player.getDirectionBools()[1]) {
-			moveWorldSouth();
-		}
-		if (player.getDirectionBools()[2]) {
-			moveWorldEast();
-		}
-		if (player.getDirectionBools()[3]) {
-			moveWorldWest();
 		}
 	}
 	
@@ -75,8 +56,8 @@ public class PlayerCamera {
 	private static void movePlayerNorth() {
 		if (player.getYCenterOffset() >= -Tile.getTileSize()) {
 			player.setYCenterOffset((int)(player.getYCenterOffset() - player.getSpeed()));
-			if (boundCheck()) {
-				moveWorld();
+			if (boundCheck(EnumDirection.NORTH)) {
+				moveWorldNorth();
 			}
 		}
 	}
@@ -84,8 +65,8 @@ public class PlayerCamera {
 	private static void movePlayerSouth() {
 		if (player.getYCenterOffset() <= Tile.getTileSize()) {
 			player.setYCenterOffset((int)(player.getYCenterOffset() + player.getSpeed()));
-			if (boundCheck()) {
-				moveWorld();
+			if (boundCheck(EnumDirection.SOUTH)) {
+				moveWorldSouth();
 			}
 		}
 	}
@@ -93,8 +74,8 @@ public class PlayerCamera {
 	private static void movePlayerEast() {
 		if (player.getXCenterOffset() <= Tile.getTileSize()) {
 			player.setXCenterOffset((int)(player.getXCenterOffset() + player.getSpeed()));
-			if (boundCheck()) {
-				moveWorld();
+			if (boundCheck(EnumDirection.EAST)) {
+				moveWorldEast();
 			}
 		}
 	}
@@ -102,34 +83,30 @@ public class PlayerCamera {
 	private static void movePlayerWest() {
 		if (player.getXCenterOffset() >= -Tile.getTileSize()) {
 			player.setXCenterOffset((int)(player.getXCenterOffset() - player.getSpeed()));
-			if (boundCheck()) {
-				moveWorld();
+			if (boundCheck(EnumDirection.WEST)) {
+				moveWorldWest();
 			}
 		}
 	}
 	
-	private static boolean boundCheck() {
+	private static boolean boundCheck(EnumDirection dir) {
 		
-		if (player.getYCenterOffset() < -Tile.getTileSize()) {
+		if (dir == EnumDirection.NORTH && player.getYCenterOffset() < -Tile.getTileSize()) {
 			player.setYCenterOffset(-Tile.getTileSize());
 			return true;
 		}
-		
-		if (player.getYCenterOffset() > Tile.getTileSize()) {
+		else if (dir == EnumDirection.SOUTH && player.getYCenterOffset() > Tile.getTileSize()) {
 			player.setYCenterOffset(Tile.getTileSize());
 			return true;
 		}
-		
-		if (player.getXCenterOffset() > Tile.getTileSize()) {
+		else if (dir == EnumDirection.EAST && player.getXCenterOffset() > Tile.getTileSize()) {
 			player.setXCenterOffset(Tile.getTileSize());
 			return true;
 		}
-		
-		if (player.getXCenterOffset() < -Tile.getTileSize()) {
+		else if (dir == EnumDirection.WEST && player.getXCenterOffset() < -Tile.getTileSize()) {
 			player.setXCenterOffset(-Tile.getTileSize());
 			return true;
 		}
-		
-		return false;
+		else return false;
 	}
 }
