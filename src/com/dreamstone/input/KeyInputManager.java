@@ -51,8 +51,6 @@ public class KeyInputManager extends KeyAdapter implements KeyListener {
 		}
 	}
 
-//	@Override public void keyPressed(KeyEvent e) {}
-
 	@Override
 	public void keyReleased(KeyEvent e) {
 		for (int i = 0; i < pressed.size(); i++) {

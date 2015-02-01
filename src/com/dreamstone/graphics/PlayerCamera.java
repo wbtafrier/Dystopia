@@ -13,24 +13,27 @@ public class PlayerCamera {
 	
 	public static EntityPlayer player = Dystopia.getGame().getCurrentWorld().getPlayer();
 	public static World world = Dystopia.getGame().getCurrentWorld();
-//	private static final int PLAYER_BOUNDS = 3;
 
 	public static void movePlayer() {
 		player.setCurrentSpeed();
 		
 		if (player.getDirectionBools()[0]) {
 			movePlayerNorth();
+//			moveWorldNorth();
 		}
 		if (player.getDirectionBools()[1]) {
 			movePlayerSouth();
+//			moveWorldSouth();
 		}
 		if (player.getDirectionBools()[2]) {
 			movePlayerEast();
+//			moveWorldEast();
 		}
 		if (player.getDirectionBools()[3]) {
 			movePlayerWest();
+//			moveWorldWest();
 		}
-		System.out.println(player.directions[0] + ", " + player.directions[1] + ", " + player.directions[2] + ", " + player.directions[3]);
+//		System.out.println(player.directions[0] + ", " + player.directions[1] + ", " + player.directions[2] + ", " + player.directions[3]);
 	}
 	
 	public static void moveWorld() {

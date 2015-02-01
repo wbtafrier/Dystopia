@@ -5,10 +5,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 
 import com.dreamstone.core.DisplayCarrier;
 import com.dreamstone.core.Dystopia;
+import com.dreamstone.tile.Tile;
 
 public final class DystopiaCanvas extends Canvas {
 
@@ -34,8 +36,10 @@ public final class DystopiaCanvas extends Canvas {
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		
 		g.setColor(new Color(0xEEEEEE));
-		g.fillRect(0, 0, DisplayCarrier.getFrame().getWidth(), DisplayCarrier.getFrame().getHeight());
+		g.fillRect(0, 0, DisplayCarrier.getCanvas().getWidth(), DisplayCarrier.getCanvas().getHeight());
 		GridDisplay.drawGrid(g);
+		Rectangle2D rect = new Rectangle2D.Double(DisplayCarrier.getCanvas().getWidth() / 2 - Tile.getTileSize(), DisplayCarrier.getCanvas().getHeight() / 2 - Tile.getTileSize(), Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+		g.draw(rect);
 		PlayerCamera.drawPlayer(g);
 		
         g.dispose();

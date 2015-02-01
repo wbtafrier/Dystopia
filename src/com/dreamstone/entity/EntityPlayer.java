@@ -15,10 +15,6 @@ public final class EntityPlayer extends EntityMovable {
 	);
 	
 	private boolean isWalking;
-//	private boolean isNorth;
-//	private boolean isSouth;
-//	private boolean isEast;
-//	private boolean isWest;
 	
 	//[north][south][east][west]
 	public boolean[] directions;
@@ -177,10 +173,10 @@ public final class EntityPlayer extends EntityMovable {
 	
 	public void setCurrentSpeed() {
 		if (isWalking) {
-			this.setSpeed(2.0F);
+			this.setSpeed(4.0F);
 		}
 		/*else if (isRunning) {
-			this.setSpeed(4.0F);
+			this.setSpeed(8.0F);
 		}*/
 		else {
 			this.setSpeed(0.0F);
