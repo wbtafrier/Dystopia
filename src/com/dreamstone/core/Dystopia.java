@@ -97,7 +97,6 @@ public class Dystopia implements Runnable {
 					PlayerCamera.movePlayer();
 				}
 			}
-			
 			frames++;
 		}
 	}
