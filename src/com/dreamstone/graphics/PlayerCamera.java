@@ -16,8 +16,6 @@ public class PlayerCamera {
 	public static World world = Dystopia.getGame().getCurrentWorld();
 
 	public static void movePlayer() {
-		player.setCurrentSpeed();
-		
 		if (player.getDirectionBools()[0]) {
 			movePlayerNorth();
 		}

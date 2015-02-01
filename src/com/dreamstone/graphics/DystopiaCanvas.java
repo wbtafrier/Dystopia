@@ -43,8 +43,10 @@ public final class DystopiaCanvas extends Canvas {
 		PlayerCamera.drawPlayer(g);
 		
         g.dispose();
-        bs.show();
+        
+        if (!bs.contentsLost()) {
+        	bs.show();
+        }
         Toolkit.getDefaultToolkit().sync();
-
 	}
 }

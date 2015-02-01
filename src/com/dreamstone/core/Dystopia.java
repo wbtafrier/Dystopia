@@ -93,6 +93,7 @@ public class Dystopia implements Runnable {
 			KeyInputManager.processInput();
 			
 			if (ticked) {
+				this.currentWorld.getPlayer().setCurrentSpeed();
 				if (currentWorld.getPlayer().isWalking()) {
 					PlayerCamera.movePlayer();
 				}

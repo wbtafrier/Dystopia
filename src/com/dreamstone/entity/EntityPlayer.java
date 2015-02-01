@@ -173,7 +173,9 @@ public final class EntityPlayer extends EntityMovable {
 	
 	public void setCurrentSpeed() {
 		if (isWalking) {
-			this.setSpeed(4.0F);
+			if (this.getSpeed() < 5.0F) {
+				this.setSpeed(this.getSpeed() + 1.0F);
+			}
 		}
 		/*else if (isRunning) {
 			this.setSpeed(8.0F);
